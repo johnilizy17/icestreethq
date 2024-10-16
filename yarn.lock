@@ -2116,6 +2116,11 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
+countries-and-timezones@2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/countries-and-timezones/-/countries-and-timezones-2.0.5.tgz#e6e3eae3a7d0dc4b2599a48b91fc1e01647d3895"
+  integrity sha512-TSsvUFb63PfiNrv3fpRgUIeFgnR7shfXRbeKdjbQ8bPonEJPgezziSGszh6A8xaKNSoYD7tgFCbJpTg03iTzng==
+
 country-flag-icons@^1.5.11:
   version "1.5.13"
   resolved "https://registry.yarnpkg.com/country-flag-icons/-/country-flag-icons-1.5.13.tgz#963596b7fca6602b4b389a4e7b711ef3f33cc0b1"
@@ -3964,6 +3969,14 @@ js-sdsl@^4.1.4:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
+js-user-country@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/js-user-country/-/js-user-country-1.0.1.tgz#35fed41c43f81c34627afde33d3a3d3d8b6f47f9"
+  integrity sha512-aUQHQlSWMH/nGPSYYN88lHgkO+GN59ddREah4y/Jbg5hpcgJh1+OTHj9grflcLnK04mlK7o4dORWht1CInUQuA==
+  dependencies:
+    countries-and-timezones "2.0.5"
+    moment-timezone "0.5.28"
+
 js-yaml@^3.13.1:
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"
@@ -4176,6 +4189,18 @@ mkdirp@^0.5.1:
   integrity sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==
   dependencies:
     minimist "^1.2.6"
+
+moment-timezone@0.5.28:
+  version "0.5.28"
+  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.28.tgz#f093d789d091ed7b055d82aa81a82467f72e4338"
+  integrity sha512-TDJkZvAyKIVWg5EtVqRzU97w0Rb0YVbfpqyjgu6GwXCAohVRqwZjf4fOzDE6p1Ch98Sro/8hQQi65WDXW5STPw==
+  dependencies:
+    moment ">= 2.9.0"
+
+"moment@>= 2.9.0":
+  version "2.30.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
+  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
 
 moment@^2.29.4:
   version "2.29.4"
