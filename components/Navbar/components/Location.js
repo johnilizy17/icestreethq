@@ -33,7 +33,7 @@ export default function Location() {
                     </Box>
                     </MenuButton>
                     <MenuList >
-                        {language.map((a: { svg: string,title: string, icon:any }, b: number) => (
+                        {language.map((a, b) => (
                             <MenuItem  onClick={()=>{setSelect(a.svg)}} key={b}>
                                 <Center pl="10px" h="17px" w="34px">
                                 {a.icon}

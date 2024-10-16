@@ -9,7 +9,7 @@ export default function PaymentMethod({ paymentSuccessfull }: { paymentSuccessfu
     const { userDetails } = useUserDetails()
     const config = {
         reference: (new Date()).getTime().toString(),
-        email: userDetails?.user.email,
+        email: userDetails&& userDetails?.user ?userDetails?.user.email:"",
         amount: 20000, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
         publicKey: 'pk_live_e0f7f264648d319f3d4352079bb0c2f6cac6b53c',
     };
