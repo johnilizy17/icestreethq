@@ -7,7 +7,7 @@ import { UserAddress } from '../../../services/userDashboardServices';
 import SpinLoader from '../../Loaders/SpinLoader';
 import { WalletServices } from '../../../services/UserWalletServices';
 
-export default function FundWallet({ getAmount }: any) {
+export default function FundWallet({ getAmount }) {
 
     const [isShown, setIsShown] = React.useState("")
     const toast = useToast()
@@ -44,9 +44,15 @@ export default function FundWallet({ getAmount }: any) {
             logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
         },
     };
-    const handleFlutterPayment = useFlutterwave(config);
+    let handleFlutterPayment = useFlutterwave(config);
 
-    async function AddFund(p: any) {
+    // useEffect(() => {
+    //     if (typeof window === 'object') {
+    //         handleFlutterPayment 
+    //     }
+    // })
+
+    async function AddFund(p) {
 
         const response = await AddFundFlotterwave(p)
         await getAmount()
@@ -89,7 +95,7 @@ export default function FundWallet({ getAmount }: any) {
                 })
             } else {
                 handleFlutterPayment({
-                    callback: (response: any) => {
+                    callback: (response) => {
                         AddFund({
                             amount: response.amount, "transaction_title": "adding fund with flutterwave",
                             "referrence": response.flw_ref
