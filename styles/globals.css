@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+
+
+@font-face {
+  font-family: "Inter-Regular";
+  src: url("../assets/fonts/Inter-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Inter-Bold";
+  src: url("../assets/fonts/Inter-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Inter-SemiBold";
+  src: url("../assets/fonts/Inter-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Inter-Medium";
+  src: url("../assets/fonts/Inter-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Inter-ExtraBold";
+  src: url("../assets/fonts/Inter-ExtraBold.ttf");
+}
+
+@layer base {
+
+  html,
+  body {
+    @apply font-Inter-Regular;
+  }
+
+  body {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /*
+  Typography
+  */
+  p {
+    font-size: .93rem;
+    /* 15px*/
+  }
+
+  b {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  small {
+    font-weight: 400;
+    font-size: .89rem;
+  }
+}
+
+.loginShadow {
+  box-shadow: 0px 0px 10px 0px #00000040;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}
