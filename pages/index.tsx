@@ -14,7 +14,8 @@ import AllCollection from '../components/AllCollection'
 export default function Home() {
 
   const [category, setCategory] = React.useState([] as any)
-
+  
+  
   useEffect(() => {
     (async () => {
       try {
