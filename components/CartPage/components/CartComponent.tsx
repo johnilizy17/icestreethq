@@ -228,7 +228,7 @@ export default function CartComponent({ packageInstance }: Props) {
                     w={["full", "full", "full", "800px"]}
                     p={["20px", "30px"]} pt={["10px", "20px"]}>
                     <Box pb="10px" mb="20px" fontWeight="600" fontSize="16px" color="#000" borderBottom={"1px solid grey"}>
-                        {/* {userDetails && userDetails?.user && userDetails?.user.firstname ? userDetails?.user.lastname + " " + userDetails?.user.firstname : userDetails && userDetails?.user && userDetails?.user.email ? userDetails?.user.email : "Guest"} */}
+                        {userDetails && userDetails?.user && userDetails?.user.firstname ? userDetails?.user.lastname + " " + userDetails?.user.firstname : userDetails && userDetails?.user && userDetails?.user.email ? userDetails?.user.email : "Guest"}
                     </Box>
                     <Box>
                         <Center>

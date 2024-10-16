@@ -11,7 +11,7 @@ import { calculateNumberPayment, isSingleItem, productInfoReducer, productInitia
 import { productDetailsProp } from './type'
 import { imagePath } from '../../../services/Variable'
 import { Rating } from 'react-simple-star-rating'
-import HTMLRenderer from 'react-html-renderer';
+import HTMLState from './htmlRender';
 
 enum productActionKind {
     INCREMENT_QUANTITY = 'INCREASE',
@@ -268,7 +268,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
     return (
         <Box className=' w-full' >
             <Box className=' w-full flex items-start lg:flex-row flex-col justify-around lg:py-8  lg:bg-white ' p={["20px", "20px", "20px", "30px"]} >
-                <Flex flexDir={["row", "row", "row", "column"]} w={["full","full","full","auto"]} justifyContent={["space-between"]} overflow={["scroll", "scroll", "hidden", "hidden"]} >
+                <Flex flexDir={["row", "row", "row", "column"]} w={["full", "full", "full", "auto"]} justifyContent={["space-between"]} overflow={["scroll", "scroll", "hidden", "hidden"]} >
                     <Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
                     <Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
                     <Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
@@ -339,8 +339,8 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                             <Box className=' w-full bg-white  mt-6 lg:mt-8 ' >
                                 <p className=' font-bold' >Specification</p>
                                 <p className=' font-normal text-justify text-[15px] ' >
-                                    <HTMLRenderer
-                                        html={data?.spec}
+                                    <HTMLState
+                                        item={data?.spec}
                                     />
                                 </p>
                             </Box>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { usePaystackPayment } from 'react-paystack';
 import useUserDetails from "../../hooks/auth.hook";
 
-export default function PaymentMethod({ paymentSuccessfull }: { paymentSuccessfull: any }) {
+export default function PaymentMethod({ paymentSuccessfull }) {
 
     const [payment, setPayment] = useState("")
     const { userDetails } = useUserDetails()
@@ -15,7 +15,7 @@ export default function PaymentMethod({ paymentSuccessfull }: { paymentSuccessfu
     };
 
     // you can call this function anything
-    const onSuccess = (reference: any) => {
+    const onSuccess = (reference) => {
         // Implementation for whatever you want to do with reference and after success call.
         console.log(reference);
     };
