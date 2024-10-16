@@ -41,7 +41,7 @@ export default function CartComponent({ packageInstance }: Props) {
     const [SumTotal, setSumTotal] = useState(cashFormat(0))
     const [SumTotal2, setSumTotal2] = useState(0)
     const { userDetails, isLoggedIn } = useUserDetails()
-    const [value, setValue] = useState()
+    const [value, setValue] = useState<any>("")
     const route = useRouter()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { product_id: _products, ...p } = packageInstance
@@ -228,7 +228,7 @@ export default function CartComponent({ packageInstance }: Props) {
                     w={["full", "full", "full", "800px"]}
                     p={["20px", "30px"]} pt={["10px", "20px"]}>
                     <Box pb="10px" mb="20px" fontWeight="600" fontSize="16px" color="#000" borderBottom={"1px solid grey"}>
-                        {userDetails?.user.firstname ? userDetails?.user.lastname + " " + userDetails?.user.firstname : userDetails?.user.email ? userDetails?.user.email : "Guest"}
+                        {/* {userDetails && userDetails?.user && userDetails?.user.firstname ? userDetails?.user.lastname + " " + userDetails?.user.firstname : userDetails && userDetails?.user && userDetails?.user.email ? userDetails?.user.email : "Guest"} */}
                     </Box>
                     <Box>
                         <Center>
@@ -245,7 +245,7 @@ export default function CartComponent({ packageInstance }: Props) {
                                 <Formik
                                     initialValues={{ city: '', country: '', state: "", post: '', address: '' }}
                                     validate={values => {
-                                        const errors = {};
+                                        const errors = {city:"", country:"", post:"", state:"", address:""};
                                         if (!values.city) {
                                             errors.city = 'Required';
                                         } else if (!values.country) {
@@ -295,7 +295,6 @@ export default function CartComponent({ packageInstance }: Props) {
 
                                                         }} />
                                                 </Box>
-                                                {errors.phone && touched.phone && errors.phone}
                                                 <Box fontWeight="900" mt="20px" mb="10px">
                                                     Country
                                                 </Box>

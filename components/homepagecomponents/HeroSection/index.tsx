@@ -104,7 +104,7 @@ export default function HeroSection() {
                     <Flex bg="#d7efdc" justifyContent={"space-between"} flexDir={["column", "column", "column", "row"]} pt="30px" pr="30px" borderRadius="24px" h={["auto", "auto", "auto", "600px"]}>
                         <Center flexDir="column" alignItems={"self-start"} p="20px">
                             <Box mt={["20px", "0px"]} lineHeight={["40px", "40px", "40px", "70px"]} fontWeight="bolder" fontSize={["32px", "38px", "38px", "58px"]}>
-                            Savor the Season's Hottest Looks!
+                            Savor the Season{"`"}s Hottest Looks!
                             </Box>
                             <Box fontStyle="italic" mt="16px" fontSize={["16px", "16px", "28px", "36px"]}>
                                 30% Discount Promo

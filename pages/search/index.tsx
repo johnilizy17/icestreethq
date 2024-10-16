@@ -107,6 +107,7 @@ export default function Home() {
                                         <Box pos="absolute" left="0px" bg="red" bottom="-10px" h="full" w="full">
                                             {!disabled && data.map((a: any, b: number) => (
                                                 <Flex
+                                                key={b}
                                                     onClick={() => {
                                                         setValue(a.itemName)
                                                         setDisable(true)

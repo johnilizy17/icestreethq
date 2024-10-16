@@ -62,7 +62,7 @@ const Privacy = () => {
                     </Box>
                     <ListItem fontWeight="800">Data Controllers & Contact</ListItem>
                     <Box pb="80px" fontSize="11px" mt="10px" mb="10px">
-                    If you have any questions or concerns about Ice Street's Privacy Notice or you are looking for more information on how we process your personal data, or wish to exercise your legal rights in respect of your personal data, please contact the Data Privacy Officer by email at  compliance.alert@icestreet. . 
+                    {"If you have any questions or concerns about Ice Street's Privacy Notice or you are looking for more information on how we process your personal data, or wish to exercise your legal rights in respect of your personal data, please contact the Data Privacy Officer by email at  compliance.alert@icestreet. ."} 
                     </Box>
                 </OrderedList>
 
