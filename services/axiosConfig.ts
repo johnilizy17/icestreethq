@@ -1,5 +1,5 @@
 import axios from "axios";
-let baseURL ="http://api.icestreethq.com/";
+let baseURL ="https://api.icestreethq.com/";
 let token;
 
 if (typeof window !== 'undefined') {
