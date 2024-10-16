@@ -17,21 +17,23 @@ export default function Location() {
         svg: "NGA"
     }, {
         icon: <Flag code={"USA"} />,
-        title: "USA",
+        title: "US",
         svg: "USA"
     }
     ]
 
     useEffect(() => {
-        const country = getUserCountry().name
-        if (country === "Nigeria") {
-            setSelect("NGA")
-        } else if (country === "United Kingdom"){
-            setSelect("GBR")
-        }else{
-            setSelect("USA")
+        if (typeof window === "undefined") {
+            const country = getUserCountry().name
+            if (country === "Nigeria") {
+                setSelect("NGA")
+            } else if (country === "United Kingdom") {
+                setSelect("GBR")
+            } else {
+                setSelect("USA")
+            }
         }
-    }, [getUserCountry().name])
+    }, [])
     return (
         <Center>
             <Box zIndex={9000}>
