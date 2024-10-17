@@ -46,7 +46,7 @@ export default function Electronic({ label, type, category, createdBy, product }
 
     React.useEffect(() => {
         if (product) {
-            console.log("sdndjkfnjk", "item")
+            console.log(product, "item")
             setData(product)
         } else {
             (async () => {
@@ -59,7 +59,6 @@ export default function Electronic({ label, type, category, createdBy, product }
                 } catch (err) {
                     toast.error("Error occured");
                 }
-                // setLoading(false);
             })();
         }
     }, [category]);
@@ -68,16 +67,18 @@ export default function Electronic({ label, type, category, createdBy, product }
         <Box p={["10px", "10px", "10px", "30px"]}>
             <Box bg={type && type.color ? type.color : ""} borderRadius={"40px"} overflow="hidden">
                 <CategoryLabel label={label} type={type} title="Electronic" createdBy={createdBy} />
-                <Box overflow="scroll">
-                    <Flex h="390px" w="auto" pl={["20px", "20px", "20px", "30px"]} pt="32px" pr={["20px", "20px", "20px", "30px"]}>
-                        {data?.map((item: any, index: number) => {
-                            return (
-                                <Box key={index}>
-                                    <ProductDisplay item={item} index={index} />
-                                </Box>
-                            )
-                        })}
-                    </Flex>
+                <Box pl="10px" pr="10px">
+                    <Box overflow="scroll">
+                        <Flex h="390px" w="auto" pl={["20px", "20px", "20px", "30px"]} pt="32px" pr={["20px", "20px", "20px", "30px"]}>
+                            {data?.map((item: any, index: number) => {
+                                return (
+                                    <Box key={index}>
+                                        <ProductDisplay item={item} index={index} />
+                                    </Box>
+                                )
+                            })}
+                        </Flex>
+                    </Box>
                 </Box>
             </Box>
         </Box>

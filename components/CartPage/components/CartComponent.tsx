@@ -355,7 +355,8 @@ export default function CartComponent({ packageInstance }: Props) {
                                                     value={values.post}
                                                 />
                                                 {errors.post && touched.post && errors.post}
-                                                <Button isLoading={isSubmitting || loading} isDisabled={isSubmitting} mt="20px" h="50px" bg="#000" color="#fff" type="submit" disabled={isSubmitting}>
+                                                <Button 
+                                                isLoading={isSubmitting || loading} isDisabled={isSubmitting} mt="20px" h="50px" bg="#000" color="#fff" type="submit" disabled={isSubmitting}>
                                                     Submit
                                                 </Button>
                                             </Flex>

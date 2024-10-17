@@ -3969,10 +3969,10 @@ js-sdsl@^4.1.4:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-js-user-country@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/js-user-country/-/js-user-country-1.0.1.tgz#35fed41c43f81c34627afde33d3a3d3d8b6f47f9"
-  integrity sha512-aUQHQlSWMH/nGPSYYN88lHgkO+GN59ddREah4y/Jbg5hpcgJh1+OTHj9grflcLnK04mlK7o4dORWht1CInUQuA==
+js-user-country@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/js-user-country/-/js-user-country-1.0.0.tgz#c21e7dbee285f6a570e303243dfac802bbe02f00"
+  integrity sha512-uQ5TDN5oH4POB70Ln1y0SCuiUlFXeNNIdSMX9Fptcv6ztPUkjOdOx3DtyBOHC/Gye8eGfEPAhFgOKI9MOOvjBw==
   dependencies:
     countries-and-timezones "2.0.5"
     moment-timezone "0.5.28"

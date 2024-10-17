@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import PageLabel from './components/PageLabel';
 import MenuLayout from '../MenuLayout';
 import SideBar from './components/SideBar';
@@ -9,6 +9,9 @@ type props = {
 };
 
 export default function DashboardLayout({ children, menu }: props) { 
+
+    const [show, setShow] = useState(true)
+
     return (
         <MenuLayout menu={menu} category={false} > 
             <div className=' w-full lg:flex flex-col hidden h-[80px]' >
@@ -18,7 +21,7 @@ export default function DashboardLayout({ children, menu }: props) {
             </div>
             <div className=' w-full flex px-4 lg:px-[108px] py-8 lg:py-12 bg-white lg:bg-[#F5F5F5] ' >
                 <div className=' lg:flex flex-col hidden lg:w-fit ' >
-                    <SideBar />
+                    <SideBar show={setShow} />
                 </div>
                 <div className=' w-full lg:pl-[35px] ' >
                     {children}

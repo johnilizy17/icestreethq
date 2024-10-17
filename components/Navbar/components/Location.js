@@ -2,38 +2,62 @@ import { Box, Button, Center, Drawer, DrawerBody, DrawerCloseButton, DrawerConte
 import React, { useState, useEffect } from "react";
 import Flag from 'react-world-flags'
 import getUserCountry from "js-user-country";
+import { getCurrency } from '../../../services/productService';
 
 export default function Location() {
 
-    const [select, setSelect] = useState("NGA")
+    const [select, setSelect] = useState("USA")
 
     const language = [{
         icon: <Flag code={"GBR"} />,
         title: "GBP",
+        money:"gbp",
         svg: "GBR"
     }, {
         icon: <Flag code={"NGA"} />,
         title: "NGN",
+        money:"ngn",
         svg: "NGA"
     }, {
         icon: <Flag code={"USA"} />,
         title: "US",
+        money:"usd",
         svg: "USA"
     }
     ]
 
+    async function CountryAmount(e) {
+       try{
+         const result = await getCurrency()
+       const amount = result[e]
+       console.log(amount,"amount")
+       localStorage.setItem("amount", amount) 
+    }catch(error){
+     console.log(error.response, "amount")
+    }
+}
+
     useEffect(() => {
-        if (typeof window === "undefined") {
+        if (typeof window !== "undefined") {
             const country = getUserCountry().name
+            console.log(country, "country")
             if (country === "Nigeria") {
                 setSelect("NGA")
+                CountryAmount("ngn") 
+                localStorage.setItem("currency", "NGN")
             } else if (country === "United Kingdom") {
                 setSelect("GBR")
+                CountryAmount("gbp")
+                localStorage.setItem("currency", "GBP")
             } else {
                 setSelect("USA")
+                CountryAmount("usd")
+                localStorage.setItem("currency", "USA")
             }
+
         }
-    }, [])
+    }, [typeof window])
+
     return (
         <Center>
             <Box zIndex={9000}>
@@ -47,7 +71,10 @@ export default function Location() {
                     </MenuButton>
                     <MenuList >
                         {language.map((a, b) => (
-                            <MenuItem onClick={() => { setSelect(a.svg) }} key={b}>
+                            <MenuItem onClick={() => { 
+                                CountryAmount(a.money)
+                                setSelect(a.svg)
+                                 }} key={b}>
                                 <Center pl="10px" h="17px" w="34px">
                                     {a.icon}
                                     <Box ml="7px" fontWeight="800" fontSize="12px">

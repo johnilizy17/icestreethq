@@ -34,6 +34,10 @@ export const getCartById = async (item: any) => {
   return data;
 };
 
+export const guestLogin = async (info: any) => {
+  const { data } = await axios.post("/guest", info);
+  return data;
+};
 
 export const PurchaseItem = async (item: any) => {
   const data = await axios.post("/cart/user", item);

@@ -7,18 +7,30 @@ import { Box, Center, Flex, Img } from "@chakra-ui/react";
 import { Rating } from "react-simple-star-rating";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
-export default function ProductDisplay({ item, index }: { item: any, index: number }) {
+export default function ProductDisplay({ item, index }: { item: { image: string, price: number, discount: number,sold:number, _id:string, rate: number, itemName:string, name:string  }, index: number }) {
 
     const router = useRouter()
 
-    const navigateToProductDetails = (id: number) => {
+    const navigateToProductDetails = (id: string) => {
         localStorage.setItem("product", id.toString())
         router.push("/product-details")
     }
 
     const [value, setValue] = useState(0)
 
+    function IconProduct(){
+        if(value === 1){
+            setValue(0)
+            localStorage.removeItem(item._id)
+        }else{
+            setValue(1)
+            localStorage.setItem(item._id, item._id)
+        }
+    }
+
     useEffect(() => {
+
+        console.log(item, "product")
 
         const product = localStorage.getItem(item._id)
 
@@ -27,29 +39,27 @@ export default function ProductDisplay({ item, index }: { item: any, index: numb
         } else {
             setValue(0)
         }
-        // console.log(product,,"product")
     }, [])
 
     return (
         <Box pos="relative">
             <Center
                 onClick={() => {
-                    localStorage.setItem(item._id, item._id)
-                    setValue(1)
+                    IconProduct()
                 }}
                 zIndex={20} pos="absolute" bg="#fff" w="40px" h="40px" pt="10px" overflow="hidden" borderRadius="50px" right="50px" top="25px">
                 <Rating
                     emptyIcon={<MdFavoriteBorder size={30} />}
                     initialValue={value}
                     disableFillHover={true}
-
+                    readonly={true}
                     fillIcon={<MdFavorite color="red" size={30} />}
                     iconsCount={1}
                 />
             </Center>
             <Box w="275px" mr="20px" _hover={{ transform: "scale(1.03)", transition: "0.5s ease-in-out" }} cursor="pointer" p="10px" bg="#ffffff" borderRadius="40px" h="320px" onClick={() => navigateToProductDetails(item._id)} key={index} className=' w-full rounded-[5px] px-[11px] py-[15px]  ' >
                 <Center borderRadius={"40px"} h="200px" overflow={"hidden"}>
-                    <Img src={imagePath + "/" + item?.image}  objectFit="cover" alt={item?.name} />
+                    <Img src={imagePath + "/" + item?.image} objectFit="cover" alt={item?.name} />
                 </Center>
                 <Box className='mt-4 lg:ml-2 ' >
                     <p className=' font-medium text-sm ' >{item?.itemName}</p>

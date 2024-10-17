@@ -97,7 +97,7 @@ const MoreItemsMain = () => {
 
     const addPackageToCart = () => {
         if (!packageId) return
-
+        setLoading(true)
         const packageData: UpdatePackageProps = {
             duration: packageInfo.duration,
             total: packageInfo.totalAmount,
@@ -107,12 +107,12 @@ const MoreItemsMain = () => {
             product_id: packageInfo.packageInstance.product_id,
             package_id: packageId ?? ""
         }
-
         updatePackage2(packageData)
             .then(() => {
                 localStorage.setItem("cartId", packageId)
                 route.push("/cart")
             })
+            setLoading(false)
     }
 
 
@@ -231,7 +231,7 @@ const MoreItemsMain = () => {
                         <MdAddCircleOutline color='#0dadf7' />
                         Add Items
                     </button> */}
-                    <Button w="full" bg="black" colorScheme='blackAlpha' onClick={addPackageToCart} >
+                    <Button isLoading={loading} isDisabled={loading} w="full" bg="black" colorScheme='blackAlpha' onClick={addPackageToCart} >
                         Checkout
                     </Button>
                 </div>

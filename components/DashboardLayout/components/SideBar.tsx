@@ -8,14 +8,15 @@ type props = {
     show: Function
 }
 
-export default function SideBar() {
+export default function SideBar({show}:props) {
 
     const router = useRouter()
     const [routerPath, setRouterPath] = React.useState("")
 
     const clickHandler = (item: any) => {
-        router.push(item)
-    }
+        router.push(item.toLowerCase())
+        show(false) 
+    } 
 
     React.useEffect(() => {
         setRouterPath(router.pathname)
@@ -27,7 +28,9 @@ export default function SideBar() {
                 <div className=' lg:w-[350px] lg:pt-[37px] pt-[55px] rounded-[10px] py-[37px] lg:px-[41px] bg-white ' >
                     {CategoryData.map((item: string) => {
                         return (
-                            <button onClick={()=>clickHandler(item)} key={item} className=' flex text-[15px] items-center py-4 ' >
+                            <button onClick={()=>{
+                                clickHandler(item)
+                                }} key={item} className=' flex text-[15px] items-center py-4 ' >
                                 <IconComponent name={item} />
                                 <p className={item === "All Categories" ? ' ml-4 text-[#0dadf7] ' : ' ml-4'} >{item}</p>
                             </button>
