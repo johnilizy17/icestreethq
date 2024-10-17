@@ -1,7 +1,6 @@
 import React from 'react'
 import MenuLayout from '../../components/MenuLayout'
-import OtherProduct from '../../components/OtherProduct'
-import MoreItemsMain from '../../components/AddmoreItemPage/components/MoreItemsMain'
+// import MoreItemsMain from '../../components/AddmoreItemPage/components/MoreItemsMain'
 
 const AddMoreItemsPage = () => {
     return (
@@ -12,13 +11,8 @@ const AddMoreItemsPage = () => {
                 </div>
                 <div className=' w-full flex pb-12 ' >
                     <div className=' w-full lg:pr-5 ' >
-                        <MoreItemsMain />
+                        {/* <MoreItemsMain /> */}
                     </div>
-                    {/* <div className=' lg:flex flex-col hidden w-fit' >
-                        <div className=' w-[400px] overflow-y-auto ' >
-                            <OtherProduct />
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </MenuLayout>

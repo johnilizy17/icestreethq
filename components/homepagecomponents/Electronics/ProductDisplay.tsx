@@ -7,7 +7,7 @@ import { Box, Center, Flex, Img } from "@chakra-ui/react";
 import { Rating } from "react-simple-star-rating";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
-export default function ProductDisplay({ item, index }: { item: { image: string, price: number, discount: number,sold:number, _id:string, rate: number, itemName:string, name:string  }, index: number }) {
+export default function ProductDisplay({ item, index }: { item: { image: string, price: number, discount: number, sold:number, _id:string, rate: number, itemName:string, name:string  }, index: number }) {
 
     const router = useRouter()
 
