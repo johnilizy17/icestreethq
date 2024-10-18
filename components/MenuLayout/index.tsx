@@ -3,7 +3,8 @@ import React from 'react';
 import Footer from '../Footer';
 import ItemCategories from '../ItemCategories';
 import Navbar from '../Navbar';
-import ChatSystem from './ChatSystem';
+import dynamic from 'next/dynamic';
+const ChatSystem = dynamic(import('./ChatSystem'), { ssr: false });
 
 type Props = {
     children: React.ReactNode;
