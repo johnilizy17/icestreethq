@@ -3,6 +3,7 @@ import React from 'react';
 import Footer from '../Footer';
 import ItemCategories from '../ItemCategories';
 import Navbar from '../Navbar';
+import ChatSystem from './ChatSystem';
 
 type Props = {
     children: React.ReactNode;
@@ -16,7 +17,7 @@ export default function MenuLayout({ children, category, menu, pageName }: Props
     return (
         <div className=' w-full lg:pb-0 overflow-x-hidden ' >
             <Head>
-                <title>{pageName?pageName:"Ice Street"}</title>
+                <title>{pageName ? pageName : "Ice Street"}</title>
                 <meta name="description" content="The best e-commerce site" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="theme-color" content="#0dadf7" />
@@ -30,6 +31,7 @@ export default function MenuLayout({ children, category, menu, pageName }: Props
             <div className=' pt-0 w-full h-auto ' >
                 {children}
             </div>
+            <ChatSystem />
             {!menu && (
                 <Footer />
             )}
