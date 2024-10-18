@@ -42,7 +42,7 @@ const products = [
 export default function OrderSummary() {
     return (
         <div className=' w-full min-h-screen bg-[#F5F5F5] flex flex-col items-center ' >
-            {/* <div style={{ boxShadow: "0px 0px 10px 0px #00000040" }} className=' bg-white w-full flex px-[35px] py-[22px] justify-center items-center ' >
+            <div style={{ boxShadow: "0px 0px 10px 0px #00000040" }} className=' bg-white w-full flex px-[35px] py-[22px] justify-center items-center ' >
                 <button onClick={() => Router.push("/")} className=' flex items-center ' >
                                     <Image src="/images/logo.png" className=' ml-1 h-[40px] ' alt='logo' />
         </button>
@@ -66,7 +66,7 @@ export default function OrderSummary() {
                     ))}
 
                 </div>
-            </div> */}
+            </div>
         </div>
     )
 } 
