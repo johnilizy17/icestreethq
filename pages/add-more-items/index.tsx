@@ -1,6 +1,7 @@
 import React from 'react'
 import MenuLayout from '../../components/MenuLayout'
-// import MoreItemsMain from '../../components/AddmoreItemPage/components/MoreItemsMain'
+import dynamic from 'next/dynamic';
+const MoreItemsMain = dynamic(import('../../components/AddmoreItemPage/components/MoreItemsMain'), { ssr: false });
 
 const AddMoreItemsPage = () => {
     return (
@@ -11,7 +12,7 @@ const AddMoreItemsPage = () => {
                 </div>
                 <div className=' w-full flex pb-12 ' >
                     <div className=' w-full lg:pr-5 ' >
-                        {/* <MoreItemsMain /> */}
+                        <MoreItemsMain />
                     </div>
                 </div>
             </div>

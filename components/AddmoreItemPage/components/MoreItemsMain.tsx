@@ -142,7 +142,7 @@ const MoreItemsMain = () => {
         } else {
             setEmpty(true)
         }
-    }, [route])
+    }, [])
 
 
     useEffect(() => {
