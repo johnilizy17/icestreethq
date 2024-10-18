@@ -2,7 +2,8 @@ import React from 'react'
 import Router from 'next/router'
 import { Image } from '@chakra-ui/react'
 import SummaryInfo from '../../components/OrderSummary/components/SummaryInfo';
-import SummaryProductItem from '../../components/OrderSummary/components/SummaryProductItem';
+import dynamic from 'next/dynamic';
+const SummaryProductItem = dynamic(import('../../components/OrderSummary/components/SummaryProductItem'), { ssr: false });
 
 const summaryData = [
     { name: 'Order ID', value: 'MA1209098233' },
@@ -52,8 +53,6 @@ export default function OrderSummary() {
                 {summaryData.map((data) => (
                     <SummaryInfo key={data.name} name={data.name} value={data.value} />
                 ))}
-
-
                 <p className=' font-normal mt-12 text-[15px] ' >Package summary</p>
                 <div className='w-full py-2 ' >
                     {products.map((product, idx) => (
