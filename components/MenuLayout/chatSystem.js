@@ -35,7 +35,6 @@ export default function ChatSystem() {
     };
     return (
         <ChatFrame
-        style={{marginTop:30}}
             chatbox={
                 <ChatBox
                     onSendMessage={handleOnSendMessage}
@@ -54,9 +53,6 @@ export default function ChatSystem() {
             showIcon={attr.showIcon}
             iconStyle={{ background: 'black', fill: 'white' }}
         >
-            <div className="Greeting" style={{ width: '300px' }}>
-                👋 Hey, I’m here contact us if you have a problem?
-            </div>
-        </ChatFrame>
+ </ChatFrame>
     );
 }

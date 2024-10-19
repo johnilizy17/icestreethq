@@ -188,15 +188,6 @@ export default function Navbar({ menu }: props) {
                         <CartBadge loading={cartLoading} value={cartInfo?.itemsQuantity ?? 0} />
                     </Box>
                 </Link>
-                <button
-                style={{marginLeft:5}}
-                    onClick={() => Router.push("/search")}
-                    className={`flex items-center flex-col`}  >
-                    <svg width="30" height="30" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15 25.5C20.799 25.5 25.5 20.799 25.5 15C25.5 9.20101 20.799 4.5 15 4.5C9.20101 4.5 4.5 9.20101 4.5 15C4.5 20.799 9.20101 25.5 15 25.5Z" stroke={showModal ? "#0dadf7" : "#434343"} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M31.5 31.5L22.5 22.5" stroke={router.pathname === "/search" ? "#0dadf7" : "#434343"} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
                 <Location />
             </Box>
             {

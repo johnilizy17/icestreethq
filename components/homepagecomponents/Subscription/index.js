@@ -18,7 +18,7 @@ export default function Subscription() {
             <Box p={["20px", "20px", "20px", "30px"]} pb="80px">
                 <Center borderRadius="40px" p={["26px", "28px", "28px", "48px"]} bg="#C3DFEE" h="auto" w="full">
                     <Center zIndex={1} h="full" w="full" flexDir="column">
-                        <Box fontWeight="700" p="10px" fontSize={["24px", "24px", "24px", "48px"]} >
+                        <Box textAlign="center" fontWeight="700" p="10px" fontSize={["24px", "24px", "24px", "48px"]} >
                             GET 10% OFF YOUR FIRST ORDER                        </Box>
                         <Box fontWeight="400" textAlign="center" fontSize={["12px", "12px", "12px", "16px"]}>
                         Sign up to our newsletter and be the first to know about our launches, exclusive discounts, special offers, and more!
