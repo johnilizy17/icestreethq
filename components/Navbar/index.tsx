@@ -156,6 +156,7 @@ export default function Navbar({ menu }: props) {
                     </Box>
                 </Link>
                 <button
+                style={{marginLeft:5}}
                     onClick={() => Router.push("/search")}
                     className={`flex items-center flex-col`}  >
                     <svg width="30" height="30" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -188,6 +189,7 @@ export default function Navbar({ menu }: props) {
                     </Box>
                 </Link>
                 <button
+                style={{marginLeft:5}}
                     onClick={() => Router.push("/search")}
                     className={`flex items-center flex-col`}  >
                     <svg width="30" height="30" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
