@@ -169,7 +169,7 @@ export default function Footer() {
                     <img src={"/images/logo-white.png"} alt="logo" />
                 </Link>
                 <Box color={COLORS.white} mt="29.5px" w={["auto", "auto", "auto", "418px"]}>
-                    Ice Street encapsulates the cool, modern vibe with a focus on street fashion, playing on the word {"“"}ice{"”"} to reflect a sense of sleekness and trendsetting style. Let me know if {"you'd"} like adjustments or alternatives!
+                    Ice Street encapsulates the cool, modern vibe with a focus on street fashion, playing on the word {"“"}ice{"”"} to reflect a sense of sleekness and trendsetting style. 
                 </Box>
             </Box>
 

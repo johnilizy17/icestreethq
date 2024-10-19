@@ -19,10 +19,9 @@ export default function Subscription() {
                 <Center borderRadius="40px" p={["26px", "28px", "28px", "48px"]} bg="#C3DFEE" h="auto" w="full">
                     <Center zIndex={1} h="full" w="full" flexDir="column">
                         <Box fontWeight="700" p="10px" fontSize={["24px", "24px", "24px", "48px"]} >
-                            Search Products
-                        </Box>
+                            GET 10% OFF YOUR FIRST ORDER                        </Box>
                         <Box fontWeight="400" textAlign="center" fontSize={["12px", "12px", "12px", "16px"]}>
-                            Be the first to know when we have new stocks and collections
+                        Sign up to our newsletter and be the first to know about our launches, exclusive discounts, special offers, and more!
                         </Box>
                         <Flex flexDir={["column", "column", "column", "row"]} w={["100%", "100%", "100%", "50%"]} borderRadius="10px" mt={["15px", "15px", "18px", "36px"]} h={["auto", "auto", "auto", "50px"]} pos="relative">
                             <Input
@@ -62,7 +61,7 @@ export default function Subscription() {
                     <Box mt="32px" fontWeight="700" fontSize="24px" textAlign="center">
                         Express Delivery
                     </Box>
-                    <Box w={["100%","100%","100%","350px"]} textAlign="center" p={["20px", "20px", "20px", "30px"]}>
+                    <Box w={["100%", "100%", "100%", "350px"]} textAlign="center" p={["20px", "20px", "20px", "30px"]}>
                         We prioritize speed and efficiency with our express delivery service, ensuring that your package reaches its destination swiftly
                     </Box>
                 </Center>
@@ -73,7 +72,7 @@ export default function Subscription() {
                     <Box mt="32px" fontWeight="700" fontSize="24px" textAlign="center">
                         Free Return
                     </Box>
-                    <Box w={["100%","100%","100%","350px"]} textAlign="center" p={["20px", "20px", "20px", "30px"]}>
+                    <Box w={["100%", "100%", "100%", "350px"]} textAlign="center" p={["20px", "20px", "20px", "30px"]}>
                         {"We offer hassle-free returns at no extra cost, giving you peace of mind with every purchase."}
                     </Box>
                 </Center>
@@ -84,7 +83,7 @@ export default function Subscription() {
                     <Box mt="32px" fontWeight="700" fontSize="24px" textAlign="center">
                         Flexible Payment
                     </Box>
-                    <Box w={["100%","100%","100%","350px"]} textAlign="center" p={["20px", "20px", "20px", "30px"]}>
+                    <Box w={["100%", "100%", "100%", "350px"]} textAlign="center" p={["20px", "20px", "20px", "30px"]}>
                         {"We provide flexible payment solutions to suit your needs, allowing you to choose from a variety of methods."}
                     </Box>
                 </Center>
