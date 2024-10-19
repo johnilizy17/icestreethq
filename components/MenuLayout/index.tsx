@@ -4,7 +4,7 @@ import Footer from '../Footer';
 import ItemCategories from '../ItemCategories';
 import Navbar from '../Navbar';
 import dynamic from 'next/dynamic';
-const ChatSystem = dynamic(import('./ChatSystem'), { ssr: false });
+const ChatSystem = dynamic(import('./chatSystem'), { ssr: false });
 
 type Props = {
     children: React.ReactNode;
