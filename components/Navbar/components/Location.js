@@ -3,58 +3,90 @@ import React, { useState, useEffect } from "react";
 import Flag from 'react-world-flags'
 import getUserCountry from "js-user-country";
 import { getCurrency } from '../../../services/productService';
+import { useRouter } from "next/router";
 
 export default function Location() {
 
     const [select, setSelect] = useState("USA")
+    const router = useRouter()
 
     const language = [{
         icon: <Flag code={"GBR"} />,
         title: "GBP",
-        money:"gbp",
-        svg: "GBR"
+        money: "gbp",
+        svg: "GBR",
+        country: "United Kingdom"
     }, {
         icon: <Flag code={"NGA"} />,
         title: "NGN",
-        money:"ngn",
-        svg: "NGA"
+        money: "ngn",
+        svg: "NGA",
+        country: "Nigeria"
     }, {
         icon: <Flag code={"USA"} />,
         title: "US",
-        money:"usd",
-        svg: "USA"
+        money: "usd",
+        svg: "USA",
+        country: "United State"
     }
     ]
 
     async function CountryAmount(e) {
-       try{
-         const result = await getCurrency()
-       const amount = result[e]
-       console.log(amount,"amount")
-       localStorage.setItem("amount", amount) 
-    }catch(error){
-     console.log(error.response, "amount")
+        try {
+            const result = await getCurrency()
+            const amount = result[e]
+            console.log(amount, "amount")
+            localStorage.setItem("amount", amount)
+        } catch (error) {
+            console.log(error.response, "amount")
+        }
     }
-}
+
+    function SelectionCountry(country) {
+        if (country === "Nigeria") {
+            setSelect("NGA")
+            CountryAmount("ngn")
+            localStorage.setItem("currency", "NGN")
+        } else if (country === "United Kingdom") {
+            setSelect("GBR")
+            CountryAmount("gbp")
+            localStorage.setItem("currency", "GBP")
+        } else {
+            setSelect("USA")
+            CountryAmount("usd")
+            localStorage.setItem("currency", "USA")
+        }
+        router.reload()
+    }
 
     useEffect(() => {
+
         if (typeof window !== "undefined") {
             const country = getUserCountry().name
-            console.log(country, "country")
-            if (country === "Nigeria") {
-                setSelect("NGA")
-                CountryAmount("ngn") 
-                localStorage.setItem("currency", "NGN")
-            } else if (country === "United Kingdom") {
-                setSelect("GBR")
-                CountryAmount("gbp")
-                localStorage.setItem("currency", "GBP")
+            const currency = localStorage.getItem("currency")
+            if (currency) {
+                if (currency === "NGN") {
+                    setSelect("NGA")
+                } else if (currency === "GBP") {
+                    setSelect("GBR")
+                } else {
+                    setSelect("USA")
+                }
             } else {
-                setSelect("USA")
-                CountryAmount("usd")
-                localStorage.setItem("currency", "USA")
+                if (country === "Nigeria") {
+                    setSelect("NGA")
+                    CountryAmount("ngn")
+                    localStorage.setItem("currency", "NGN")
+                } else if (country === "United Kingdom") {
+                    setSelect("GBR")
+                    CountryAmount("gbp")
+                    localStorage.setItem("currency", "GBP")
+                } else {
+                    setSelect("USA")
+                    CountryAmount("usd")
+                    localStorage.setItem("currency", "USA")
+                }
             }
-
         }
     }, [typeof window])
 
@@ -71,10 +103,11 @@ export default function Location() {
                     </MenuButton>
                     <MenuList >
                         {language.map((a, b) => (
-                            <MenuItem onClick={() => { 
+                            <MenuItem onClick={() => {
                                 CountryAmount(a.money)
                                 setSelect(a.svg)
-                                 }} key={b}>
+                                SelectionCountry(a.country)
+                            }} key={b}>
                                 <Center pl="10px" h="17px" w="34px">
                                     {a.icon}
                                     <Box ml="7px" fontWeight="800" fontSize="12px">

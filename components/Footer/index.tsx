@@ -76,7 +76,7 @@ export default function Footer() {
     }
 
     return (
-        <Center justifyContent="space-between" mt={["60px","60px","60px","120px"]} alignItems={["flex-start"]} flexDir={["column", "column", "column", "row"]} h={["auto", "auto", "auto", "400px"]} pl={["20px", "63px"]} pr={["20px", "63px"]} pt={["40px", "40px", "40px", "90px"]} pb={["20px", "90px"]} bg={COLORS.black}>
+        <Center justifyContent="space-between" mt={["60px", "60px", "60px", "120px"]} alignItems={["flex-start"]} flexDir={["column", "column", "column", "row"]} h={["auto", "auto", "auto", "400px"]} pl={["20px", "63px"]} pr={["20px", "63px"]} pt={["40px", "40px", "40px", "90px"]} pb={["20px", "90px"]} bg={COLORS.black}>
             <Box mb="30px" cursor="pointer" display={["none", "none", "none", "block"]}>
                 <Link href="/">
                     <img src={"/images/logo-white.png"} alt="logo" />
@@ -138,8 +138,8 @@ export default function Footer() {
                         </Link>
                         <Link href=" https://x.com/IcestreetbyHq">
                             <IconButton colorScheme="blackAlpha" bg="transparent" aria-label={""}>
-                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M25 7.556V12.9347C22.5814 12.6947 20.2753 11.7949 18.3333 10.3333V16.3333C18.333 17.9615 17.874 19.5566 17.0089 20.936C16.1439 22.3154 14.9078 23.4232 13.4422 24.1325C11.9767 24.8417 10.3409 25.1239 8.72247 24.9465C7.10399 24.7691 5.56821 24.1394 4.29107 23.1295C3.01394 22.1196 2.04712 20.7704 1.50137 19.2364C0.955619 17.7024 0.853017 16.0457 1.20532 14.4561C1.55762 12.8665 2.35057 11.4083 3.49334 10.2486C4.6361 9.0888 6.08244 8.2744 7.66667 7.89867V13.6667C7.21212 14.0076 6.85225 14.459 6.62125 14.9781C6.39025 15.4972 6.29578 16.0668 6.3468 16.6327C6.39783 17.1986 6.59266 17.742 6.9128 18.2114C7.23294 18.6809 7.66775 19.0607 8.17596 19.3148C8.68416 19.5689 9.24888 19.6888 9.81649 19.6633C10.3841 19.6378 10.9358 19.4675 11.4191 19.1688C11.9024 18.8701 12.3014 18.4528 12.5781 17.9565C12.8548 17.4603 13 16.9015 13 16.3333V1H18.444C18.7216 2.63787 19.5018 4.14883 20.6765 5.3235C21.8512 6.49817 23.3621 7.27838 25 7.556Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" className="bi bi-twitter-x" viewBox="0 0 16 16">
+                                    <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
                                 </svg>
                             </IconButton>
                         </Link>
@@ -169,7 +169,7 @@ export default function Footer() {
                     <img src={"/images/logo-white.png"} alt="logo" />
                 </Link>
                 <Box color={COLORS.white} mt="29.5px" w={["auto", "auto", "auto", "418px"]}>
-                    Ice Street encapsulates the cool, modern vibe with a focus on street fashion, playing on the word {"“"}ice{"”"} to reflect a sense of sleekness and trendsetting style. 
+                    Ice Street encapsulates the cool, modern vibe with a focus on street fashion, playing on the word {"“"}ice{"”"} to reflect a sense of sleekness and trendsetting style.
                 </Box>
             </Box>
 
