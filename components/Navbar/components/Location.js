@@ -24,7 +24,7 @@ export default function Location() {
         country: "Nigeria"
     }, {
         icon: <Flag code={"USA"} />,
-        title: "US",
+        title: "USD",
         money: "usd",
         svg: "USA",
         country: "United State"
