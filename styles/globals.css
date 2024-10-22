@@ -81,6 +81,14 @@
   bottom: 35px !important;
 }
 
+.cut-text { 
+  width: auto; 
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .loginShadow {
   box-shadow: 0px 0px 10px 0px #00000040;
 }

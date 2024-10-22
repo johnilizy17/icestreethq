@@ -65,7 +65,7 @@ export default function Electronic({ label, type, category, createdBy, product }
 
     return (
         <Box p={["10px", "10px", "10px", "30px"]}>
-            <Box bg={type && type.color ? type.color : ""} borderRadius={"40px"} overflow="hidden">
+            <Box bg={type && type.color ? type.color : ""} borderRadius={"24px"} overflow="hidden">
                 <CategoryLabel label={label} type={type} title="Electronic" createdBy={createdBy} />
                 <Box pl="10px" pr="10px">
                     <Box overflow="scroll">

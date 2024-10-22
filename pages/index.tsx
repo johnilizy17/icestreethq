@@ -35,7 +35,7 @@ export default function Home() {
         <MenuLayout pageName='Ice Street' menu={false} category={false}>
           <div className=' w-full mt-[10px] lg:mt-[32px] ' >
             <HeroSection />
-            <HeroSearch />
+            {/* <HeroSearch /> */}
             {category?.map((item: any, index: number) => {
               return (
                 <div key={index} className=' w-full ' >

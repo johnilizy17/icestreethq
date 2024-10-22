@@ -114,10 +114,7 @@ export default function Navbar({ menu }: props) {
                     <Box bg="black" mb="5px" className='w-[25px] h-[2px]' />
                     {/* <Box className=' w-[25px] h-[2px] bg-black mt-[3px] ' /> */}
                 </Button>
-                <Center ml="-20px" h={["40px"]} w={["170px", "170px", "170px", "200px"]} onClick={() => Router.push("/")} className={menu ? ' hidden lg:flex items-center ' : ' flex items-center '} >
-                    <Box display={["none", "none", "none", "flex"]}>
-                        {router.pathname !== "/" ? <AiOutlineArrowLeft color='#0dadf7' /> : ""}
-                    </Box>
+                <Center ml="-20px" h={["50px"]} w={["170px", "170px", "170px", "250px"]} onClick={() => Router.push("/")} className={menu ? ' hidden lg:flex items-center ' : ' flex items-center '} >
                     <Img style={{ objectFit: "contain" }} src="/images/logo.png" alt='logo' />
                 </Center>
             </Box>

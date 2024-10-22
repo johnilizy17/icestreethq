@@ -28,7 +28,7 @@ export default function CategoryLabel({ title, label, type, createdBy, color }: 
 
     return (
         <Box className=' w-full' color={type && type.Header_Color ? type.Header_Color : ""} >
-            <Box className={` w-full h-[60px] flex text-white justify-between items-center lg:pl-[32px] px-6 lg:pr-[55px] `} >
+            <Box className={` w-full h-[60px] flex text-white justify-between items-center lg:pl-[32px] px-10 lg:pr-[55px] `} pt={["24px"]} >
                 <Box fontSize={["18px","20px","24px","36px"]} color={type?.Header_Color} className=' font-bold' >{type && type.title ? type.title : ""}</Box>
                 <Center style={type ? { color: type.Header_Color } : {}} onClick={() => clickHandler()} className=' font-semibold ' >
                     <Box fontSize={["10px","12px","12px","14px"]} cursor="pointer">

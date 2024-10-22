@@ -53,7 +53,7 @@ export default function SingleItem({ title, category, type, createdBy, label, pr
         <>
             {data.length !== 0 && (
                 <Box p={["10px", "10px", "10px", "30px"]} mt="-40px" pt="0px">
-                    <Box pt={"40px"} borderRadius={"40px"} overflow="hidden">
+                    <Box pt={"40px"} borderRadius={"24px"} overflow="hidden">
                         <CategoryLabel color='790252' type={type} label={label} createdBy={createdBy} title={category?.title} />
                         <Box mt="30px" paddingLeft={["30px"]} display="flex">
                             {data?.map((item: any, index: number) => {

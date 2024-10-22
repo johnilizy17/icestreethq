@@ -27,7 +27,7 @@ export default function PageLabel() {
     }, [router])
 
     return (
-        <div className=' w-full h-[80px] flex flex-col text-white px-[108px] bg-[#D2301C] py-[15px] ' >
+        <div className=' w-full h-[80px] flex flex-col text-white px-[108px] bg-[#000] py-[15px] ' >
             <p className=' font-medium text-sm ' >Home {">"} My Account {">"} {label}</p>
             <p className=' font-bold text-lg mt-auto ' >{label}</p>
         </div>

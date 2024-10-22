@@ -72,29 +72,31 @@ export default function Men() {
                         <Center p={["20px", "20px", "20px", "30px"]} flexWrap="wrap" >
                             {category.map((a: any, index: any) => (<SelectionButton key={index} title={a} select={select} setSelect={setSelect} />))}
                         </Center>
-                        <Flex justifyContent={["center","flex-start"]} flexWrap="wrap" p={["20px", "20px", "20px", "30px"]} bg="rgba(217, 217, 217, 0.2)">
-                            {loading ?
-                                <Center h="300px" w="full">
-                                    <Spinner size="xl" />
-                                </Center> :
-                                data.length < 1 ?
-                                    <Center flexDir="column" p="20px" w="full">
-                                        <Lottie options={defaultOptions}
-                                            height={300}
-                                            width={300} />
-                                        <Box fontWeight="700" mt="10px" fontSize="24px">
-                                            No Result
-                                        </Box>
-                                    </Center>
-                                    :
-                                    data?.map((item: any, index: number) => {
-                                        return (
-                                            <Box key={index} mb="20px">
-                                                <ProductDisplay item={item} index={index} />
+                        <Center bg="rgba(217, 217, 217, 0.2)" pt="20px" pb="20px">
+                            <Flex justifyContent={["space-between","space-between","space-between","flex-start"]} flexWrap="wrap">
+                                {loading ?
+                                    <Center h="300px" w="full">
+                                        <Spinner size="xl" />
+                                    </Center> :
+                                    data.length < 1 ?
+                                        <Center flexDir="column" p="20px" w="full">
+                                            <Lottie options={defaultOptions}
+                                                height={300}
+                                                width={300} />
+                                            <Box fontWeight="700" mt="10px" fontSize="24px">
+                                                No Result
                                             </Box>
-                                        )
-                                    })}
-                        </Flex>
+                                        </Center>
+                                        :
+                                        data?.map((item: any, index: number) => {
+                                            return (
+                                                <Box key={index} mb="20px">
+                                                    <ProductDisplay item={item} index={index} />
+                                                </Box>
+                                            )
+                                        })}
+                            </Flex>
+                        </Center>
                     </MenuLayout>
                 </Box>
             </main>

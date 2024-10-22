@@ -108,7 +108,7 @@ export default function Dashboard() {
             <DashboardLayout menu={true}>
                 {loadingDashboard ?
                     <LoadingComponent /> :
-                    <div className=' w-full rounded-[10px] bg-white ' >
+                    <div className='w-full rounded-[10px] bg-white ' >
                         <div className=' w-full border-b  border-[#D9D9D9] pb-[17px] lg:py-[17px] lg:px-[46px] ' >
                             <p className=' font-bold text-lg ' >Account Information</p>
                         </div>
@@ -116,6 +116,7 @@ export default function Dashboard() {
                             <div className=' w-full mt-6 lg:mt-8 ' >
                                 <p className=' text-sm font-medium mb-2 ' >First Name</p>
                                 <Input
+                                    isDisabled={true}
                                     name="firstname"
                                     onChange={formik.handleChange}
                                     value={formik.values.firstname}
@@ -127,6 +128,7 @@ export default function Dashboard() {
                             <div className=' w-full mt-4 ' >
                                 <p className=' text-sm font-medium mb-2 ' >Last Name</p>
                                 <Input
+                                    isDisabled={true}
                                     name="lastname"
                                     onChange={formik.handleChange}
                                     value={formik.values.lastname}
@@ -138,6 +140,7 @@ export default function Dashboard() {
                             <div className=' w-full mt-4 ' >
                                 <p className=' text-sm font-medium mb-2 ' >Email Address</p>
                                 <Input
+                                    isDisabled={true}
                                     name="email"
                                     onChange={formik.handleChange}
                                     value={formik.values.email}
@@ -149,6 +152,7 @@ export default function Dashboard() {
                             <div className=' w-full mt-4 ' >
                                 <p className=' text-sm mb-2 ' >Phone Number</p>
                                 <Input
+                                    isDisabled={true}
                                     name="phone"
                                     onChange={formik.handleChange}
                                     value={formik.values.phone}
@@ -157,7 +161,7 @@ export default function Dashboard() {
                                     }
                                     height="45px" border="1px solid #595959E5" placeholder='Enter password' fontSize="sm" />
                             </div>
-                            <Button colorScheme="blue" isLoading={loading} onClick={submit} className=' w-full h-[45px] rounded-[2px] text-white bg-[#069046] font-Inter-ExtraBold text-lg mt-6 '>Save Changes</Button>
+                            <Button isDisabled={true} colorScheme="blue" isLoading={loading} onClick={submit} className=' w-full h-[45px] rounded-[2px] text-white bg-[#069046] font-Inter-ExtraBold text-lg mt-6 '>Save Changes</Button>
                         </div>
                     </div>
                 }

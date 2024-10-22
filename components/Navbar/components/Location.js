@@ -42,18 +42,18 @@ export default function Location() {
         }
     }
 
-    function SelectionCountry(country) {
+    async function SelectionCountry(country) {
         if (country === "Nigeria") {
             setSelect("NGA")
-            CountryAmount("ngn")
+            await CountryAmount("ngn")
             localStorage.setItem("currency", "NGN")
         } else if (country === "United Kingdom") {
             setSelect("GBR")
-            CountryAmount("gbp")
+            await CountryAmount("gbp")
             localStorage.setItem("currency", "GBP")
         } else {
             setSelect("USA")
-            CountryAmount("usd")
+            await CountryAmount("usd")
             localStorage.setItem("currency", "USA")
         }
         router.reload()

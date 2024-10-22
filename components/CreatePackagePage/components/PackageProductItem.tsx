@@ -39,7 +39,7 @@ const PackageProductItem = ({ name, onRemove, price, imageUrl, id, qty, handleQu
             handleQuantityChanged(updatedValue, price, "decrement", id, newQuantity)
     }
     return (
-        <div className=' flex items-center py-4 border rounded-xl lg:border-t-0 lg:border-r-0 lg:border-l-0 lg:border-b px-4 lg:px-6 justify-between border-[#D9D9D9] mb-4'>
+        <div className='flex items-center py-4 border rounded-xl lg:border-t-0 lg:border-r-0 lg:border-l-0 lg:border-b px-4 lg:px-6 justify-between border-[#D9D9D9] mb-4'>
             <div className=' w-full flex items-center' >
                 <Image src={imageUrl} alt="gone" className=' w-[70px] lg:w-[50px] object-contain ' />
                 <div className=' ml-3' >
