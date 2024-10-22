@@ -24,7 +24,6 @@ export default function Index() {
             setCategory(item);
           }
         })
-        //   console.log(response); 
       } catch (err) {
         toast.error("Error occured");
       }

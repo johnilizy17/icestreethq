@@ -1,4 +1,5 @@
-import { Box, Button, Center, Select, useDisclosure, useToast } from '@chakra-ui/react'
+
+import { Box, Button, Center, Flex, Image, Img, useToast, useDisclosure, Input } from '@chakra-ui/react'
 import React, { useEffect, useReducer, useState } from 'react'
 import { MdAddCircleOutline } from 'react-icons/md'
 import ProductItem from '../../ProductItem'
@@ -15,15 +16,21 @@ import SpinLoader from '../../Loaders/SpinLoader'
 import { initialState, packageInfoReducer } from '../utils'
 import Lottie from 'react-lottie'
 import Empty from '../../../assets/lottie/empty.json'
+import { guestLogin } from '../../../services'
+import {
+    Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton,
+} from '@chakra-ui/react'
 
 const MoreItemsMain = () => {
     const { isOpen, onClose, onOpen } = useDisclosure()
     const [packageInfo, packageDispatch] = useReducer(packageInfoReducer, initialState)
     const [loading, setLoading] = useState(true)
     const [empty, setEmpty] = useState(true)
+    const [userData, setUserData] = React.useState("");
     const [packageId, setPackageId] = useState<string>();
     const [activeTab, setActiveTab] = useState<FrequencyType>("monthly")
     const [SumTotal, setSumTotal] = useState(cashFormat(0))
+    const [showForm, setShowForm] = useState(false)
     const route = useRouter()
     const defaultOptions = {
         loop: true,
@@ -39,6 +46,34 @@ const MoreItemsMain = () => {
         paymentFrequency: activeTab,
         amount: 1
     })
+
+    async function handleGuest() {
+        try {
+            setLoading(true)
+            const response = await guestLogin({ email: userData })
+            localStorage.setItem("user", response?.userID)
+            onClose()
+            localStorage.setItem("token", response?.access_token)
+            toast({
+                title: response?.msg,
+                position: "bottom",
+                status: "success",
+                isClosable: true,
+            })
+            setLoading(false)
+        } catch (err: any) {
+            setLoading(false)
+            console.log(err.response.data, "state")
+            toast({
+                title: "Email Error",
+                description: err.response.data.msg,
+                status: "error",
+                position: "top-right"
+            })
+        }
+        setLoading(false)
+    }
+
 
     const handlePaymentFrequencyChanged = (frequency: FrequencyType, amount: number) => {
         setPaymentInfo({
@@ -92,14 +127,14 @@ const MoreItemsMain = () => {
     }
 
     const handleDurationChanged = (duration: number) => {
-        packageDispatch({ type: "CHANGE_DURATION", payload: duration })
+        packageDispatch({ type: "CHANGE_DURATION", payload: 1 })
     }
 
     const addPackageToCart = () => {
         if (!packageId) return
         setLoading(true)
         const packageData: UpdatePackageProps = {
-            duration: packageInfo.duration,
+            duration: 1,
             total: packageInfo.totalAmount,
             payment_frequency: paymentInfo.paymentFrequency,
             category: packageInfo.packageInstance.category,
@@ -112,7 +147,7 @@ const MoreItemsMain = () => {
                 localStorage.setItem("cartId", packageId)
                 route.push("/cart")
             })
-            setLoading(false)
+        setLoading(false)
     }
 
 
@@ -129,7 +164,7 @@ const MoreItemsMain = () => {
 
                     const pageData: PackageInfoType = {
                         packageInstance: res,
-                        duration: res.duration,
+                        duration: 1,
                         totalAmount: parseInt(res.total),
                         totalQuantity: getTotalQuantity(res.product_id),
                         daily_payment,
@@ -177,67 +212,130 @@ const MoreItemsMain = () => {
             Empty Cart
         </Box> </Box></Center> : <Center> <SpinLoader /> </Center>
     return (
-        <div
-            onClick={() => SumTotalFunction()}
-            className='w-full bg-white py-4' >
-            {/* start of more items heading */}
-            <div className=' w-full mt-2 lg:mt-0 flex flex-col lg:flex-row items-start lg:items-center justify-start  border-b py-3 lg:px-4 border-[#D9D9D9] bg-white space-y-4 lg:space-y-0 lg:space-x-8' >
-                <p className=' font-bold text-[24px]' >Add to cart</p>
+        <>
+            <Modal isCentered isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    {showForm ?
+                        <>
+                            <ModalHeader>Guest Details</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+                                <Input
+                                    placeholder="Enter E-mail"
+                                    onChange={(e) => {
+                                        setUserData(e.target.value)
+                                    }}
+                                />
+                            </ModalBody>
 
-                <Center>
-                    <button onClick={() => route.push("/")} className='border ml-auto lg:ml-0 rounded-md block border-[#0dadf7] border-b-2 text-[#0dadf7] bg-white h-[30px] text-[13px] w-[120px] ' >
-                        Add More Items
-                    </button>
-                </Center>
-            </div>
-            {/* end of more items heading */}
+                            <ModalFooter justifyContent="space-between">
+                                <Button
+                                    isLoading={loading}
+                                    isDisabled={loading}
+                                    onClick={() => {
+                                        setShowForm(false)
+                                        onClose()
+                                    }} bg='red' color="white" mr={3}>
+                                    Cancel
+                                </Button>
+                                <Button
+                                    isLoading={loading}
+                                    isDisabled={loading}
+                                    colorScheme="blackAlpha"
+                                    bg='black' color="white"
+                                    onClick={() => {
+                                        handleGuest()
+                                    }}
+                                >submit</Button>
+                            </ModalFooter>
+                        </> :
+                        <>
+                            <ModalHeader>Login</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+                                Do you want to Log in or explore has a guest
+                            </ModalBody>
 
-            <div className=' w-full h-full items-center flex flex-col pt-4 lg:px-6 lg:pb-10 bg-white space-y-5'>
-                {packageInfo.packageInstance.product_id.map((productInfo: any, indx: number) => {
-                    const product = productInfo.item
-                    const totalAmount = productInfo.qty * convertToNumber(product.price)
-                    return (
-                        <ProductItem
-                            id={product._id}
-                            key={productInfo._id}
-                            imageURL={product.image}
-                            products={packageInfo.packageInstance.product_id}
-                            index={indx}
-                            name={product.itemName}
-                            quantity={productInfo.qty}
-                            handleQuantityChanged={handleQuantityChanged}
-                            handleProductRemoved={handleRemoveProduct}
-                            handleTotalProductAmountChanged={handlePaymentFrequencyChanged}
-                            price={convertToNumber(product.price)}
-                            initialTotalAmount={totalAmount} />
-                    )
-                })}
+                            <ModalFooter justifyContent="space-between">
+                                <Button onClick={() => {
+                                    route.push("/login")
+                                }} bg='black' color="white" mr={3}>
+                                    Login
+                                </Button>
+                                <Button
+                                    onClick={() => {
+                                        setShowForm(true)
+                                    }}
+                                    colorScheme='green'>Guest</Button>
+                            </ModalFooter>
+                        </>
+                    }
+                </ModalContent>
+            </Modal>
 
-                {/* */}
-            </div>
+            <div
+                onClick={() => SumTotalFunction()}
+                className='w-full bg-white py-4' >
+                {/* start of more items heading */}
+                <div className=' w-full mt-2 lg:mt-0 flex flex-col lg:flex-row items-start lg:items-center justify-start  border-b py-3 lg:px-4 border-[#D9D9D9] bg-white space-y-4 lg:space-y-0 lg:space-x-8' >
+                    <p className=' font-bold text-[24px]' >Add to cart</p>
 
-            <div className='text-center'>
-                <div className='w-full flex flex-col justify-center items-center py-3 lg:px-4 border-[#D9D9D9] ' >
-                    <div className='flex w-full pb-5 justify-between lg:justify-center border-b items-baseline mb-7'>
-                        <h3 className='font-bold lg:text-lg lg:mr-16' >Item{getSingularOrPlural(packageInfo.totalQuantity)}: <span className=' font-bold ' >{packageInfo.totalQuantity}</span></h3>
-                        <div className='text-right'>
-                            <h3 className='font-bold text-sm lg:text-xm text-right lg:mt-0 mt-2 lg:text-lg' >Amount: <span className=' font-bold text-[#0dadf7]' >{SumTotal}</span></h3>
-                        </div>
-                    </div>
+                    <Center>
+                        <button onClick={() => route.push("/")} className='border ml-auto lg:ml-0 rounded-md block border-[#0dadf7] border-b-2 text-[#0dadf7] bg-white h-[30px] text-[13px] w-[120px] ' >
+                            Add More Items
+                        </button>
+                    </Center>
+                </div>
+                {/* end of more items heading */}
+
+                <div className=' w-full h-full items-center flex flex-col pt-4 lg:px-6 lg:pb-10 bg-white space-y-5'>
+                    {packageInfo.packageInstance.product_id.map((productInfo: any, indx: number) => {
+                        const product = productInfo.item
+                        const totalAmount = productInfo.qty * convertToNumber(product.price)
+                        return (
+                            <ProductItem
+                                id={product._id}
+                                key={productInfo._id}
+                                imageURL={product.image}
+                                products={packageInfo.packageInstance.product_id}
+                                index={indx}
+                                name={product.itemName}
+                                quantity={productInfo.qty}
+                                handleQuantityChanged={handleQuantityChanged}
+                                handleProductRemoved={handleRemoveProduct}
+                                handleTotalProductAmountChanged={handlePaymentFrequencyChanged}
+                                price={convertToNumber(product.price)}
+                                initialTotalAmount={totalAmount} />
+                        )
+                    })}
+
+                    {/* */}
                 </div>
 
-                <div className='w-full flex text-center lg:justify-center space-x-3 lg:space-x-0 mt-7'>
-                    {/* <button onClick={onOpen} className='w-2/6 py-2 px-2 inline-flex lg:hidden items-center justify-between border border-[#0dadf7] text-[#0dadf7] bg-white text-sm font-semibold rounded-md' >
+                <div className='text-center'>
+                    <div className='w-full flex flex-col justify-center items-center py-3 lg:px-4 border-[#D9D9D9] ' >
+                        <div className='flex w-full pb-5 justify-between lg:justify-center border-b items-baseline mb-7'>
+                            <h3 className='font-bold lg:text-lg lg:mr-16' >Item{getSingularOrPlural(packageInfo.totalQuantity)}: <span className=' font-bold ' >{packageInfo.totalQuantity}</span></h3>
+                            <div className='text-right'>
+                                <h3 className='font-bold text-sm lg:text-xm text-right lg:mt-0 mt-2 lg:text-lg' >Amount: <span className=' font-bold text-[#0dadf7]' >{SumTotal}</span></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='w-full flex text-center lg:justify-center space-x-3 lg:space-x-0 mt-7'>
+                        {/* <button onClick={onOpen} className='w-2/6 py-2 px-2 inline-flex lg:hidden items-center justify-between border border-[#0dadf7] text-[#0dadf7] bg-white text-sm font-semibold rounded-md' >
                         <MdAddCircleOutline color='#0dadf7' />
                         Add Items
                     </button> */}
-                    <Button isLoading={loading} isDisabled={loading} w="full" bg="black" colorScheme='blackAlpha' onClick={addPackageToCart} >
-                        Checkout
-                    </Button>
+                        <Button isLoading={loading} isDisabled={loading} w="full" bg="black" colorScheme='blackAlpha' onClick={addPackageToCart} >
+                            Checkout
+                        </Button>
+                    </div>
                 </div>
-            </div>
-            <SearchProductModal isOpen={isOpen} onClose={onClose} handleClick={handleItemAdded} />
-        </div >
+                <SearchProductModal isOpen={isOpen} onClose={onClose} handleClick={handleItemAdded} />
+            </div >
+        </>
     )
 }
 

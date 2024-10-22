@@ -143,7 +143,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
     async function handleGuest() {
         try {
             setLoading(true)
-            const response = await guestLogin({email:userData})
+            const response = await guestLogin({ email: userData })
             localStorage.setItem("user", response?.userID)
             onClose()
             localStorage.setItem("token", response?.access_token)
@@ -154,8 +154,15 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                 isClosable: true,
             })
             setLoading(false)
-        } catch (err) {
+        } catch (err:any) {
             setLoading(false)
+            console.log(err.response.data, "state")
+            toast({
+                title: "Email Error",
+                description: err.response.data.msg,
+                status: "error",
+                position: "top-right"
+            })
         }
         setLoading(false)
     }
@@ -196,6 +203,13 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                     .catch(err => {
                         setLoading(false)
                         console.error(err?.response)
+                        toast({
+                            title: "Token",
+                            description: "Token has expire kindly login",
+                            status: "error",
+                            position: "top-right"
+                        })
+                        onOpen()
                     })
             } else {
                 updatePackage({
@@ -211,6 +225,13 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                     route.push("/")
                 }).catch((res: any) => {
                     setLoading(false)
+                    toast({
+                        title: "Token",
+                        description: "Token has expire kindly login",
+                        status: "error",
+                        position: "top-right"
+                    })
+                    onOpen()
                 })
 
             }
@@ -259,7 +280,13 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                     })
                     .catch(err => {
                         setLoading2(false)
-                        console.error(err?.response)
+                        toast({
+                            title: "Token",
+                            description: "Token has expire kindly login",
+                            status: "error",
+                            position: "top-right"
+                        })
+                        onOpen()
                     })
             } else {
                 updatePackage({
@@ -275,6 +302,13 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                     route.push("/add-more-items")
                 }).catch((res: any) => {
                     setLoading2(false)
+                    toast({
+                        title: "Token",
+                        description: "Token has expire kindly login",
+                        status: "error",
+                        position: "top-right"
+                    })
+                    onOpen()
                 })
 
             }

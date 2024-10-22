@@ -67,7 +67,7 @@ export default function AllCollection({ label }: props) {
                         {data?.map((item: any, index: number) => {
                             return (
                                 <Box key={index}>
-                                    <Box w="275px" mr="20px" pos="relative" overflow="hidden" _hover={{ w: ["280px","480px"], transition: "0.5s ease-in-out" }} cursor="pointer" bg="red" borderRadius="40px" h="320px" key={index}>
+                                    <Box w="275px" mr="20px" pos="relative" overflow="hidden" _hover={{ w: ["280px","480px"], transition: "0.5s ease-in-out" }} cursor="pointer" bg="black" borderRadius="40px" h="320px" key={index}>
                                         <Box w="500px" h="full">
                                             <img style={{ width: 500, objectFit: "cover", height: "100%" }} src={item.image ? imagePath + "/" + item.image : "/banner/collectionBanner.png"} />
                                             <Button
