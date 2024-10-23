@@ -37,7 +37,7 @@ enum cartInfoActionKind {
 
 
 export default function CartComponent({ packageInstance }: Props) {
-    const [data, setData] = React.useState({ country: "" })
+    const [data, setData] = React.useState({ country: "", phone:"" })
     const [loading, setLoading] = React.useState(true);
     const [SumTotal, setSumTotal] = useState(cashFormat(0))
     const [SumTotal2, setSumTotal2] = useState(0)
@@ -153,6 +153,8 @@ export default function CartComponent({ packageInstance }: Props) {
         }
     }
 
+    const amountNumber:any = localStorage.getItem("amount")
+
     function SumTotalFunction() {
         console.log(products, "product")
 
@@ -167,7 +169,7 @@ export default function CartComponent({ packageInstance }: Props) {
             } else {
                 shipping = selected ? shippingAmount.amount[1]*currency.gbp : shippingAmount.amount[2]*currency.gbp
             }
-            setSumTotal2(Math.floor(100 * (shipping + (total * (JSON.parse(localStorage.getItem("amount")))))))
+            setSumTotal2(Math.floor(100 * (shipping + (total * JSON.parse(amountNumber)))))
             setSumTotal(cashFormat(total))
         } else {
             setSumTotal(cashFormat(0))
