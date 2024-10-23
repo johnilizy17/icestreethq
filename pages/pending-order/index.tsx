@@ -50,7 +50,7 @@ export default function Index() {
                 <div className=' w-full rounded-[10px] bg-white ' >
                     {!viewDetail && (
                         <div className=' w-full border-b  border-[#D9D9D9] pb-[15px] lg:py-[15px] lg:px-[46px] ' >
-                            <p className=' font-bold text-lg ' >Active Order</p>
+                            <p className=' font-bold text-lg ' >Pending Order</p>
                         </div>
                     )}
                     {isShown && (
@@ -62,7 +62,7 @@ export default function Index() {
                                 <OrderItem detail={setViewDetail} data={data} setEdit={setEdit} />
                             )}
                             {viewDetail && (
-                                <OrderSummary detail={setViewDetail} edit={edit} />
+                                <OrderSummary detail={setViewDetail} edit={edit} data={data} />
                             )}
                         </>
                     )}

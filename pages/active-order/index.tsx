@@ -3,7 +3,7 @@ import DashboardLayout from '../../components/DashboardLayout'
 import EmptyOrder from '../../components/OrderComponents/EmptyOrder'
 import OrderItem from '../../components/OrderComponents/OrderItem'
 import OrderSummary from '../../components/OrderComponents/OrderSummary'
-import { UserPackageFunction } from '../../services/UserPackage'
+import { getCartAmount } from '../../services/UserPackage'
 import LoadingComponent from '../../components/OrderComponents/LoadingComponent';
 
 export default function Index() {
@@ -11,7 +11,6 @@ export default function Index() {
     const [isEmpty, setIsEmpty] = React.useState(false)
     const [viewDetail, setViewDetail] = React.useState(false)
 
-    const { allPackage } = UserPackageFunction()
     const [isShown, setIsShown] = useState(true)
 
     const [data, setData] = useState({ email: [] })
@@ -24,7 +23,8 @@ export default function Index() {
         refresh = []
         let user
         try {
-            const response = await allPackage("active")
+            const response = await getCartAmount()
+            console.log(response)
             setData(response?.data);
             refresh = ""
             if (response.data.length === 0) {

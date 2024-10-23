@@ -50,6 +50,14 @@ export const getPackage = async (package_id: string) => {
     return response.data    
 }
 
+export const getCartAmount = async () => {
+  try {
+    const response = await axios.get(`cart/active`,);
+    return response
+  } catch (err: any) {
+    return err?.response
+  }
+}
 
 export const updatePackage2 = async (packageObj: UpdatePackageProps) => {
   const response = await axios.put("package/update/checkout", packageObj)

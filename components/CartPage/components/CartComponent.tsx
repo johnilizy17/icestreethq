@@ -7,20 +7,21 @@ import SpinLoader from '../../Loaders/SpinLoader'
 import MonthlySelector from '../../MontlySelector'
 import PaymentFrequency from '../../PaymentFrequency'
 import ProductItem from '../../ProductItem'
-import { cashFormat } from '../../utils/cashFormat'
+import { cashFormat, cashFormat2 } from '../../utils/cashFormat'
 import { convertToNumber, getSingularOrPlural } from '../../utils/index.util'
 import { calculateTotalAmount } from '../../utils/productDetails.utils'
 import CartHeader from './CartHeader'
 import CartInfoItem from './CartInfoItem'
 import PaymentModal from './PaymentModal'
 import { cartInfoReducer, cartInitializer, getFrequencyAmount, getTotalQuantity } from './utils'
-import { Box, Button, Center, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Radio, RadioGroup, Stack, useDisclosure, useToast } from '@chakra-ui/react'
+import { Box, Button, Center, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Radio, RadioGroup, Stack, Text, useDisclosure, useToast } from '@chakra-ui/react'
 import { createPaymentPlan } from '../../../services/UserPackage'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import { Formik } from 'formik'
 import PaymentMethod from '../../Payment'
+import { getCurrency } from '../../../services/productService';
 
 type Props = {
     packageInstance: any
@@ -36,14 +37,17 @@ enum cartInfoActionKind {
 
 
 export default function CartComponent({ packageInstance }: Props) {
-    const [data, setData] = React.useState({})
+    const [data, setData] = React.useState({ country: "" })
     const [loading, setLoading] = React.useState(true);
     const [SumTotal, setSumTotal] = useState(cashFormat(0))
     const [SumTotal2, setSumTotal2] = useState(0)
     const { userDetails, isLoggedIn } = useUserDetails()
+    const [selected, setSelected] = useState(true)
     const [value, setValue] = useState<any>("")
     const route = useRouter()
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [currency, setCurrency] = useState({ ngn: 0, gbp: 0 })
+    const [shippingAmount, setShippingAmount] = useState({ country: "Other", amount: { 1: 15.99, 2: 15.99 } })
     const { product_id: _products, ...p } = packageInstance
     const [products, setProducts] = useState(_products)
     const toast = useToast()
@@ -76,13 +80,6 @@ export default function CartComponent({ packageInstance }: Props) {
         dispatchCartAction({ type: cartInfoActionKind.CHANGE_DURATION, payload: { duration } })
     }
 
-    const handlePayNowClicked = () => {
-        //send cart information
-        // const data = createPaymentPlan(paymentInfo.amount, "Your package name", paymentInfo.paymentFrequency, cartInfo.duration)
-        // if (!isLoggedIn) route.push("/login")
-        // setIsOpen(true)
-    }
-
     const handlePaymentFrequencyChanged = (frequency: FrequencyType, amount: number) => {
         setPaymentInfo({
             paymentFrequency: frequency,
@@ -109,14 +106,33 @@ export default function CartComponent({ packageInstance }: Props) {
         }
     }, []);
 
+    const CountryChoose = [{ country: "Nigeria", amount: { 1: 5000, 2: 15000 } }, { country: "United State", amount: { 1: 5.99, 2: 6.99 } }, { country: "USA", amount: { 1: 5.99, 2: 6.99 } }, { country: "England", amount: { 1: 5.99, 2: 6.99 } }, { country: "Britain", amount: { 1: 5.99, 2: 6.99 } }, { country: "Denmark", amount: { 1: 5.99, 2: 6.99 } }, { country: "Other", amount: { 1: 15.99, 2: 15.99 } }]
 
 
+    async function CountryAmount() {
+        try {
+            const result = await getCurrency()
+            localStorage.setItem("usa", result.gbp)
+            setCurrency(result)
+
+        } catch (error: any) {
+            console.log(error.response, "amount")
+        }
+    }
     const paymentSuccessfull = async (id: string) => {
         try {
             setLoading(true)
             onClose()
             const package_id = localStorage.getItem("default_package")
-            const response = await PurchaseItem({ ...data, payment: id, total: SumTotal2, product_id: products, package_id: package_id });
+            let shipping
+            if (shippingAmount.amount[1] > 19) {
+                const amount = selected ? shippingAmount.amount[1] : shippingAmount.amount[2]
+                shipping = amount / currency.gbp
+            } else {
+                const amount = selected ? shippingAmount.amount[1] : shippingAmount.amount[2]
+                shipping = amount / currency.ngn
+            }
+            const response = await PurchaseItem({ ...data, payment: id, total: SumTotal2, shipping: shipping, product_id: products, package_id: package_id });
             localStorage.removeItem("default_package")
             route.push("/dashboard")
             toast({
@@ -142,20 +158,48 @@ export default function CartComponent({ packageInstance }: Props) {
 
         if (products && products.length > 0) {
             const reformat = products.map((a: any, b: number) => {
-                return a.item.price * a.qty
+                return (a.item.price - (a.item.price * a.item.discount) / 100) * a.qty
             })
             const total = reformat.reduce((a: any, b: number) => a + b, 0)
-            setSumTotal2(total)
+            let shipping
+            if (data.country.toLowerCase() === "nigeria" || data.country.toLowerCase() === "England" || data.country.toLowerCase() === "Britain") {
+                shipping = selected ? shippingAmount.amount[1] : shippingAmount.amount[2]
+            } else {
+                shipping = selected ? shippingAmount.amount[1]*currency.gbp : shippingAmount.amount[2]*currency.gbp
+            }
+            setSumTotal2(Math.floor(100 * (shipping + (total * (JSON.parse(localStorage.getItem("amount")))))))
             setSumTotal(cashFormat(total))
         } else {
             setSumTotal(cashFormat(0))
         }
     }
 
+    function shippingFee() {
+        const result: any = CountryChoose.filter((a: any, b: number) => {
+            if (a.country.toLowerCase() === data.country.toLowerCase()) {
+                return a
+            }
+        })
+        if (result.length === 1) {
+            setShippingAmount(result[0])
+        } else {
+            setShippingAmount({ country: "Other", amount: { 1: 15.99, 2: 15.99 } })
+        }
+    }
+
+
     useEffect(() => {
         SumTotalFunction()
         setLoading(false)
+        CountryAmount()
     }, [])
+
+    useEffect(() => {
+        if (isOpen) {
+            shippingFee()
+            SumTotalFunction()
+        }
+    }, [isOpen, selected])
 
     return (
         <>
@@ -170,8 +214,28 @@ export default function CartComponent({ packageInstance }: Props) {
                 <ModalContent>
                     <ModalHeader>Payment Method</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody>
-                        {isOpen && <PaymentMethod paymentSuccessfull={paymentSuccessfull} />}
+                    <ModalBody pb="20px">
+                        <Box mb="20px">
+                            <Center mb="20px" fontWeight="700" justifyContent="start" fontSize="14px">
+                                Shipping Amount:<Box ml="5px" fontSize="14px" color="green.300">
+                                    {
+                                        selected ? cashFormat2(shippingAmount.amount[1], shippingAmount.country) : cashFormat2(shippingAmount.amount[2], shippingAmount.country)
+                                    }</Box>
+                            </Center>
+
+                            <Flex justifyContent="space-between">
+                                <Button onClick={() => { setSelected(true) }} _hover={{ border: "1px solid lightgreen" }} colorScheme='whiteAlpha' color="black" bg="transparent" border="1px solid grey" fontSize={"12px"}>
+                                    <Radio mr="5px" isChecked={selected} value='1'></Radio>   3-5 Working Days
+                                </Button>
+                                <Button onClick={() => { setSelected(false) }} _hover={{ border: "1px solid lightgreen" }} colorScheme='whiteAlpha' color="black" bg="transparent" border="1px solid grey" fontSize={"12px"}>
+                                    <Radio mr="5px" isChecked={!selected} value='2'></Radio>   1 Working Day
+                                </Button>
+                            </Flex>
+                        </Box>
+                        <Box fontWeight={"700"} mb="10px" textAlign="center">
+                            Type of Payment
+                        </Box>
+                        {isOpen && <PaymentMethod SumTotalFunction={SumTotal2} userDetails={userDetails} paymentSuccessfull={paymentSuccessfull} />}
                     </ModalBody>
                 </ModalContent>
             </Modal>
@@ -200,6 +264,7 @@ export default function CartComponent({ packageInstance }: Props) {
                                     imageURL={product.image}
                                     name={product.itemName}
                                     quantity={productInfo.qty}
+                                    discount={product.discount}
                                     products={products}
                                     index={idx}
                                     handleQuantityChanged={handleQuantityChanged}
@@ -225,6 +290,7 @@ export default function CartComponent({ packageInstance }: Props) {
                     </Box>
                 )}
                 <Box
+                    mt={["30px", "30px", "30px", "0px"]}
                     w={["full", "full", "full", "800px"]}
                     p={["20px", "30px"]} pt={["10px", "20px"]}>
                     <Box pb="10px" mb="20px" fontWeight="600" fontSize="16px" color="#000" borderBottom={"1px solid grey"}>
@@ -245,7 +311,7 @@ export default function CartComponent({ packageInstance }: Props) {
                                 <Formik
                                     initialValues={{ city: '', country: '', state: "", post: '', address: '' }}
                                     validate={values => {
-                                        const errors = {city:"", country:"", post:"", state:"", address:""};
+                                        let errors: any;
                                         if (!values.city) {
                                             errors.city = 'Required';
                                         } else if (!values.country) {
@@ -355,8 +421,8 @@ export default function CartComponent({ packageInstance }: Props) {
                                                     value={values.post}
                                                 />
                                                 {errors.post && touched.post && errors.post}
-                                                <Button 
-                                                isLoading={isSubmitting || loading} isDisabled={isSubmitting} mt="20px" h="50px" bg="#000" color="#fff" type="submit" disabled={isSubmitting}>
+                                                <Button
+                                                    isLoading={isSubmitting || loading} isDisabled={isSubmitting} mt="20px" h="50px" bg="#000" color="#fff" type="submit" disabled={isSubmitting}>
                                                     Submit
                                                 </Button>
                                             </Flex>

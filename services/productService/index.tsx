@@ -31,7 +31,7 @@ export const getCollectionBrand = async (id: any) => {
     return response.data
 }
 
-export const getCurrency = async (id: any) => {
+export const getCurrency = async () => {
     const response = await instance.get(`/currency`)
 
     return response.data

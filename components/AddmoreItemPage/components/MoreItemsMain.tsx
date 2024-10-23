@@ -25,7 +25,8 @@ const MoreItemsMain = () => {
     const { isOpen, onClose, onOpen } = useDisclosure()
     const [packageInfo, packageDispatch] = useReducer(packageInfoReducer, initialState)
     const [loading, setLoading] = useState(true)
-    const [empty, setEmpty] = useState(true)
+    const [loading2, setLoading2] = useState(false)
+    const [empty, setEmpty] = useState(false)
     const [userData, setUserData] = React.useState("");
     const [packageId, setPackageId] = useState<string>();
     const [activeTab, setActiveTab] = useState<FrequencyType>("monthly")
@@ -132,7 +133,7 @@ const MoreItemsMain = () => {
 
     const addPackageToCart = () => {
         if (!packageId) return
-        setLoading(true)
+        setLoading2(true)
         const packageData: UpdatePackageProps = {
             duration: 1,
             total: packageInfo.totalAmount,
@@ -142,12 +143,20 @@ const MoreItemsMain = () => {
             product_id: packageInfo.packageInstance.product_id,
             package_id: packageId ?? ""
         }
-        updatePackage2(packageData)
-            .then(() => {
-                localStorage.setItem("cartId", packageId)
-                route.push("/cart")
+        updatePackage2(packageData).then(() => {
+            localStorage.setItem("cartId", packageId)
+            toast({
+                title: "Checkout your order with easy",
+                status: "success",
+                position: "top-right"
             })
-        setLoading(false)
+            route.push("/cart")
+        }).catch(err => {
+            setLoading2(false)
+            console.log("sent")
+            onOpen()
+        })
+        // setLoading2(false)
     }
 
 
@@ -174,6 +183,7 @@ const MoreItemsMain = () => {
                     packageDispatch({ type: "INIT", payload: pageData })
                     setLoading(false)
                 })
+            SumTotalFunction()
         } else {
             setEmpty(true)
         }
@@ -183,13 +193,15 @@ const MoreItemsMain = () => {
     useEffect(() => {
         let frequency = packageInfo.packageInstance.payment_frequency
         setActiveTab(frequency)
+        SumTotalFunction()
     }, [packageInfo.packageInstance.payment_frequency])
+
     function SumTotalFunction() {
         const products = packageInfo.packageInstance.product_id
         console.log(products, "products")
         if (products && products.length > 0) {
             const reformat = products.map((a: any, b: number) => {
-                return a.item.price * a.qty
+                return (a.item.price - (a.item.price * a.item.discount) / 100) * a.qty
             })
             const total = reformat.reduce((a: any, b: number) => a + b, 0)
 
@@ -275,7 +287,6 @@ const MoreItemsMain = () => {
             </Modal>
 
             <div
-                onClick={() => SumTotalFunction()}
                 className='w-full bg-white py-4' >
                 {/* start of more items heading */}
                 <div className=' w-full mt-2 lg:mt-0 flex flex-col lg:flex-row items-start lg:items-center justify-start  border-b py-3 lg:px-4 border-[#D9D9D9] bg-white space-y-4 lg:space-y-0 lg:space-x-8' >
@@ -300,12 +311,13 @@ const MoreItemsMain = () => {
                                 imageURL={product.image}
                                 products={packageInfo.packageInstance.product_id}
                                 index={indx}
+                                discount={product.discount}
                                 name={product.itemName}
                                 quantity={productInfo.qty}
                                 handleQuantityChanged={handleQuantityChanged}
                                 handleProductRemoved={handleRemoveProduct}
                                 handleTotalProductAmountChanged={handlePaymentFrequencyChanged}
-                                price={convertToNumber(product.price)}
+                                price={product.price}
                                 initialTotalAmount={totalAmount} />
                         )
                     })}
@@ -328,12 +340,11 @@ const MoreItemsMain = () => {
                         <MdAddCircleOutline color='#0dadf7' />
                         Add Items
                     </button> */}
-                        <Button isLoading={loading} isDisabled={loading} w="full" bg="black" colorScheme='blackAlpha' onClick={addPackageToCart} >
+                        <Button isLoading={loading2} isDisabled={loading2} w="full" bg="black" colorScheme='blackAlpha' onClick={addPackageToCart} >
                             Checkout
                         </Button>
                     </div>
                 </div>
-                <SearchProductModal isOpen={isOpen} onClose={onClose} handleClick={handleItemAdded} />
             </div >
         </>
     )

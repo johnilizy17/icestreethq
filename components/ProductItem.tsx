@@ -14,13 +14,14 @@ interface Props {
     quantity: number,
     products:any,
     index:number,
+    discount:number,
     price: number
     handleQuantityChanged: Function
     handleTotalProductAmountChanged?: Function
     handleProductRemoved: (id: string, qty: number, totalAmount: number) => void
 }
 
-const ProductItem = ({ imageURL, id,products, index, name, initialTotalAmount, quantity, handleQuantityChanged, price, handleProductRemoved }: Props) => {
+const ProductItem = ({ imageURL, id,products, discount, index, name, initialTotalAmount, quantity, handleQuantityChanged, price, handleProductRemoved }: Props) => {
     const [stateQuantity, setStateQuantity] = useState<number>(quantity)
     const [totalAmount, setTotalAmount] = useState<number>(initialTotalAmount)
 
@@ -63,7 +64,7 @@ const ProductItem = ({ imageURL, id,products, index, name, initialTotalAmount, q
             </Flex>
             <Box className=' ml-2 space-y-2 w-2/6 lg:w-auto' >
                 <p className=' lg:text-base text-xs font-medium ' >{name}</p>
-                <p className='text-sm lg:text-lg font-bold ' >{cashFormat(totalAmount)}</p>
+                <p className='text-sm lg:text-lg font-bold ' >{cashFormat(totalAmount-((discount*totalAmount)/100))}</p>
                 <Button display={["flex","flex","flex","none"]} onClick={() => handleProductRemoved(id, stateQuantity, totalAmount)} className=' rounded-md font-medium lg:hidden flex items-center bg-[#D5D4FF] h-[30px] text-xs mt-4 px-4 text-[#000]' >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6 17C6.53043 17 7.03914 17.2107 7.41421 17.5858C7.78929 17.9609 8 18.4696 8 19C8 19.5304 7.78929 20.0391 7.41421 20.4142C7.03914 20.7893 6.53043 21 6 21C5.46957 21 4.96086 20.7893 4.58579 20.4142C4.21071 20.0391 4 19.5304 4 19C4 18.4696 4.21071 17.9609 4.58579 17.5858C4.96086 17.2107 5.46957 17 6 17ZM6 17H12.5M6 17V3H4M6 5L20 6L19 13H6M16 19H22" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

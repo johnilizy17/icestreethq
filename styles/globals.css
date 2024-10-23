@@ -89,6 +89,17 @@
   overflow: hidden;
 }
 
+.paystack-button{
+  border:1px solid grey;
+  width:100%;
+  justify-content: start;
+  height: 40px;
+  align-items: start;
+  text-align: start;
+  padding-left: 20px;
+  border-radius: 10px;
+  font-weight: 700;
+}
 .loginShadow {
   box-shadow: 0px 0px 10px 0px #00000040;
 }

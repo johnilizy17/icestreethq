@@ -28,11 +28,6 @@ export default function Cart() {
                         {packageInstance && <CartComponent packageInstance={packageInstance[0]} />}
                         {(packageInstance && packageInstance[0].product_id.length <= 0) && <h1>Your Cart is empty</h1>}
                     </Box>
-                    {/* <Box className=' lg:flex flex-col hidden w-fit' >
-                        <Box className=' w-[400px] overflow-y-auto ' >
-                            <OtherProduct />
-                        </Box>
-                    </Box> */}
                 </Box>
             </Box>
         </MenuLayout>
