@@ -26,7 +26,7 @@ export default function MenuLayout({ children, category, menu, pageName }: Props
             </Head>
             <div className=' w-full h-[70px] lg:h-[89px] ' >
                 <div className=' fixed bg-white z-[50] top-0 w-full ' >
-                    {/* <Navbar menu={menu} /> */}
+                    <Navbar menu={menu} />
                 </div>
             </div>
             <div className=' pt-0 w-full h-auto ' >
