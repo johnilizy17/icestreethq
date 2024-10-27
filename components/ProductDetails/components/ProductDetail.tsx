@@ -142,11 +142,13 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
 
     async function handleGuest() {
         try {
+
             setLoading(true)
             const response = await guestLogin({ email: userData })
             localStorage.setItem("user", response?.userID)
             onClose()
             localStorage.setItem("token", response?.access_token)
+            route.reload()
             toast({
                 title: response?.msg,
                 position: "bottom",
@@ -154,7 +156,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                 isClosable: true,
             })
             setLoading(false)
-        } catch (err:any) {
+        } catch (err: any) {
             setLoading(false)
             console.log(err.response.data, "state")
             toast({
@@ -172,7 +174,6 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
         const defaultPackageId = localStorage.getItem("default_package")
         if (size.length > 0) {
             if (!defaultPackageId) {
-                console.log("ssfnjdf")
                 const packageData = {
                     duration: productInfo.duration,
                     size: size,
@@ -192,13 +193,14 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                     .then((res) => {
                         setPackageId(res._id)
                         localStorage.setItem("default_package", res._id)
-                        route.push("/")
+                        setLoading(false)
                         toast({
                             title: "Product",
                             description: "Product Successfully added to cart",
                             status: "success",
                             position: "top-right"
                         })
+
                     })
                     .catch(err => {
                         setLoading(false)
@@ -222,7 +224,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                         status: "success",
                         position: "top-right"
                     })
-                    route.push("/")
+                    setLoading(false)
                 }).catch((res: any) => {
                     setLoading(false)
                     toast({

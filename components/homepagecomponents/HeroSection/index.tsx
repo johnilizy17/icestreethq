@@ -57,7 +57,7 @@ export default function HeroSection() {
                 className="w-full"
             >
                 <SwiperSlide>
-                    <Flex bg="#EFE3D7" justifyContent={"space-between"} flexDir={["column", "column", "column", "row"]} pt="30px" pr="30px" borderRadius="24px" h={["auto", "auto", "auto", "600px"]}>
+                    <Flex bg="#EFE3D7" justifyContent={"space-between"} flexDir={["column", "column", "column", "row"]} pt="30px" pr="30px" borderRadius={["8px","16px","24px"]} h={["auto", "auto", "auto", "600px"]}>
                         <Center flexDir="column" alignItems={"self-start"} p="20px">
                             <Box mt={["20px", "0px"]} lineHeight={["40px", "40px", "40px", "70px"]} fontWeight="bolder" fontSize={["32px", "38px", "38px", "58px"]}>
                                 Styles With Elegance Collection
@@ -79,7 +79,7 @@ export default function HeroSection() {
                     </Flex>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Flex bg="#d7dcef" justifyContent={"space-between"} flexDir={["column", "column", "column", "row"]} pt="30px" pr="30px" borderRadius="24px" h={["auto", "auto", "auto", "600px"]}>
+                    <Flex bg="#d7dcef" justifyContent={"space-between"} flexDir={["column", "column", "column", "row"]} pt="30px" pr="30px" borderRadius={["8px","16px","24px"]} h={["auto", "auto", "auto", "600px"]}>
                         <Center flexDir="column" alignItems={"self-start"} p="20px">
                             <Box mt={["20px", "0px"]} lineHeight={["40px", "40px", "40px", "70px"]} fontWeight="bolder" fontSize={["32px", "38px", "38px", "58px"]}>
                             Freeze the Moment Own the Look
@@ -101,7 +101,7 @@ export default function HeroSection() {
                     </Flex>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Flex bg="#d7efdc" justifyContent={"space-between"} flexDir={["column", "column", "column", "row"]} pt="30px" pr="30px" borderRadius="24px" h={["auto", "auto", "auto", "600px"]}>
+                    <Flex bg="#d7efdc" justifyContent={"space-between"} flexDir={["column", "column", "column", "row"]} pt="30px" pr="30px" borderRadius={["8px","16px","24px"]} h={["auto", "auto", "auto", "600px"]}>
                         <Center flexDir="column" alignItems={"self-start"} p="20px">
                             <Box mt={["20px", "0px"]} lineHeight={["40px", "40px", "40px", "70px"]} fontWeight="bolder" fontSize={["32px", "38px", "38px", "58px"]}>
                             Savor the Season{"`"}s Hottest Looks!

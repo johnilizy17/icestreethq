@@ -43,10 +43,6 @@ export default function Home() {
         setLoading(false)
     }
 
-    useEffect(() => {
-        SearchProduct()
-    }, [])
-
     return (
         <>
             <Head>
@@ -60,7 +56,7 @@ export default function Home() {
                 <Box bg={COLORS.white}>
                     <MenuLayout menu={false} category={false}>
                         <Box p={["20px", "20px", "20px", "30px"]}>
-                            <Center borderRadius="40px" p={["26px","28px","28px","48px"]} bg="#EDEFEF" h="auto" w="full">
+                            <Center borderRadius={["8px","16px","24px"]} p={["26px","28px","28px","48px"]} bg="#EDEFEF" h="auto" w="full">
                                 <Center zIndex={1} h="full" w="full" flexDir="column">
                                     <Box fontWeight="700" p="10px" fontSize={["24px", "24px", "24px", "48px"]} >
                                         Search Products
@@ -68,7 +64,7 @@ export default function Home() {
                                     <Box fontWeight="400" textAlign="center" fontSize={["12px", "12px", "12px", "16px"]}>
                                         Be the first to know when we have new stocks and collections
                                     </Box>
-                                    <Flex flexDir={["column", "column", "column", "row"]} w={["100%", "100%", "100%", "50%"]} borderRadius="10px" mt={["15px", "15px", "18px", "36px"]} h={["auto", "auto", "auto", "50px"]} overflow="hidden" pos="relative" bg={COLORS.white}>
+                                    <Flex flexDir={["column", "column", "column", "row"]} w={["100%", "100%", "100%", "50%"]} borderRadius="10px" mt={["15px", "15px", "18px", "36px"]} h={["auto", "auto", "auto", "50px"]} overflow="hidden" pos="relative" bg={["transparent", "transparent", "transparent", COLORS.white]}>
                                         <Input
                                             value={value}
                                             variant="unstyled"
@@ -76,7 +72,7 @@ export default function Home() {
                                                 SearchProduct()
                                                 setDisable(false)
                                                 setValue(e.target.value)
-                                            }} w="full" h="50px" p="10px" borderColor="white" />
+                                            }} bg={COLORS.white} w="full" h="50px" p="10px" mb={["20px","20px","20px","0px"]} borderColor="white" />
                                         <Button
                                             display={["none", "none", "none", "flex"]}
                                             isLoading={loading}

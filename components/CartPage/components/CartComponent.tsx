@@ -192,7 +192,6 @@ export default function CartComponent({ packageInstance }: Props) {
 
     useEffect(() => {
         SumTotalFunction()
-        setLoading(false)
         CountryAmount()
     }, [])
 
@@ -205,12 +204,6 @@ export default function CartComponent({ packageInstance }: Props) {
 
     return (
         <>
-            {loading && (
-                <Box className=' w-full pt-32 text-2xl flex justify-center font-Inter-ExtraBold ' >
-                    <SpinLoader />
-                </Box>
-            )}
-
             <Modal isCentered isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
@@ -241,8 +234,7 @@ export default function CartComponent({ packageInstance }: Props) {
                     </ModalBody>
                 </ModalContent>
             </Modal>
-            <Flex flexDir={["column", "column", "column", "row"]} m="0px 20px" pt="20px" >
-                {!loading && (
+            <Flex flexDir={["column", "column", "column", "row"]} m={["0px -10px","0px -10px","0px -10px","0px -20px"]} pt="20px" >
                     <Box
                         onClick={() => {
                             SumTotalFunction()
@@ -276,21 +268,13 @@ export default function CartComponent({ packageInstance }: Props) {
                             )
                         })}
 
-                        {/* start of product list footer */}
                         <Box className=' w-full flex flex-row items-baseline justify-between lg:justify-center lg:border-b py-3 lg:px-4 border-[#D9D9D9] ' >
                             <Box className='w-full max-w-md lg:-ml-20 flex flex-row justify-between lg:justify-center  items-baseline'>
                                 <h3 className='font-bold text-sm lg:text-lg lg:mr-14' >Item{getSingularOrPlural(cartInfo.totalQuantity)}: <span className='font-light' >{cartInfo.totalQuantity}</span></h3>
                                 <h3 className=' font-bold text-sm lg:text-base lg:mt-0 mt-2 lg:ml-14  ' >Amount: <span className='font-light text-[#0dadf7]' >{SumTotal}</span></h3>
                             </Box>
-
                         </Box>
-                        {/*<Box className='w-full lg:w-11/12 lg:max-w-md flex flex-col space-y-4 lg:space-y-8'>
-                            <button onClick={handlePayNowClicked} className='mt-14 self-center inline-block rounded-md w-[200px] text-sm bg-[#069046] h-[40px] font-semibold text-white ' >
-                                Pay Now
-                            </button>
-                        </Box> */}
                     </Box>
-                )}
                 <Box
                     mt={["30px", "30px", "30px", "0px"]}
                     w={["full", "full", "full", "800px"]}

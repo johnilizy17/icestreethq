@@ -62,19 +62,25 @@ export default function AllCollection({ label }: props) {
             <Box bg={"white"} borderRadius={"24px"} overflow="hidden">
                 <CategoryLabel label={label} type={{ Header_Color: "#000", color: "#fff", title: "All Collections" }} title="All Collection" />
                 <Box overflow="scroll">
-                    <Flex h="390px" w="auto" pl={["20px", "20px", "20px", "30px"]} pt="32px" pr={["20px", "20px", "20px", "30px"]} overflow={"scroll"}>
+                    <Flex h="390px" w="auto" pl={["20px", "20px", "20px", "30px"]} pt="32px" pr={["20px", "20px", "20px", "30px"]} overflow={"scroll"} __css={
+                        {
+                            '::-webkit-scrollbar': {
+                                display: 'none'
+                            }
+                        }
+                    }>
 
                         {data?.map((item: any, index: number) => {
                             return (
                                 <Box key={index}>
-                                    <Box w="275px" mr="20px" pos="relative" overflow="hidden" _hover={{ w: ["280px","480px"], transition: "0.5s ease-in-out" }} cursor="pointer" bg="black" borderRadius="40px" h="320px" key={index}>
+                                    <Box w="275px" mr="20px" pos="relative" overflow="hidden" _hover={{ w: ["280px", "480px"], transition: "0.5s ease-in-out" }} cursor="pointer" bg="black" borderRadius={["8px","16px","24px"]} h="320px" key={index}>
                                         <Box w="500px" h="full">
                                             <img style={{ width: 500, objectFit: "cover", height: "100%" }} src={item.image ? imagePath + "/" + item.image : "/banner/collectionBanner.png"} />
                                             <Button
                                                 onClick={() => {
                                                     router.push(`/collection?id=${item._id}&name=${item.title}`)
                                                 }}
-                                                borderRadius="40px"
+                                                borderRadius={["8px","16px","24px"]}
                                                 pos="absolute" bottom="20px" left="20px" fontSize="20px" h="53px">
                                                 {item.title}
                                                 <svg style={{ marginLeft: 10 }} width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">

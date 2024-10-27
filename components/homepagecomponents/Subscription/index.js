@@ -16,7 +16,7 @@ export default function Subscription() {
         <>
 
             <Box p={["20px", "20px", "20px", "30px"]} pb="80px">
-                <Center borderRadius="40px" p={["26px", "28px", "28px", "48px"]} bg="#C3DFEE" h="auto" w="full">
+                <Center borderRadius={["8px","16px","24px"]} p={["26px", "28px", "28px", "48px"]} bg="#C3DFEE" h="auto" w="full">
                     <Center zIndex={1} h="full" w="full" flexDir="column">
                         <Box textAlign="center" fontWeight="700" p="10px" fontSize={["24px", "24px", "24px", "48px"]} >
                             GET 10% OFF YOUR FIRST ORDER                        </Box>

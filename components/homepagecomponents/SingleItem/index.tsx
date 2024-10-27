@@ -60,7 +60,7 @@ export default function SingleItem({ title, category, type, createdBy, label, pr
                                 {data?.map((item: any, index: number) => {
                                     return (
                                         <Box mb="20px" mr="20px" _hover={{ transform: "scale(1.05)", transition: "0.5s ease-in-out" }} cursor="pointer" onClick={() => clickHandler(item._id)} key={index} onMouseOver={() => setIsHover(index)} onMouseOut={() => setIsHover(-1)} role="button" w="300px" h="418px" >
-                                            <Center h={["310px", "310px"]} borderRadius="40px" overflow="hidden">
+                                            <Center h={["310px", "310px"]} borderRadius={["8px","16px","24px"]} overflow="hidden">
                                                 <Img src={imagePath + "/" + item?.image} objectFit="cover" alt={item?.name} />
                                             </Center>
                                             <Box>

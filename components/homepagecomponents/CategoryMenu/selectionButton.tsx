@@ -6,7 +6,7 @@ export default function SelectionButton({ title, select, setSelect }: { title: {
     return (
         <Button
             h="45px"
-            borderRadius="24px"
+            borderRadius={["8px","16px","24px"]}
             mr="10px"
             style={title.title == select.title ? { background: "#C3DFEE" } : {}}
             onClick={() => {

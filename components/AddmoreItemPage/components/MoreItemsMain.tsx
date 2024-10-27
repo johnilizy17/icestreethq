@@ -215,7 +215,37 @@ const MoreItemsMain = () => {
         SumTotalFunction()
     }, [])
 
+    const addPackageToCart2 = () => {
+        if (!packageId) return
+        const packageData: UpdatePackageProps = {
+            duration: 1,
+            total: packageInfo.totalAmount,
+            payment_frequency: paymentInfo.paymentFrequency,
+            category: packageInfo.packageInstance.category,
+            numberOfExpectedPayment: calculateNumberPayment(packageInfo.duration, paymentInfo.paymentFrequency),
+            product_id: packageInfo.packageInstance.product_id,
+            package_id: packageId ?? ""
+        }
+        updatePackage2(packageData).then(() => {
+            localStorage.setItem("cartId", packageId)
+            toast({
+                title: "Checkout your order with easy",
+                status: "success",
+                position: "top-right"
+            })
+        }).catch(err => {
+            setLoading2(false)
+            console.log("sent")
+            onOpen()
+        })
+    }
 
+
+    useEffect(() => {
+        if (packageInfo && packageInfo.packageInstance && packageInfo.packageInstance.product_id && packageInfo.packageInstance.product_id.length > 0) {
+            addPackageToCart2()
+        }
+    }, [packageInfo && packageInfo.packageInstance && packageInfo.packageInstance.product_id && packageInfo.packageInstance.product_id.length])
 
     if (loading) return empty ? <Center h="400px"><Box> <Lottie options={defaultOptions}
         height={300}

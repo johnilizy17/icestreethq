@@ -7,7 +7,7 @@ import { Box, Center, Flex, Img } from "@chakra-ui/react";
 import { Rating } from "react-simple-star-rating";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
-export default function ProductDisplay({ item, index }: { item: { image: string, price: number, discount: number, sold: number, _id: string, rate: number, itemName: string, name: string }, index: number }) {
+export default function ProductDisplay2({ item, index }: { item: { image: string, price: number, discount: number, sold: number, _id: string, rate: number, itemName: string, name: string }, index: number }) {
 
     const router = useRouter()
 
@@ -42,12 +42,12 @@ export default function ProductDisplay({ item, index }: { item: { image: string,
     }, [])
 
     return (
-        <Box mb="20px" ml={index < 1 ? "0px" : ["0px", "0px", "20px"]} pos="relative" _hover={{ transform: "scale(1.03)", transition: "0.5s ease-in-out" }} w={["45%", "275px"]}>
+        <Box pos="relative" _hover={{ transform: "scale(1.03)", transition: "0.5s ease-in-out" }} mr="20px" w="275px">
             <Center
                 onClick={() => {
                     IconProduct()
                 }}
-                zIndex={20} pos="absolute" bg="#fff" w="40px" h="40px" pt="10px" overflow="hidden" borderRadius="50px" right={["24px", "50px"]} top={["12px", "25px"]}>
+                zIndex={20} pos="absolute" bg="#fff" w="40px" h="40px" pt="10px" overflow="hidden" borderRadius="50px" right={["50px"]} top={["25px"]}>
                 <Rating
                     emptyIcon={<MdFavoriteBorder size={30} />}
                     initialValue={value}
@@ -57,13 +57,11 @@ export default function ProductDisplay({ item, index }: { item: { image: string,
                     iconsCount={1}
                 />
             </Center>
-            <Box w={"full"} overflow="hidden" cursor="pointer" p="10px" pt={["10px", "10px"]} pb={["15px", "10px"]} bg="#fff" borderRadius={["8px","16px","24px"]} h={["auto", "320px"]} onClick={() => navigateToProductDetails(item._id)} key={index}>
-                <Center w="full">
-                    <Box borderRadius={"20px"} h={["150px", "200px"]} overflow={"hidden"}>
-                        <Img src={imagePath + "/" + item?.image} objectFit="cover" alt={item?.name} />
-                    </Box>
+            <Box w={"full"} cursor="pointer" p="10px" bg="#ffffff" borderRadius={["8px","16px","24px"]} h={"320px"} onClick={() => navigateToProductDetails(item._id)} key={index}>
+                <Center borderRadius={"20px"} h={["200px"]} overflow={"hidden"}>
+                    <Img src={imagePath + "/" + item?.image} objectFit="cover" alt={item?.name} />
                 </Center>
-                <Box className='mt-4 lg:ml-2 ' >
+                <Box className='mt-4 ml-2 ' >
                     <Box className="cut-text">
                         <p className=' font-medium text-sm ' >{item?.itemName}</p>
                     </Box>
@@ -74,7 +72,7 @@ export default function ProductDisplay({ item, index }: { item: { image: string,
                         </svg>
                         {item.rate} <span style={{ color: "#C2C2C2", fontSize: 11, marginLeft: 5, fontWeight: "400" }} >{item.sold} Items sold</span> </Box>
                     <Flex>
-                        {item?.discount > 0 && <Box display={["none", "none", "none", "flex"]} textDecoration="line-through" mr="10px" color="grey" className='text-[13px]' >{cashFormat(item?.price)}</Box>}
+                        {item?.discount > 0 && <Box textDecoration="line-through" mr="10px" color="grey" className='text-[13px]' >{cashFormat(item?.price)}</Box>}
                         <p className=' font-bold text-[#000000] text-[13px]' >{cashFormat(item?.price - (item?.price * item.discount / 100))}</p>
                     </Flex>
                 </Box>

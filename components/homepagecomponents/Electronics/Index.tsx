@@ -5,7 +5,7 @@ import { getProducts } from '../../../services'
 import { toast } from 'react-hot-toast'
 import { cashFormat } from '../../utils/cashFormat'
 import { imagePath } from '../../../services/Variable'
-import ProductDisplay from './ProductDisplay'
+import ProductDisplay from './ProductDisplay2'
 
 type props = {
     label: boolean,

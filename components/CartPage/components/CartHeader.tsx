@@ -8,7 +8,7 @@ const CartHeader = () => {
     return (
         <Box pb={["20px","30px"]} justifyContent="space-between" alignItems="center" className='w-full flex flex-row  lg:items-center lg:border-b lg:pb-3 pb-4 py-3 lg:px-4 lg:border-[#D9D9D9] ' >
             {/* <span className='font-medium text-base' >Christmas</span> */}
-            <Center onClick={()=>router.back()} w="35px" h="35px" borderRadius="40px" background="black">
+            <Center onClick={()=>router.back()} w="35px" h="35px" borderRadius={["8px","16px","24px"]} background="black">
                 <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 5H15M1 5L5 9M1 5L5 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
