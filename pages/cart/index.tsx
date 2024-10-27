@@ -9,7 +9,7 @@ import Lottie from 'react-lottie';
 import Empty from '../../assets/lottie/empty.json'
 
 export default function Cart() {
-    const [packageInstance, setPackageInstance] = useState()
+    const [packageInstance, setPackageInstance] = useState<[{product_id:any}]>()
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -52,7 +52,7 @@ export default function Cart() {
                                 </Box>
                             </Center>
                             :
-                            packageInstance && !loading && packageInstance[0].product_id.length > 0  ?
+                            packageInstance && !loading && packageInstance[0].product_id && packageInstance[0].product_id.length > 0  ?
                                 <CartComponent packageInstance={packageInstance[0]} />
                                 :
                                 <Center flexDir="column" p="20px" w="full">
