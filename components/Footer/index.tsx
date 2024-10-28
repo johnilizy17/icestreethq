@@ -26,7 +26,12 @@ export default function Footer() {
     {
         title: "Collection",
         nav: "collection"
-    }])
+    },
+    {
+        title: "New Arrivals",
+        nav: "arrival"
+    }
+    ])
 
     const FooterItem = {
         1: [{
@@ -34,16 +39,23 @@ export default function Footer() {
             link: stateProduct
         }],
         2: [{
-            header: "Featured",
-            link: [{
-                title: "New Arrivals",
-                nav: "arrival"
-            }
-            ]
-        }],
-        3: [{
             header: "Collections",
             link: stateData
+        }],
+        3: [{
+            header: "Support",
+            link: [{
+                title: "Contact us",
+                nav: "contact"
+            },
+            {
+                title: "Return Policy",
+                nav: "return_policy"
+            },
+            {
+                title: "FAQs",
+                nav: "faq"
+            }]
         }],
         4: [{
             header: "Legal",
@@ -59,32 +71,15 @@ export default function Footer() {
                 title: "Privacy Policy",
                 nav: "privacy"
             }]
-        }],
-        5: [{
-            header: "Support",
-            link: [{
-                title: "Contact us",
-                nav: "contact"
-            },
-            {
-                title: "Return Policy",
-                nav: "return_policy"
-            },
-            {
-                title: "FAQs",
-                nav: "faq"
-            }]
         }]
     }
 
     return (
         <Center justifyContent="space-between" mt={["24px", "24px", "24px", "60px"]} alignItems={["flex-start"]} flexDir={["column", "column", "column", "row"]} h={["auto", "auto", "auto", "400px"]} pl={["20px", "63px"]} pr={["20px", "63px"]} pt={["40px", "40px", "40px", "90px"]} pb={["20px", "90px"]} bg={COLORS.black}>
             <Box mb="30px" cursor="pointer" display={["none", "none", "none", "block"]}>
-                <Center>
                     <Link href="/">
                         <img src={"/logo-white.png"} alt="logo" />
                     </Link>
-                </Center>
                 <Box mt={["16px", "16px", "16px", "24px"]} pb="5px">
                     <Link href="https://www.instagram.com/icestreethq">
                         <IconButton colorScheme="blackAlpha" bg="transparent" aria-label={""}>
