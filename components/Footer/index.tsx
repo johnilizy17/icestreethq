@@ -77,9 +77,9 @@ export default function Footer() {
     return (
         <Center justifyContent="space-between" mt={["24px", "24px", "24px", "60px"]} alignItems={["flex-start"]} flexDir={["column", "column", "column", "row"]} h={["auto", "auto", "auto", "400px"]} pl={["20px", "63px"]} pr={["20px", "63px"]} pt={["40px", "40px", "40px", "90px"]} pb={["20px", "90px"]} bg={COLORS.black}>
             <Box mb="30px" cursor="pointer" display={["none", "none", "none", "block"]}>
-                    <Link href="/">
-                        <img src={"/logo-white.png"} alt="logo" />
-                    </Link>
+                <Link href="/">
+                    <img src={"/logo-white.png"} alt="logo" />
+                </Link>
                 <Box mt={["16px", "16px", "16px", "24px"]} pb="5px">
                     <Link href="https://www.instagram.com/icestreethq">
                         <IconButton colorScheme="blackAlpha" bg="transparent" aria-label={""}>

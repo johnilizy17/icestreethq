@@ -62,14 +62,7 @@ export default function AllCollection({ label }: props) {
             <Box bg={"white"} borderRadius={"24px"} overflow="hidden">
                 <CategoryLabel label={label} type={{ Header_Color: "#000", color: "#fff", title: "All Collections" }} title="All Collection" />
                 <Box overflow="scroll">
-                    <Flex h="390px" w="auto" pl={["20px", "20px", "20px", "30px"]} pt="32px" pr={["20px", "20px", "20px", "30px"]} overflow={"scroll"} __css={
-                        {
-                            '::-webkit-scrollbar': {
-                                display: 'none'
-                            }
-                        }
-                    }>
-
+                    <Flex h="390px" w="auto" pl={["20px", "20px", "20px", "30px"]} pt="32px" pr={["20px", "20px", "20px", "30px"]} overflow={"scroll"}>
                         {data?.map((item: any, index: number) => {
                             return (
                                 <Box key={index}>
