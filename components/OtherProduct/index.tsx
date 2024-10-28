@@ -34,7 +34,7 @@ export default function OtherProduct({ id }: { id: string }) {
             <Box className=' pb-3 mb-3 border-b border-[#D9D9D9] ' >
                 <p className='font-bold text-xl'>Other Products</p>
             </Box>
-            <Flex justifyContent={["center", "flex-start"]} flexWrap="wrap" p={["20px", "20px", "20px", "30px"]} bg="rgba(217, 217, 217, 0.2)">
+            <Flex p={["20px", "20px", "20px", "30px"]} justifyContent={["space-between", "space-between", "space-between", "flex-start"]} flexWrap="wrap">
                 {loading ?
                     <Center h="300px" w="full">
                         <Spinner size="xl" />

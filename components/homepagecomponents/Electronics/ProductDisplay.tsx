@@ -42,7 +42,7 @@ export default function ProductDisplay({ item, index }: { item: { image: string,
     }, [])
 
     return (
-        <Box mb="20px" ml={index < 1 ? "0px" : ["0px", "0px", "20px"]} pos="relative" _hover={{ transform: "scale(1.03)", transition: "0.5s ease-in-out" }} w={["45%", "275px"]}>
+        <Box mb="20px" ml={index < 1 ? "0px" : ["0px", "0px", "20px"]} pos="relative" _hover={{ transform: "scale(1.03)", transition: "0.5s ease-in-out" }} w={["50%", "275px"]}>
             <Center
                 onClick={() => {
                     IconProduct()
@@ -59,7 +59,7 @@ export default function ProductDisplay({ item, index }: { item: { image: string,
             </Center>
             <Box w={"full"} overflow="hidden" cursor="pointer" p="10px" pt={["10px", "10px"]} pb={["15px", "10px"]} bg="#fff" borderRadius={["8px","16px","24px"]} h={["auto", "320px"]} onClick={() => navigateToProductDetails(item._id)} key={index}>
                 <Center w="full">
-                    <Box borderRadius={"20px"} h={["150px", "200px"]} overflow={"hidden"}>
+                    <Box borderRadius={["8px","16px","24px"]} h={["150px", "200px"]} overflow={"hidden"}>
                         <Img src={imagePath + "/" + item?.image} objectFit="cover" alt={item?.name} />
                     </Box>
                 </Center>

@@ -58,7 +58,7 @@ export default function ProductDisplay2({ item, index }: { item: { image: string
                 />
             </Center>
             <Box w={"full"} cursor="pointer" p="10px" bg="#ffffff" borderRadius={["8px","16px","24px"]} h={"320px"} onClick={() => navigateToProductDetails(item._id)} key={index}>
-                <Center borderRadius={"20px"} h={["200px"]} overflow={"hidden"}>
+                <Center borderRadius={["8px","16px","24px"]} h={["200px"]} overflow={"hidden"}>
                     <Img src={imagePath + "/" + item?.image} objectFit="cover" alt={item?.name} />
                 </Center>
                 <Box className='mt-4 ml-2 ' >
