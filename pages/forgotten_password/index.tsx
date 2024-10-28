@@ -3,10 +3,11 @@ import Router, { useRouter } from 'next/router'
 import { motion } from 'framer-motion';
 import * as yup from 'yup'
 import { useFormik } from 'formik';
-import { Image, Input, useToast } from '@chakra-ui/react'
+import { Button, Image, Input, useToast } from '@chakra-ui/react'
 import { useLoginCallback } from '../../services/authService';
 import SpinLoader from '../../components/Loaders/SpinLoader';
 import MenuLayout from '../../components/MenuLayout';
+import { forgotPassword } from '../../services';
 
 export default function ForgottenPassword() {
 
@@ -16,8 +17,7 @@ export default function ForgottenPassword() {
     const { handleLogin } = useLoginCallback();
     const navigate = useRouter()
     const loginSchema = yup.object({
-        email: yup.string().email('This email is not valid').required('Your email is required'),
-        password: yup.string().required('Your password is required').min(8, 'A minimium of 8 characters')
+        email: yup.string().email('This email is not valid').required('Your email is required')
     })
 
     // formik
@@ -37,7 +37,6 @@ export default function ForgottenPassword() {
                 status: "error",
                 isClosable: true,
             })
-            navigate.push("/dashboard")
         } else if (!formik.isValid) {
             toast({
                 title: "You have to fill in the form to continue",
@@ -46,24 +45,31 @@ export default function ForgottenPassword() {
                 isClosable: true,
             })
         } else {
-
-            const response = await handleLogin(JSON.stringify(formik.values))
-            if (response?.status === 200) {
-                localStorage.setItem("user", response?.data?.userID)
+            try {
+                const response = await forgotPassword(formik.values)
+                if (response?.status === 200) {
+                    toast({
+                        title: response?.data?.msg,
+                        position: "bottom",
+                        status: "success",
+                        isClosable: true,
+                    })
+                } else {
+                    toast({
+                        title: response?.data?.msg ? response?.data?.msg : "Error occured",
+                        position: "bottom",
+                        status: "error",
+                        isClosable: true,
+                    })
+                }
+            } catch (response:any) {
                 toast({
-                    title: response?.data?.msg,
-                    position: "bottom",
-                    status: "success",
-                    isClosable: true,
-                })
-
-            } else {
-                toast({
-                    title: response?.data?.msg ? response?.data?.msg : "Error occured",
+                    title: response.response?.data ? response.response?.data : "Error occured",
                     position: "bottom",
                     status: "error",
                     isClosable: true,
                 })
+                setLoading(false);
             }
         }
         setLoading(false);
@@ -96,9 +102,9 @@ export default function ForgottenPassword() {
                                 )}
                             </div>
                         </div>
-                        <button disabled={loading} onClick={() => submit()} className=' w-full h-[45px] rounded-[5px] text-white bg-[#0dadf7] font-Inter-ExtraBold text-sm mt-3 '>
-                            {loading ? <SpinLoader size="xs" /> : "SUMBIT"}
-                        </button>
+                        <Button colorScheme='blackAlpha' bg="black" isLoading={loading} isDisabled={loading} onClick={() => submit()} className=' w-full h-[45px] rounded-[5px] text-white bg-[#0dadf7] font-Inter-Bold text-sm mt-3 '>
+                            Submit
+                        </Button>
                         <p className=' text-sm text-center mt-6 font-medium ' >Remember your password? <span onClick={() => Router.push("/login")} className=' text-[#0dadf7] cursor-pointer ml-1 font-bold ' >Log In</span></p>
                     </div>
                 </div>

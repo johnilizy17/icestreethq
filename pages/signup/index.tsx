@@ -220,7 +220,7 @@ export default function SignUp() {
                         </div>
                         <p className=' text-sm text-center mt-4 mb-4 font-medium lg:w-96 mx-auto ' >By signing up you accept our terms and conditions & privacy policy</p>
                         <button disabled={loading} onClick={() => submit()} className=' w-full h-[45px] rounded-[5px] text-white bg-[#000] font-Inter-ExtraBold text-sm mt-3 '>{loading ? <SpinLoader size="xs" /> : "Create Account"}</button>
-                        <p className=' text-sm text-center mt-6 font-medium ' >Dont have an account? <span onClick={() => Router.push("/login")} className=' text-[#0dadf7] ml-1 font-bold ' >Login</span></p>
+                        <p className=' text-sm text-center mt-6 font-medium ' >Do you have an account? <span onClick={() => Router.push("/login")} className=' text-[#0dadf7] ml-1 font-bold ' >Login</span></p>
                     </div>
                 </div>
             </MenuLayout>

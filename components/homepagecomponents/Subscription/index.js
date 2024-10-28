@@ -27,6 +27,8 @@ export default function Subscription() {
                             <Input
                                 value={value}
                                 bg={COLORS.white}
+                                onChange={(e)=>setValue(e.target.value)}
+                                placeholder='Enter your Email'
                                 mr={["0px", "0px", "0px", "12px"]}
                                 w="full" h="50px" p="10px" borderColor="white" />
                             <Button

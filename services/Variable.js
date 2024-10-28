@@ -1,1 +1,1 @@
-export const imagePath= "https://api.icestreethq.com"
+export const imagePath= "http://localhost:4000"

@@ -39,6 +39,11 @@ export const guestLogin = async (info: any) => {
   return data;
 };
 
+export const forgotPassword = async (info: any) => {
+  const { data } = await axios.post("/forgotten/password", info);
+  return data;
+};
+
 export const PurchaseItem = async (item: any) => {
   const data = await axios.post("/cart/user", item);
   return data;
