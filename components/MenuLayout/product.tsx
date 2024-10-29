@@ -23,7 +23,7 @@ export default function MenuLayoutProduct({ children, category, menu, pageName }
                     <meta name="description" content="The best e-commerce site" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                     <meta name="theme-color" content="#0dadf7" />
-                    <script type="application/ld+json">
+                    {/* <script type="application/ld+json">
                         {{
                             "@context": "https://schema.org/",
                             "@type": "Product",
@@ -65,7 +65,7 @@ export default function MenuLayoutProduct({ children, category, menu, pageName }
                                 "priceCurrency": "USD"
                             }
                         }}
-                    </script>
+                    </script> */}
                     <link rel="icon" href="/favicon.ico" />
                     {/* <script src= /> */}
                 </Head>

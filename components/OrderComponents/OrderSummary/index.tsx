@@ -14,9 +14,11 @@ type props = {
 export default function OrderSummary({ detail, edit, data }: props) {
 
     const [tab, setTab] = React.useState(false)
+    const [number, setNumber] = React.useState<any>("0")
 
     useEffect(() => {
         console.log(edit, "edit")
+        setNumber(localStorage.getItem("amount"))
     }, [])
 
     return (
@@ -56,11 +58,11 @@ export default function OrderSummary({ detail, edit, data }: props) {
                     </Box>
                     <Box className=' text-sm my-2 flex items-center justify-between ' >
                         <p className='  font-semibold ' >Total:</p>
-                        <p className=' font-normal ml-4 text-right ' >{cashFormat(edit.total/(JSON.parse(localStorage.getItem("amount")*100)))}</p>
+                        <p className=' font-normal ml-4 text-right ' >{cashFormat(edit.total/(JSON.parse(number)*100))}</p>
                     </Box>
                     <Box className=' text-sm my-2 flex items-center justify-between ' >
                         <p className='  font-semibold ' >shipping and Payment fee:</p>
-                        <p className=' font-normal ml-4 text-right text-[#0dadf7] ' >{cashFormat(edit.shipping/(JSON.parse(localStorage.getItem("amount"))))}</p>
+                        <p className=' font-normal ml-4 text-right text-[#0dadf7] ' >{cashFormat(edit.shipping/JSON.parse(number))}</p>
                     </Box>
                     <Box className=' text-sm my-2 flex items-center justify-between ' >
                         <p className='  font-semibold ' >Total Product:</p>
