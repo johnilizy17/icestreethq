@@ -8,15 +8,19 @@ import { COLORS } from '../../services/theme/colors';
 import ProductDisplay from '../../components/homepagecomponents/Electronics/ProductDisplay';
 import Lottie from 'react-lottie';
 import Empty from '../../assets/lottie/empty.json'
-import { getSearchResult } from '../../services/productService';
+import { getCollection, getCollections, getGender, getSearchResult } from '../../services/productService';
 import { useRouter } from 'next/router';
+import SelectionButton from '../../components/homepagecomponents/CategoryMenu/selectionButton';
 
-export default function Arrival() {
+export default function Men() {
 
     const [data, setData] = useState([]);
-    const [value, setValue] = useState("")
+    const [value, setValue] = useState(3)
+    const [brandstyle, setBrandStyle] = useState("1")
     const [loading, setLoading] = useState(false)
     const { query } = useRouter()
+    const [select, setSelect] = useState({ title: "", _id: "123" })
+    const [category, setCategory] = useState([])
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -28,15 +32,14 @@ export default function Arrival() {
 
     async function SearchProduct() {
         setLoading(true);
-        const result = await getSearchResult(value)
+        const result = await getSearchResult("")
         setData(result)
         setLoading(false)
-        console.log(data, "result")
     }
 
     useEffect(() => {
         SearchProduct()
-    }, [])
+    }, [select._id])
 
     return (
         <>
@@ -50,34 +53,41 @@ export default function Arrival() {
             <main>
                 <Box bg={COLORS.white}>
                     <MenuLayout menu={false} category={false}>
-                        <Box p={["20px", "20px", "20px", "30px"]} fontWeight="800" fontSize={["30px", "30px", "30px", "60px"]}>
-                            New Arrival Product
+                        <Box onClick={() => SearchProduct()} overflow="hidden" mt={["20px", "20px", "20px", "30px"]} pos="relative">
+                            <Img src="/banner/collection.png" />
+                            <Center flexDir="column" w="full" textAlign={"center"} fontWeight="700" color="#fff" pos="absolute" top="0px" h="full" bg="#000000b5" fontSize={["24px", "32px", "47px", "57px"]} >
+                                <Box>
+                                    New Arrivals
+                                </Box>
+                                <Box>
+                                    All Producr
+                                </Box>
+                            </Center>
                         </Box>
-                        <Center bg="rgba(217, 217, 217, 0.2)" pt="20px" pb="20px">
-                            <Flex justifyContent={["space-between", "space-between", "space-between", "flex-start"]} flexWrap="wrap">
-                                {loading ?
-                                    <Center h="300px" w="full">
-                                        <Spinner size="xl" />
-                                    </Center> :
-                                    data.length < 1 ?
-                                        <Center flexDir="column" p="20px" w="full">
-                                            <Lottie options={defaultOptions}
-                                                height={300}
-                                                width={300} />
-                                            <Box fontWeight="700" mt="10px" fontSize="24px">
-                                                No Result
-                                            </Box>
-                                        </Center>
-                                        :
-                                        data?.map((item: any, index: number) => {
-                                            return (
-                                                <Box key={index} mb="20px">
-                                                    <ProductDisplay item={item} index={index} />
-                                                </Box>
-                                            )
-                                        })}
-                            </Flex>
+                        <Center h={["100px", "100px", "100px", "197px"]} fontWeight="700" fontSize={["24px", "27px", "47px", "57px"]}>
+                            Stay Classy, Stay Trendy
                         </Center>
+                        <Flex p={["20px", "20px", "20px", "30px"]} justifyContent={["space-between", "space-between", "space-between", "flex-start"]} flexWrap="wrap">
+                            {loading ?
+                                <Center h="300px" w="full">
+                                    <Spinner size="xl" />
+                                </Center> :
+                                data.length < 1 ?
+                                    <Center flexDir="column" p="20px" w="full">
+                                        <Lottie options={defaultOptions}
+                                            height={300}
+                                            width={300} />
+                                        <Box fontWeight="700" mt="10px" fontSize="24px">
+                                            No Result
+                                        </Box>
+                                    </Center>
+                                    :
+                                    data?.map((item: any, index: number) => {
+                                        return (
+                                            <ProductDisplay key={index} item={item} index={index} />
+                                        )
+                                    })}
+                        </Flex>
                     </MenuLayout>
                 </Box>
             </main>

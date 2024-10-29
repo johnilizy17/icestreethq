@@ -131,7 +131,7 @@ export default function Login() {
                         <button disabled={loading} onClick={() => submit()} className=' w-full h-[45px] rounded-[5px] text-white bg-[#000] font-Inter-ExtraBold text-sm mt-3 '>
                             {loading ? <SpinLoader size="xs" /> : "LOGIN"}
                         </button>
-                        <p className=' text-sm text-center mt-6 font-medium ' >{"Don't have an account?"} <span onClick={() => Router.push("/signup")} className=' text-[#0dadf7] cursor-pointer ml-1 font-bold ' >Sign Up</span></p>
+                        <p className=' text-sm text-center mt-6 font-medium ' >{"Already Have an Account?"} <span onClick={() => Router.push("/signup")} className=' text-[#0dadf7] cursor-pointer ml-1 font-bold ' >Sign Up</span></p>
                     </div>
                 </div>
             </MenuLayout>
