@@ -7,7 +7,7 @@ import { Button, Image, Input, useToast } from '@chakra-ui/react'
 import { useLoginCallback } from '../../services/authService';
 import SpinLoader from '../../components/Loaders/SpinLoader';
 import MenuLayout from '../../components/MenuLayout';
-import { forgotPassword } from '../../services';
+import { forgotPassword, resetPassword } from '../../services';
 
 export default function ForgottenPassword() {
 
@@ -17,12 +17,13 @@ export default function ForgottenPassword() {
     const { handleLogin } = useLoginCallback();
     const navigate = useRouter()
     const loginSchema = yup.object({
-        email: yup.string().email('This email is not valid').required('Your email is required')
+        otp: yup.string().required('Your OTP is required'),
+        password: yup.string().required('Your Password is required')
     })
 
     // formik
     const formik = useFormik({
-        initialValues: { email: '', password: '' },
+        initialValues: { otp: '', password: '' },
         validationSchema: loginSchema,
         onSubmit: () => { },
     });
@@ -46,17 +47,15 @@ export default function ForgottenPassword() {
             })
         } else {
             try {
-                const response = await forgotPassword(formik.values)
-                console.log(response.data,"response")    
+                const response = await resetPassword(formik.values)
                 toast({
-                        title: response?.msg,
-                        position: "bottom",
-                        status: "success",
-                        isClosable: true,
-                    })
-                    navigate.push("otp")
-
-            } catch (response:any) {
+                    title: response?.data?.msg,
+                    position: "bottom",
+                    status: "success",
+                    isClosable: true,
+                })
+                navigate.push("/login")
+            } catch (response: any) {
                 toast({
                     title: response.response?.data ? response.response?.data : "Error occured",
                     position: "bottom",
@@ -74,24 +73,43 @@ export default function ForgottenPassword() {
             <MenuLayout pageName='Ice Street SignUp' menu={false} category={false}>
                 <div className=' w-full bg-white lg:bg-[#F5F5F5] flex flex-col items-center ' >
                     <div className=' lg:loginShadow w-full lg:w-[600px] font-medium my-12 rounded-xl flex flex-col bg-white py-8 px-4 lg:px-[45px] ' >
-                        <p className=' font-bold lg:text-2xl text-center ' >FORGOTTEN PASSWORD</p>
+                        <p className=' font-bold lg:text-2xl text-center ' >Reset Password</p>
                         <div className=' w-full mt-10 lg:mt-8 ' >
-                            <p className=' text-sm font-medium mb-2 ' >Email Address</p>
+                            <p className=' text-sm font-medium mb-2 ' >OTP</p>
                             <Input
-                                name="email"
+                                name="otp"
                                 onChange={formik.handleChange}
                                 onFocus={() =>
-                                    formik.setFieldTouched("email", true, true)
+                                    formik.setFieldTouched("otp", true, true)
                                 }
-                                height="45px" border="1px solid #595959E5" placeholder='Enter email address' fontSize="sm" />
+                                height="45px" border="1px solid #595959E5" placeholder='Enter OTP' fontSize="sm" />
                             <div className="w-full h-auto pt-2">
-                                {formik.touched.email && formik.errors.email && (
+                                {formik.touched.otp && formik.errors.otp && (
                                     <motion.p
                                         initial={{ y: -100, opacity: 0 }}
                                         animate={{ y: 0, opacity: 1 }}
                                         className="text-xs font-Inter-Medium text-[#ff0000]"
                                     >
-                                        {formik.errors.email}
+                                        {formik.errors.otp}
+                                    </motion.p>
+                                )}
+                            </div>
+                            <p className=' text-sm font-medium mb-2 ' > New Pasword</p>
+                            <Input
+                                name="password"
+                                onChange={formik.handleChange}
+                                onFocus={() =>
+                                    formik.setFieldTouched("password", true, true)
+                                }
+                                height="45px" border="1px solid #595959E5" placeholder='Enter email address' fontSize="sm" />
+                            <div className="w-full h-auto pt-2">
+                                {formik.touched.password && formik.errors.password && (
+                                    <motion.p
+                                        initial={{ y: -100, opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        className="text-xs font-Inter-Medium text-[#ff0000]"
+                                    >
+                                        {formik.errors.password}
                                     </motion.p>
                                 )}
                             </div>

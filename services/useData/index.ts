@@ -44,6 +44,12 @@ export const forgotPassword = async (info: any) => {
   return data;
 };
 
+
+export const resetPassword = async (info: any) => {
+  const { data } = await axios.post("/reset/password", info);
+  return data;
+};
+
 export const PurchaseItem = async (item: any) => {
   const data = await axios.post("/cart/user", item);
   return data;

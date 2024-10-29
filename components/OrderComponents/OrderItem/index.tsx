@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { cashFormat } from '../../utils/cashFormat'
 import { imagePath } from '../../../services/Variable'
+import { useRouter } from 'next/router'
 
 type props = {
     detail: Function,
@@ -13,6 +14,7 @@ type props = {
 export default function OrderItem({ detail, data, setEdit }: props) {
 
     const [isHover, setIsHover] = React.useState(-1)
+    const router = useRouter()
 
     const Items = ["one", "two", "three", "four", "one", "two", "three", "four"]
 
@@ -42,7 +44,12 @@ export default function OrderItem({ detail, data, setEdit }: props) {
                                         <p className=' font-semibold lg:text-lg ' >{r.product_id[0]?.item?.itemName}</p>
                                         <p className=' font-normal mt-1 ' >{r._id}</p>
                                         <p className=' font-bold ' >{cashFormat((r.product_id[0].item.price - (r.product_id[0].item.price * r.product_id[0].item.discount) / 100))}</p>
-                                        {r.status === "pending" && <button className=' mt-2 w-full lg:w-[120px] rounded-[5px] h-[35px] text-sm font-medium text-white bg-[#0dadf7]  ' >Pay Now</button>}
+                                        {r.status === "pending" && <button
+                                            onClick={() => {
+                                                localStorage.setItem("default_package", r._id)
+                                                router.push("/cart")
+                                            }}
+                                            className=' mt-2 w-full lg:w-[120px] rounded-[5px] h-[35px] text-sm font-medium text-white bg-[#0dadf7]  ' >Pay Now</button>}
                                         {r.status != "pending" && <p onClick={() => {
                                             setEdit(r)
                                             detail(true)
@@ -68,7 +75,7 @@ export default function OrderItem({ detail, data, setEdit }: props) {
                                             href={`/cart/${_id}`}
                                             className={`inline-flex items-center justify-center${isHover !== _id ?
                                                 ' w-full lg:w-[120px] text-[#D2301C] border-[#D2301C] border font-semibold text-sm h-[45px] rounded-[5px] ' :
-                                                ' w-full lg:w-[120px] text-white bg-[#FE7062] font-semibold text-sm h-[45px] rounded-[5px]  '}`} >Pay Now</Link>}
+                                                ' w-full lg:w-[120px] text-white bg-[#FE7062] font-semibold text-sm h-[45px] rounded-[5px]  '}`} >Pay Nows</Link>}
                                         {r.status != "pending" && <p onClick={() => {
                                             setEdit(r)
                                             detail(true)

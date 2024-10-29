@@ -60,7 +60,7 @@ export default function Login() {
                     status: "success",
                     isClosable: true,
                 })
-                navigate.push("/dashboard")
+                window.location.href = "/dashboard"
             } else {
                 toast({
                     title: response?.data?.msg ? response?.data?.msg : "Error occured",

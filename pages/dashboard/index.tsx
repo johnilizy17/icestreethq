@@ -83,19 +83,22 @@ export default function Dashboard() {
     const getProfile = async () => {
         setLoadingDashboard(true)
         const user = localStorage.getItem("user")
-        try {
-            const response = await getUserInfo(user)
-            setData(response?.data.user);
-            formik.setFieldValue("firstname", response.data.user.firstname)
-            formik.setFieldValue("lastname", response.data.user.lastname)
-            formik.setFieldValue("email", response.data.user.email)
-            formik.setFieldValue("phone", response.data.user.phone)
-            formik.setFieldValue("phone", response.data.user.phone)
-        } catch (err) {
-            console.log(err)
-            toast.error("Error occured");
+        if (user) {
+            try {
+                const response = await getUserInfo(user)
+                console.log(response, "response2")
+                setData(response?.data.user);
+                formik.setFieldValue("firstname", response.data.user.firstname)
+                formik.setFieldValue("lastname", response.data.user.lastname)
+                formik.setFieldValue("email", response.data.user.email)
+                formik.setFieldValue("phone", response.data.user.phone)
+                formik.setFieldValue("phone", response.data.user.phone)
+            } catch (err) {
+                console.log(err)
+                toast.error("Error occured");
+            }
+            setLoadingDashboard(false)
         }
-        setLoadingDashboard(false)
     }
 
     useEffect(() => {

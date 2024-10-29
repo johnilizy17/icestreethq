@@ -33,7 +33,7 @@ const CartBadge = ({ loading, value, className }: CartBadgeProps) => {
     return (
         <span
             className={`absolute p-1 -top-2 -right-2 w-5 h-5 flex items-center justify-center text-[11px] font-bold leading-none text-white 
-                transform bg-[red] rounded-full ${className}`}>
+                transform rounded-full ${className}`}>
             {loading ? "..." : value}
         </span>
     )
