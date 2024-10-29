@@ -6,6 +6,7 @@ import { getProductsById } from '../../services'
 import toast from 'react-hot-toast'
 import SpinLoader from '../../components/Loaders/SpinLoader'
 import { Box } from '@chakra-ui/react'
+import MenuLayoutProduct from '../../components/MenuLayout/product'
 
 export default function Index() {
 
@@ -38,7 +39,7 @@ export default function Index() {
                 </Box>
             )}
             {!loading && (
-                <MenuLayout pageName='Ice Street - Product' menu={false} category={true} >
+                <MenuLayoutProduct pageName='Ice Street - Product' menu={false} category={true} >
                     <Box className=' w-full bg-[#F5F5F5] lg:pl-[32px] lg:pr-[32px] ' >
                         <Box className=' w-full  text-black   pt-6 pb-4  ' >
                         </Box>
@@ -53,7 +54,7 @@ export default function Index() {
                             </Box>
                         </Box>
                     </Box>
-                </MenuLayout>
+                </MenuLayoutProduct>
             )}
         </>
     )

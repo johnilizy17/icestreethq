@@ -67,9 +67,8 @@ export default function SideBar({ show }: props) {
                             <Box className=' flex flex-col ' >
                                 <p onClick={() => clickHandler("/active-order")} className={routerPath === "/active-order" ? ' text-[#0dadf7] cursor-pointer font-medium  mt-[13px] text-sm ' : ' text-[#979494] cursor-pointer font-medium  mt-[13px] text-sm '} >Active</p>
                                 <p onClick={() => clickHandler("/pending-order")} className={routerPath === "/pending-order" ? ' text-[#0dadf7] cursor-pointer font-medium  mt-[13px] text-sm ' : ' text-[#979494] cursor-pointer font-medium  mt-[13px] text-sm '}  >Pending</p>
-                                <p onClick={() => clickHandler("/completed-order")} className={routerPath === "/completed-order" ? ' text-[#0dadf7] cursor-pointer font-medium  mt-[13px] text-sm ' : ' text-[#979494] cursor-pointer font-medium  mt-[13px] text-sm '}  >Processing</p>
+                                <p onClick={() => clickHandler("/processing")} className={routerPath === "/processing" ? ' text-[#0dadf7] cursor-pointer font-medium  mt-[13px] text-sm ' : ' text-[#979494] cursor-pointer font-medium  mt-[13px] text-sm '}  >Processing</p>
                                 <p onClick={() => clickHandler("/completed-order")} className={routerPath === "/completed-order" ? ' text-[#0dadf7] cursor-pointer font-medium  mt-[13px] text-sm ' : ' text-[#979494] cursor-pointer font-medium  mt-[13px] text-sm '}  >Delivery</p>
-                                <p onClick={() => clickHandler("/history-order")} className={routerPath === "/history-order" ? ' text-[#0dadf7] cursor-pointer font-medium  mt-[13px] text-sm ' : ' text-[#979494] cursor-pointer font-medium  mt-[13px] text-sm '}  >Order history</p>
                             </Box>
                         </Box>
                     </Box>

@@ -2,7 +2,7 @@ import { Box, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { PaystackButton } from 'react-paystack';
 
-export default function App({ paymentSuccessfull, userDetails, SumTotalFunction }) {
+export default function PaymentCheckout({ paymentSuccessfull, userDetails, SumTotalFunction }) {
 
     const toast = useToast();
     // you can call this function anything
@@ -39,13 +39,13 @@ export default function App({ paymentSuccessfull, userDetails, SumTotalFunction 
 
     const componentProps = {
         ...config,
-        text: 'Paystack',
+        text: 'Pay With Paystack',
         onSuccess: (reference) => handlePaystackSuccessAction(reference),
         onClose: handlePaystackCloseAction,
     };
 
     return (
-        <Box>
+        <Box borderTop={"1px solid gray"} pt="10px" pb="20px">
             <PaystackButton className="paystack-button" {...componentProps} />
         </Box>
     );

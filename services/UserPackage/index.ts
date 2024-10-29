@@ -59,7 +59,7 @@ export const getCartAmount = async () => {
   }
 }
 
-export const updatePackage2 = async (packageObj: UpdatePackageProps) => {
+export const updatePackage2 = async (packageObj: any) => {
   const response = await axios.put("package/update/checkout", packageObj)
 
   return response.data  

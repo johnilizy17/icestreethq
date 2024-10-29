@@ -3,14 +3,15 @@ import DashboardLayout from '../../components/DashboardLayout'
 import EmptyOrder from '../../components/OrderComponents/EmptyOrder'
 import OrderItem from '../../components/OrderComponents/OrderItem'
 import OrderSummary from '../../components/OrderComponents/OrderSummary'
-import { getCartAmount } from '../../services/UserPackage'
+import { UserPackageFunction } from '../../services/UserPackage'
 import LoadingComponent from '../../components/OrderComponents/LoadingComponent';
 
-export default function Index() {
+export default function ProcessingOrder() {
 
     const [isEmpty, setIsEmpty] = React.useState(false)
     const [viewDetail, setViewDetail] = React.useState(false)
 
+    const { allPackage } = UserPackageFunction()
     const [isShown, setIsShown] = useState(true)
 
     const [data, setData] = useState({ email: [] })
@@ -23,8 +24,7 @@ export default function Index() {
         refresh = []
         let user
         try {
-            const response = await getCartAmount()
-            console.log(response)
+            const response = await allPackage("processing")
             setData(response?.data);
             refresh = ""
             if (response.data.length === 0) {
@@ -50,7 +50,7 @@ export default function Index() {
                 <div className=' w-full rounded-[10px] bg-white ' >
                     {!viewDetail && (
                         <div className=' w-full border-b  border-[#D9D9D9] pb-[15px] lg:py-[15px] lg:px-[46px] ' >
-                            <p className=' font-bold text-lg ' >Active Order</p>
+                            <p className=' font-bold text-lg ' >Pending Order</p>
                         </div>
                     )}
                     {isShown && (
@@ -62,7 +62,7 @@ export default function Index() {
                                 <OrderItem detail={setViewDetail} data={data} setEdit={setEdit} />
                             )}
                             {viewDetail && (
-                                <OrderSummary detail={setViewDetail} edit={edit}  data={data}/>
+                                <OrderSummary detail={setViewDetail} edit={edit} data={data} />
                             )}
                         </>
                     )}

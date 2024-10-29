@@ -15,7 +15,7 @@ import CartInfoItem from './CartInfoItem'
 import PaymentModal from './PaymentModal'
 import { cartInfoReducer, cartInitializer, getFrequencyAmount, getTotalQuantity } from './utils'
 import { Box, Button, Center, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Radio, RadioGroup, Stack, Text, useDisclosure, useToast } from '@chakra-ui/react'
-import { createPaymentPlan } from '../../../services/UserPackage'
+import { createPaymentPlan, updatePackage2 } from '../../../services/UserPackage'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
@@ -37,8 +37,8 @@ enum cartInfoActionKind {
 
 
 export default function CartComponent({ packageInstance }: Props) {
-    const [data, setData] = React.useState({ country: "", phone:"" })
-    const [loading, setLoading] = React.useState(true);
+    const [data, setData] = React.useState({ country: "", phone: "" })
+    const [loading, setLoading] = React.useState(false);
     const [SumTotal, setSumTotal] = useState(cashFormat(0))
     const [SumTotal2, setSumTotal2] = useState(0)
     const { userDetails, isLoggedIn } = useUserDetails()
@@ -153,7 +153,7 @@ export default function CartComponent({ packageInstance }: Props) {
         }
     }
 
-    const amountNumber:any = localStorage.getItem("amount")
+    const amountNumber: any = localStorage.getItem("amount")
 
     function SumTotalFunction() {
         console.log(products, "product")
@@ -167,7 +167,7 @@ export default function CartComponent({ packageInstance }: Props) {
             if (data.country.toLowerCase() === "nigeria" || data.country.toLowerCase() === "England" || data.country.toLowerCase() === "Britain") {
                 shipping = selected ? shippingAmount.amount[1] : shippingAmount.amount[2]
             } else {
-                shipping = selected ? shippingAmount.amount[1]*currency.gbp : shippingAmount.amount[2]*currency.gbp
+                shipping = selected ? shippingAmount.amount[1] * currency.gbp : shippingAmount.amount[2] * currency.gbp
             }
             setSumTotal2(Math.floor(100 * (shipping + (total * JSON.parse(amountNumber)))))
             setSumTotal(cashFormat(total))
@@ -202,6 +202,23 @@ export default function CartComponent({ packageInstance }: Props) {
         }
     }, [isOpen, selected])
 
+    const addPackageToCart2 = async () => {
+        const packageId: any = localStorage.getItem("default_package");
+
+        if (!packageId) return
+        const packageData = {
+            duration: 1,
+            product_id: products,
+            package_id: packageId ?? ""
+        }
+        await updatePackage2(packageData)
+    }
+
+    useEffect(() => {
+        addPackageToCart2()
+    }, [products.length])
+
+
     return (
         <>
             <Modal isCentered isOpen={isOpen} onClose={onClose}>
@@ -218,13 +235,20 @@ export default function CartComponent({ packageInstance }: Props) {
                                     }</Box>
                             </Center>
 
-                            <Flex justifyContent="space-between">
-                                <Button onClick={() => { setSelected(true) }} _hover={{ border: "1px solid lightgreen" }} colorScheme='whiteAlpha' color="black" bg="transparent" border="1px solid grey" fontSize={"12px"}>
-                                    <Radio mr="5px" isChecked={selected} value='1'></Radio>   3-5 Working Days
-                                </Button>
-                                <Button onClick={() => { setSelected(false) }} _hover={{ border: "1px solid lightgreen" }} colorScheme='whiteAlpha' color="black" bg="transparent" border="1px solid grey" fontSize={"12px"}>
-                                    <Radio mr="5px" isChecked={!selected} value='2'></Radio>   1 Working Day
-                                </Button>
+                            <Flex flexDir={["column", "row"]} justifyContent="space-between">
+                                <Box>
+                                    <Box>Normal Delivery</Box>
+                                    <Button mb={["20px", "0px"]} onClick={() => { setSelected(true) }} _hover={{ border: "1px solid lightgreen" }} colorScheme='whiteAlpha' color="black" bg="transparent" border="1px solid grey" fontSize={"12px"} justifyContent={"space-between"}>
+                                        <Radio mr="5px" isChecked={selected} value='1'></Radio>  <Box w="100px"> 3-5 Working Days</Box>
+                                        <Box> </Box>
+                                    </Button>
+                                </Box>
+                                <Box>
+                                    <Box>Express Delivery</Box>
+                                    <Button  onClick={() => { setSelected(false) }} _hover={{ border: "1px solid lightgreen" }} colorScheme='whiteAlpha' color="black" bg="transparent" border="1px solid grey" fontSize={"12px"} justifyContent={"space-between"}>
+                                        <Radio mr="5px" isChecked={!selected} value='2'></Radio>  <Box w="100px"> 1 Working Day</Box> <Box> </Box>
+                                    </Button>
+                                </Box>
                             </Flex>
                         </Box>
                         <Box fontWeight={"700"} mb="10px" textAlign="center">
@@ -234,47 +258,47 @@ export default function CartComponent({ packageInstance }: Props) {
                     </ModalBody>
                 </ModalContent>
             </Modal>
-            <Flex flexDir={["column", "column", "column", "row"]} m={["0px -10px","0px -10px","0px -10px","0px -20px"]} pt="20px" >
-                    <Box
-                        onClick={() => {
-                            SumTotalFunction()
-                        }}
-                        borderRadius="45px" className=' w-full lg:flex h-full items-center flex-col lg:px-6 pb-10 bg-white space-y-5' p={["20px", "30px"]} pt={["10px", "20px"]}>
-                        <CartHeader />
-                        <ul className='border w-full max-w-4xl flex-col border-[#D0D0D0] rounded-xl py-4 px-5 space-y-5'>
-                            {/* <CartInfoItem
+            <Flex flexDir={["column", "column", "column", "row"]} m={["0px -10px", "0px -10px", "0px -10px", "0px -20px"]} pt="20px" >
+                <Box
+                    onClick={() => {
+                        SumTotalFunction()
+                    }}
+                    borderRadius="45px" className=' w-full lg:flex h-full items-center flex-col lg:px-6 pb-10 bg-white space-y-5' p={["20px", "30px"]} pt={["10px", "20px"]}>
+                    <CartHeader />
+                    <ul className='border w-full max-w-4xl flex-col border-[#D0D0D0] rounded-xl py-4 px-5 space-y-5'>
+                        {/* <CartInfoItem
                             label='Duration'
                             text={`${cartInfo.duration} month${getSingularOrPlural(cartInfo.duration)}`} /> */}
-                            <CartInfoItem label='Total' text={SumTotal} />
-                        </ul>
+                        <CartInfoItem label='Total' text={SumTotal} />
+                    </ul>
 
-                        {products.map((productInfo: any, idx: number) => {
-                            const product = productInfo.item
-                            const totalAmount = calculateTotalAmount(convertToNumber(product.price), productInfo.qty)
-                            return (
-                                <ProductItem
-                                    id={productInfo._id}
-                                    key={`product-${product._id}`}
-                                    imageURL={product.image}
-                                    name={product.itemName}
-                                    quantity={productInfo.qty}
-                                    discount={product.discount}
-                                    products={products}
-                                    index={idx}
-                                    handleQuantityChanged={handleQuantityChanged}
-                                    handleProductRemoved={handleProductRemoved}
-                                    price={convertToNumber(product.price)}
-                                    initialTotalAmount={totalAmount} />
-                            )
-                        })}
+                    {products.map((productInfo: any, idx: number) => {
+                        const product = productInfo.item
+                        const totalAmount = calculateTotalAmount(convertToNumber(product.price), productInfo.qty)
+                        return (
+                            <ProductItem
+                                id={productInfo._id}
+                                key={`product-${product._id}`}
+                                imageURL={product.image}
+                                name={product.itemName}
+                                quantity={productInfo.qty}
+                                discount={product.discount}
+                                products={products}
+                                index={idx}
+                                handleQuantityChanged={handleQuantityChanged}
+                                handleProductRemoved={handleProductRemoved}
+                                price={convertToNumber(product.price)}
+                                initialTotalAmount={totalAmount} />
+                        )
+                    })}
 
-                        <Box className=' w-full flex flex-row items-baseline justify-between lg:justify-center lg:border-b py-3 lg:px-4 border-[#D9D9D9] ' >
-                            <Box className='w-full max-w-md lg:-ml-20 flex flex-row justify-between lg:justify-center  items-baseline'>
-                                <h3 className='font-bold text-sm lg:text-lg lg:mr-14' >Item{getSingularOrPlural(cartInfo.totalQuantity)}: <span className='font-light' >{cartInfo.totalQuantity}</span></h3>
-                                <h3 className=' font-bold text-sm lg:text-base lg:mt-0 mt-2 lg:ml-14  ' >Amount: <span className='font-light text-[#0dadf7]' >{SumTotal}</span></h3>
-                            </Box>
+                    <Box className=' w-full flex flex-row items-baseline justify-between lg:justify-center lg:border-b py-3 lg:px-4 border-[#D9D9D9] ' >
+                        <Box className='w-full max-w-md lg:-ml-20 flex flex-row justify-between lg:justify-center  items-baseline'>
+                            <h3 className='font-bold text-sm lg:text-lg lg:mr-14' >Item{getSingularOrPlural(cartInfo.totalQuantity)}: <span className='font-light' >{cartInfo.totalQuantity}</span></h3>
+                            <h3 className=' font-bold text-sm lg:text-base lg:mt-0 mt-2 lg:ml-14  ' >Amount: <span className='font-light text-[#0dadf7]' >{SumTotal}</span></h3>
                         </Box>
                     </Box>
+                </Box>
                 <Box
                     mt={["30px", "30px", "30px", "0px"]}
                     w={["full", "full", "full", "800px"]}
