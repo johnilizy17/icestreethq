@@ -39,7 +39,7 @@ export default function Index() {
                 </Box>
             )}
             {!loading && (
-                <MenuLayoutProduct pageName='Ice Street - Product' menu={false} category={true} >
+                <MenuLayoutProduct pageName='Ice Street - Product' product={data} menu={false} category={true} >
                     <Box className=' w-full bg-[#F5F5F5] lg:pl-[32px] lg:pr-[32px] ' >
                         <Box className=' w-full  text-black   pt-6 pb-4  ' >
                         </Box>
