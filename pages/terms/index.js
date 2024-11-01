@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Image, Square, Stack, Text } from '@chakra-ui/react';
+import { Box, Center, Container, Flex, Heading, Image, Img, Square, Stack, Text } from '@chakra-ui/react';
 import Head from 'next/head';
 import React from 'react';
 import MenuLayout from '../../components/MenuLayout'
@@ -19,13 +19,17 @@ function Terms() {
 
                 <Flex minH="100vh" pt="40px" bg="#FFF" flexDir="column">
                     <Box flex="1" h="full">
-                        <Container color="#000" fontWeight="500" maxW="container.lg">
-                            <Box mb="40px" fontWeight="900" fontSize="60px">
+                        <Center pos="relative" overflow="hidden" h={["200px", "400px", "400px", "400px"]} mb="40px" color="#fff" fontWeight="900" fontSize="60px">
+                            <Img src="banner/aboutUs.png" objectPosition={"center"} objectFit="cover" />
+                            <Center top="0px" w="full" pos="absolute" h="full">
                                 Ice Street Terms and Conditions
-                            </Box>
+                            </Center>
+                        </Center>
+                        <Container color="#7d7e81" maxW="container.lg">
                             <Box style={{ marginBottom: "20px", fontSize: "24px" }}>
                                 Welcome to Ice Street! By accessing or using our website (www.icestreet.com), you agree to comply with and be bound by the following Terms and Conditions. Please read these carefully before using our services.
                             </Box>
+
                             <Box>
                                 <p style={{ marginBottom: "20px", fontSize: "18px" }}>
                                     <Box fontWeight="700">

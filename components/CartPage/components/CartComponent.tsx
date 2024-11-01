@@ -237,14 +237,14 @@ return (
 
                         <Flex flexDir={["column", "row"]} justifyContent="space-between">
                             <Box>
-                                <Box>Normal Delivery</Box>
+                                <Box>Standard Fee</Box>
                                 <Button mb={["20px", "0px"]} onClick={() => { setSelected(true) }} _hover={{ border: "1px solid lightgreen" }} colorScheme='whiteAlpha' color="black" bg="transparent" border="1px solid grey" fontSize={"12px"} justifyContent={"space-between"}>
                                     <Radio mr="5px" isChecked={selected} value='1'></Radio>  <Box w="100px"> 3-5 Working Days</Box>
                                     <Box> </Box>
                                 </Button>
                             </Box>
                             <Box>
-                                <Box>Express Delivery</Box>
+                                <Box>Express Fee</Box>
                                 <Button onClick={() => { setSelected(false) }} _hover={{ border: "1px solid lightgreen" }} colorScheme='whiteAlpha' color="black" bg="transparent" border="1px solid grey" fontSize={"12px"} justifyContent={"space-between"}>
                                     <Radio mr="5px" isChecked={!selected} value='2'></Radio>  <Box w="100px"> 1 Working Day</Box> <Box> </Box>
                                 </Button>
