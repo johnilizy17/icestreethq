@@ -31,7 +31,7 @@ export default function MenuLayoutProduct({ children, product, category, menu, p
                     <meta property="og:title" content={product.itemName} />
                     <meta property="og:description" content={product.details} />
                     <meta property="og:image" content={imagePath+"/"+product.image} />
-                    <meta property="og:url" content={imagePath+"/"+product.itemName} />
+                    <meta property="og:url" content={imagePath+"/product?product="+product.itemName} />
                     <meta property="og:type" content="website" />
                 </Head>
                 <div className=' w-full h-[70px] lg:h-[89px] ' >
