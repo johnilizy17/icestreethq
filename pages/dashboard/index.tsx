@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DashboardLayout from '../../components/DashboardLayout'
 import { Input } from '@chakra-ui/input'
-import { Button, MenuButton, useToast } from '@chakra-ui/react'
+import { Box, Button, MenuButton, Text, useToast } from '@chakra-ui/react'
 import { UserAddress } from '../../services/userDashboardServices'
 import { toast } from 'react-hot-toast'
 import { useFormik } from 'formik'
@@ -113,58 +113,33 @@ export default function Dashboard() {
                     <LoadingComponent /> :
                     <div className='w-full rounded-[10px] bg-white ' >
                         <div className=' w-full border-b  border-[#D9D9D9] pb-[17px] lg:py-[17px] lg:px-[46px] ' >
-                            <p className=' font-bold text-lg ' >Account Information</p>
+                            <Text fontWeight="800" className=' font-bold text-lg ' >Account Information</Text>
                         </div>
                         <div className=' w-full lg:px-[46px] lg:py-[27px] lg:pb-[50px] ' >
                             <div className=' w-full mt-6 lg:mt-8 ' >
-                                <p className=' text-sm font-medium mb-2 ' >First Name</p>
-                                <Input
-                                    isDisabled={true}
-                                    name="firstname"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.firstname}
-                                    onFocus={() =>
-                                        formik.setFieldTouched("firstname", true, true)
-                                    }
-                                    height="45px" border="1px solid #595959E5" placeholder='Enter First Name' fontSize="sm" />
+                                <Text fontWeight="800" className=' text-sm mb-2 ' >First Name</Text>
+                                <Box>
+                                    {formik.values.firstname}
+                                </Box>
                             </div>
                             <div className=' w-full mt-4 ' >
-                                <p className=' text-sm font-medium mb-2 ' >Last Name</p>
-                                <Input
-                                    isDisabled={true}
-                                    name="lastname"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.lastname}
-                                    onFocus={() =>
-                                        formik.setFieldTouched("lastname", true, true)
-                                    }
-                                    height="45px" border="1px solid #595959E5" placeholder='Enter Last Name' fontSize="sm" />
+                                <Text fontWeight="800" className=' text-sm mb-2 ' >Last Name</Text>
+                                <Box>
+                                    {formik.values.lastname}
+                                </Box>
                             </div>
                             <div className=' w-full mt-4 ' >
-                                <p className=' text-sm font-medium mb-2 ' >Email Address</p>
-                                <Input
-                                    isDisabled={true}
-                                    name="email"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.email}
-                                    onFocus={() =>
-                                        formik.setFieldTouched("email", true, true)
-                                    }
-                                    height="45px" border="1px solid #595959E5" placeholder='Enter email address' fontSize="sm" />
+                                <Text fontWeight="800" className=' text-sm mb-2 ' >Email</Text>
+                                <Box>
+                                    {formik.values.email}
+                                </Box>
                             </div>
                             <div className=' w-full mt-4 ' >
-                                <p className=' text-sm mb-2 ' >Phone Number</p>
-                                <Input
-                                    isDisabled={true}
-                                    name="phone"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.phone}
-                                    onFocus={() =>
-                                        formik.setFieldTouched("phone", true, true)
-                                    }
-                                    height="45px" border="1px solid #595959E5" placeholder='Enter password' fontSize="sm" />
+                                <Text fontWeight="800" className=' text-sm mb-2 ' >Phone Number</Text>
+                                <Box>
+                                    {formik.values.phone}
+                                </Box>
                             </div>
-                            <Button isDisabled={true} colorScheme="blue" isLoading={loading} onClick={submit} className=' w-full h-[45px] rounded-[2px] text-white bg-[#069046] font-Inter-ExtraBold text-lg mt-6 '>Save Changes</Button>
                         </div>
                     </div>
                 }
