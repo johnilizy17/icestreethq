@@ -62,7 +62,7 @@ const ProductItem = ({ imageURL, id,products, discount, index, name, initialTota
                     </Box>
                 </Box>
             </Flex>
-            <Box className=' ml-2 space-y-2 w-2/6 lg:w-auto' >
+            <Box className=' ml-2 space-y-2 w-2/6' >
                 <p className=' lg:text-base text-xs font-medium ' >{name}</p>
                 <p className='text-sm lg:text-lg font-bold ' >{cashFormat(totalAmount-((discount*totalAmount)/100))}</p>
                 <Button display={["flex","flex","flex","none"]} onClick={() => handleProductRemoved(id, stateQuantity, totalAmount)} className=' rounded-md font-medium lg:hidden flex items-center bg-[#D5D4FF] h-[30px] text-xs mt-4 px-4 text-[#000]' >

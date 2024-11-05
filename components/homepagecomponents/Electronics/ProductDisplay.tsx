@@ -13,7 +13,7 @@ export default function ProductDisplay({ item, index }: { item: { image: string,
 
     const navigateToProductDetails = (id: string) => {
         localStorage.setItem("product", id.toString())
-        router.push("/product-details")
+         window.location.href = `/product-details?product=${item?.itemName}`
     }
 
     const [value, setValue] = useState(0)
@@ -42,7 +42,7 @@ export default function ProductDisplay({ item, index }: { item: { image: string,
     }, [])
 
     return (
-        <Box mb="20px" ml={index < 1 ? "0px" : ["0px", "0px", "20px"]} pos="relative" _hover={{ transform: "scale(1.03)", transition: "0.5s ease-in-out" }} w={["50%", "275px"]}>
+        <Box mb="20px" ml={index < 1 ? "0px" : ["0px", "0px", "20px"]} pos="relative" _hover={{ transform: "scale(1.03)", transition: "0.5s ease-in-out" }} w={["49%", "275px"]}>
             <Center
                 onClick={() => {
                     IconProduct()

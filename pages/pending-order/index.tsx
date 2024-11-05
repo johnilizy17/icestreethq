@@ -5,6 +5,8 @@ import OrderItem from '../../components/OrderComponents/OrderItem'
 import OrderSummary from '../../components/OrderComponents/OrderSummary'
 import { UserPackageFunction } from '../../services/UserPackage'
 import LoadingComponent from '../../components/OrderComponents/LoadingComponent';
+import { useToast } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 
 export default function Index() {
 
@@ -17,6 +19,8 @@ export default function Index() {
     const [data, setData] = useState({ email: [] })
     const [loading, setLoading] = useState(true)
     const [edit, setEdit] = useState({})
+    const toaster = useToast();
+    const router = useRouter();
     let refresh
     const [user, setUser] = useState<string>("")
 
@@ -27,14 +31,26 @@ export default function Index() {
             const response = await allPackage("pending")
             setData(response?.data);
             refresh = ""
-            if (response.data.length === 0) {
-                setIsShown(true)
+            if (response.status == 200) {
+                if (response.data.length === 0) {
+                    setIsShown(true)
+                } else {
+                    setIsShown(false)
+
+                }
+                setLoading(false)
             } else {
-                setIsShown(false)
+                router.push("/login")
+                toaster({
+                    title: "Token",
+                    description: "Your token has expired",
+                    status: "warning"
+                })
             }
         } catch (err) {
+
+            setLoading(false)
         }
-        setLoading(false)
     }
 
     useEffect(() => {

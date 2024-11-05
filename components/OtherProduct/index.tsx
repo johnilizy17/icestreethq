@@ -34,7 +34,7 @@ export default function OtherProduct({ id }: { id: string }) {
             <Box className=' pb-3 mb-3 border-b border-[#D9D9D9] ' >
                 <p className='font-bold text-xl'>Other Products</p>
             </Box>
-            <Flex p={["20px", "20px", "20px", "30px"]} justifyContent={["space-between", "space-between", "space-between", "flex-start"]} flexWrap="wrap">
+            <Flex justifyContent={["space-between", "space-between", "space-between", "flex-start"]} flexWrap="wrap">
                 {loading ?
                     <Center h="300px" w="full">
                         <Spinner size="xl" />
@@ -51,9 +51,7 @@ export default function OtherProduct({ id }: { id: string }) {
                         :
                         data?.map((item: any, index: number) => {
                             return (
-                                <Box key={index} mb="20px">
-                                    <ProductDisplay item={item} index={index} />
-                                </Box>
+                                    <ProductDisplay key={index} item={item} index={index} />
                             )
                         })}
             </Flex>

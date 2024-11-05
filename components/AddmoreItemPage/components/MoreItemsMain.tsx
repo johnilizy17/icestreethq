@@ -159,14 +159,13 @@ const MoreItemsMain = () => {
         // setLoading2(false)
     }
 
-
-    useEffect(() => {
+    async function GetAllProduct() {
         const packageId = localStorage.getItem("default_package");
 
         if (packageId) {
             setPackageId(packageId);
 
-            getPackage(packageId ?? "")
+            await getPackage(packageId ?? "")
                 .then((_res) => {
                     let res = _res[0]
                     let { dailyPayment: daily_payment, weeklyPayment: weekly_payment, monthlyPayment: monthly_payment } = calculatePaymentFrequency(res.duration, res.total)
@@ -187,6 +186,10 @@ const MoreItemsMain = () => {
         } else {
             setEmpty(true)
         }
+    }
+
+    useEffect(() => {
+        GetAllProduct()
     }, [])
 
 
@@ -213,7 +216,7 @@ const MoreItemsMain = () => {
 
     useEffect(() => {
         SumTotalFunction()
-    }, [])
+    }, [[]])
 
     const addPackageToCart2 = () => {
         if (!packageId) return
@@ -366,10 +369,6 @@ const MoreItemsMain = () => {
                     </div>
 
                     <div className='w-full flex text-center lg:justify-center space-x-3 lg:space-x-0 mt-7'>
-                        {/* <button onClick={onOpen} className='w-2/6 py-2 px-2 inline-flex lg:hidden items-center justify-between border border-[#0dadf7] text-[#0dadf7] bg-white text-sm font-semibold rounded-md' >
-                        <MdAddCircleOutline color='#0dadf7' />
-                        Add Items
-                    </button> */}
                         <Button isLoading={loading2} isDisabled={loading2} w="full" bg="black" colorScheme='blackAlpha' onClick={addPackageToCart} >
                             Checkout
                         </Button>

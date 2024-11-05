@@ -9,6 +9,7 @@ import * as yup from 'yup'
 import SpinLoader from '../../components/Loaders/SpinLoader'
 import LoadingComponent from '../../components/OrderComponents/LoadingComponent';
 import ProtectedRoute from '../../components/ProtectedRoute'
+import { useRouter } from 'next/router'
 
 export default function Dashboard() {
 
@@ -17,6 +18,7 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(false)
     const [loadingDashboard, setLoadingDashboard] = useState(true)
     const toaster = useToast();
+    const router = useRouter();
 
     const addressSchema = yup.object({
         firstname: yup.string().required('Required'),
@@ -86,18 +88,27 @@ export default function Dashboard() {
         if (user) {
             try {
                 const response = await getUserInfo(user)
-                console.log(response, "response2")
-                setData(response?.data.user);
-                formik.setFieldValue("firstname", response.data.user.firstname)
-                formik.setFieldValue("lastname", response.data.user.lastname)
-                formik.setFieldValue("email", response.data.user.email)
-                formik.setFieldValue("phone", response.data.user.phone)
-                formik.setFieldValue("phone", response.data.user.phone)
+                if (response.status == 401) {
+                    router.push("/login")
+                    toaster({
+                        title:"Token",
+                        description:"Your token has expired",
+                        status:"warning"
+                    })
+                } else {
+                    setData(response?.data.user);
+                    formik.setFieldValue("firstname", response.data.user.firstname)
+                    formik.setFieldValue("lastname", response.data.user.lastname)
+                    formik.setFieldValue("email", response.data.user.email)
+                    formik.setFieldValue("phone", response.data.user.phone)
+                    formik.setFieldValue("phone", response.data.user.phone)
+                    setLoadingDashboard(false)
+                }
             } catch (err) {
                 console.log(err)
+                setLoadingDashboard(false)
                 toast.error("Error occured");
             }
-            setLoadingDashboard(false)
         }
     }
 
@@ -107,43 +118,45 @@ export default function Dashboard() {
 
 
     return (
-        <ProtectedRoute>
-            <DashboardLayout menu={true}>
-                {loadingDashboard ?
-                    <LoadingComponent /> :
-                    <div className='w-full rounded-[10px] bg-white ' >
-                        <div className=' w-full border-b  border-[#D9D9D9] pb-[17px] lg:py-[17px] lg:px-[46px] ' >
-                            <Text fontWeight="800" className=' font-bold text-lg ' >Account Information</Text>
+        <>
+            <ProtectedRoute>
+                <DashboardLayout menu={true}>
+                    {loadingDashboard ?
+                        <LoadingComponent /> :
+                        <div className='w-full rounded-[10px] bg-white ' >
+                            <div className=' w-full border-b  border-[#D9D9D9] pb-[17px] lg:py-[17px] lg:px-[46px] ' >
+                                <Text fontWeight="800" className=' font-bold text-lg ' >Account Information</Text>
+                            </div>
+                            <div className=' w-full lg:px-[46px] lg:py-[27px] lg:pb-[50px] ' >
+                                <div className=' w-full mt-6 lg:mt-8 ' >
+                                    <Text fontWeight="800" className=' text-sm mb-2 ' >First Name</Text>
+                                    <Box>
+                                        {formik.values.firstname}
+                                    </Box>
+                                </div>
+                                <div className=' w-full mt-4 ' >
+                                    <Text fontWeight="800" className=' text-sm mb-2 ' >Last Name</Text>
+                                    <Box>
+                                        {formik.values.lastname}
+                                    </Box>
+                                </div>
+                                <div className=' w-full mt-4 ' >
+                                    <Text fontWeight="800" className=' text-sm mb-2 ' >Email</Text>
+                                    <Box>
+                                        {formik.values.email}
+                                    </Box>
+                                </div>
+                                <div className=' w-full mt-4 ' >
+                                    <Text fontWeight="800" className=' text-sm mb-2 ' >Phone Number</Text>
+                                    <Box>
+                                        {formik.values.phone}
+                                    </Box>
+                                </div>
+                            </div>
                         </div>
-                        <div className=' w-full lg:px-[46px] lg:py-[27px] lg:pb-[50px] ' >
-                            <div className=' w-full mt-6 lg:mt-8 ' >
-                                <Text fontWeight="800" className=' text-sm mb-2 ' >First Name</Text>
-                                <Box>
-                                    {formik.values.firstname}
-                                </Box>
-                            </div>
-                            <div className=' w-full mt-4 ' >
-                                <Text fontWeight="800" className=' text-sm mb-2 ' >Last Name</Text>
-                                <Box>
-                                    {formik.values.lastname}
-                                </Box>
-                            </div>
-                            <div className=' w-full mt-4 ' >
-                                <Text fontWeight="800" className=' text-sm mb-2 ' >Email</Text>
-                                <Box>
-                                    {formik.values.email}
-                                </Box>
-                            </div>
-                            <div className=' w-full mt-4 ' >
-                                <Text fontWeight="800" className=' text-sm mb-2 ' >Phone Number</Text>
-                                <Box>
-                                    {formik.values.phone}
-                                </Box>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </DashboardLayout>
-        </ProtectedRoute>
+                    }
+                </DashboardLayout>
+            </ProtectedRoute>
+        </>
     )
 } 
