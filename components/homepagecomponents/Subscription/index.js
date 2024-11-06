@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import toast from "react-hot-toast";
-import { Box, Button, Center, Flex, Img, Input, Spinner } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Img, Input, Spinner, useToast } from '@chakra-ui/react';
 import { COLORS } from '../../../services/theme/colors';
+import { brevoApIkEY } from '../../../services/Variable';
 
 
 export default function Subscription() {
@@ -10,30 +11,81 @@ export default function Subscription() {
     const [data, setData] = useState([]);
     const [value, setValue] = useState("")
     const [loading, setLoading] = useState(false)
+    const toaster = useToast()
+
+
+    async function handler(req, res) {
+        setLoading(true)
+        if (value.length > 5) {
+            try {
+                const response = await fetch('https://api.brevo.com/v3/contacts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'api-key': brevoApIkEY, // Store your Brevo API key in an environment variable
+                    },
+                    body: JSON.stringify({
+                        email: value,
+                        listIds: "DFDMFKDMFKF", // Replace with your list ID
+                        updateEnabled: true, // To update contact if it already exists
+                    }),
+                });
+                if (response.data.state === 200) {
+                    toaster({
+                        title: "Email",
+                        description: "Email Successfully delivered",
+                        status: "success"
+                    })
+                } else {
+                    toaster({
+                        title: "Email",
+                        description: "Key not found",
+                        status: "error"
+                    })
+                }
+            } catch (error) {
+                toaster({
+                    title: "Email",
+                    description: "An error occur",
+                    status: "warning"
+                })
+            }
+            setLoading(false)
+        } else {
+            setLoading(false)
+            toaster({
+                title: "Email",
+                description: "Please enter a valid email",
+                status: "warning"
+            })
+        }
+    }
 
 
     return (
         <>
 
             <Box p={["20px", "20px", "20px", "30px"]} pb="80px">
-                <Center borderRadius={["8px","16px","24px"]} p={["26px", "28px", "28px", "48px"]} bg="#C3DFEE" h="auto" w="full">
+                <Center borderRadius={["8px", "16px", "24px"]} p={["26px", "28px", "28px", "48px"]} bg="#C3DFEE" h="auto" w="full">
                     <Center zIndex={1} h="full" w="full" flexDir="column">
                         <Box textAlign="center" fontWeight="700" p="10px" fontSize={["24px", "24px", "24px", "48px"]} >
                             GET 10% OFF YOUR FIRST ORDER                        </Box>
                         <Box fontWeight="400" textAlign="center" fontSize={["12px", "12px", "12px", "16px"]}>
-                        Sign up to our newsletter and be the first to know about our launches, exclusive discounts, special offers, and more!
+                            Sign up to our newsletter and be the first to know about our launches, exclusive discounts, special offers, and more!
                         </Box>
                         <Flex flexDir={["column", "column", "column", "row"]} w={["100%", "100%", "100%", "50%"]} borderRadius="10px" mt={["15px", "15px", "18px", "36px"]} h={["auto", "auto", "auto", "50px"]} pos="relative">
                             <Input
                                 value={value}
                                 bg={COLORS.white}
-                                onChange={(e)=>setValue(e.target.value)}
+                                onChange={(e) => setValue(e.target.value)}
                                 placeholder='Enter your Email'
                                 mr={["0px", "0px", "0px", "12px"]}
                                 w="full" h="50px" p="10px" borderColor="white" />
                             <Button
                                 display={["none", "none", "none", "flex"]}
                                 isLoading={loading}
+                                isDisabled={loading}
+                                onClick={() => handler()}
                                 p="12px 24px"
                                 colorScheme='blackAlpha'
                                 // onClick={() => { SearchProduct2() }}
@@ -43,6 +95,8 @@ export default function Subscription() {
                             <Button
                                 display={["flex", "flex", "flex", "none"]}
                                 isLoading={loading}
+                                isDisabled={loading}
+                                onClick={() => handler()}
                                 mt="20px"
                                 colorScheme='blackAlpha'
                                 // onClick={() => { SearchProduct2() }}
