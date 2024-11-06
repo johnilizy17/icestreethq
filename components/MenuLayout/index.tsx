@@ -34,7 +34,7 @@ export default function MenuLayout({ children, category, menu, pageName }: Props
                 <div className=' pt-0 w-full h-auto ' >
                     {children}
                 </div>
-                <ChatSystem />
+                {/* <ChatSystem /> */}
                 {!menu && (
                     <Footer />
                 )}

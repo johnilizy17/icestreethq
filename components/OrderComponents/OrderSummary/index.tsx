@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Box, Image } from '@chakra-ui/react'
 import ItemsComponent from './component/ItemsComponent'
-import { cashFormat } from '../../utils/cashFormat'
+import { cashFormat, cashFormat2 } from '../../utils/cashFormat'
 import moment from 'moment'
 
 
@@ -58,15 +58,15 @@ export default function OrderSummary({ detail, edit, data }: props) {
                     </Box>
                     <Box className=' text-sm my-2 flex items-center justify-between ' >
                         <p className='  font-semibold ' >Total:</p>
-                        <p className=' font-normal ml-4 text-right ' >{cashFormat(edit.total/(JSON.parse(number)*100))}</p>
+                        <p className=' font-normal ml-4 text-right ' >{cashFormat2(edit.total, edit.country)}</p>
                     </Box>
                     <Box className=' text-sm my-2 flex items-center justify-between ' >
                         <p className='  font-semibold ' >shipping and Payment fee:</p>
-                        <p className=' font-normal ml-4 text-right text-[#0dadf7] ' >{cashFormat(edit.shipping/JSON.parse(number))}</p>
+                        <p className=' font-normal ml-4 text-right text-[#0dadf7] ' >{cashFormat2(edit.shipping, edit.country)}</p>
                     </Box>
                     <Box className=' text-sm my-2 flex items-center justify-between ' >
                         <p className='  font-semibold ' >Total Product:</p>
-                        <p className=' font-normal ml-4 text-right text-[#0dadf7] ' >{cashFormat(edit.total - edit.balance)}</p>
+                        <p className=' font-normal ml-4 text-right text-[#0dadf7] ' >{edit.product_id.length}</p>
                     </Box>
                     <Box className=' text-sm my-2 flex items-center justify-between ' >
                         <p className='  font-semibold ' >Date Created:</p>

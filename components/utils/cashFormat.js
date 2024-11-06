@@ -24,9 +24,9 @@ export const cashFormat = (x, numb) => {
 
 export const cashFormat2 = (x, item) => {
   let icon = "$"
-  if (item === "England" || item === "Britain") {
+  if (item == "England" || item == "Britain") {
     icon = "￡"
-  } else if (item === "Nigeria") {
+  } else if (item == "Nigeria") {
     icon = "₦"
   } else {
     icon = "$"
@@ -39,6 +39,27 @@ export const cashFormat2 = (x, item) => {
       number = number
     }
       
+    return icon + parseFloat(number).toFixed(1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  return `${icon}0`
+};
+
+export const cashFormat3 = (x, numb) => {
+  let icon = "$"
+  const item = localStorage.getItem("amount") ? localStorage.getItem("currency") : "USA"
+  if (item === "GBP") {
+    icon = "￡"
+  } else if (item === "NGN") {
+    icon = "₦"
+  } else {
+    icon = "$"
+  }
+  if (x) {
+    let number = x.toString().replace(",", "")
+    if (numb) {
+      number = parseFloat(number) * numb
+    }
+    number = number
     return icon + parseFloat(number).toFixed(1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   return `${icon}0`

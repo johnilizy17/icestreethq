@@ -67,7 +67,7 @@ export default function Successful_payment() {
                                     Amount:
                                 </Center>
                                 <Center justifyContent={"start"} h="50px" w="full">
-                                    {cashFormat2(data.total/100,data.country)}
+                                    {cashFormat2(data.total,data.country)}
                                 </Center>
                             </Flex>
                         </Box>
