@@ -26,11 +26,11 @@ export default function Subscription() {
                     },
                     body: JSON.stringify({
                         email: value,
-                        listIds: "DFDMFKDMFKF", // Replace with your list ID
+                        listIds:  [123456], // Replace with your list ID
                         updateEnabled: true, // To update contact if it already exists
                     }),
                 });
-                if (response.data.state === 200) {
+                if (response.status === 201) {
                     toaster({
                         title: "Email",
                         description: "Email Successfully delivered",
@@ -39,7 +39,7 @@ export default function Subscription() {
                 } else {
                     toaster({
                         title: "Email",
-                        description: "Key not found",
+                        description: "Email already Exist",
                         status: "error"
                     })
                 }
