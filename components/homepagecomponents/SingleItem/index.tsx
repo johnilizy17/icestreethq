@@ -43,7 +43,7 @@ export default function SingleItem({ title, category, type, createdBy, label, pr
 
     const clickHandler = (item: any) => {
         localStorage.setItem("product", item)
-        navigate.push("/product-details")
+        navigate.push(`/product-details?product=${item.itemName}&price=${cashFormat(item.price)}&id=${item._id}`);
     }
 
     useEffect(() => {
@@ -56,25 +56,25 @@ export default function SingleItem({ title, category, type, createdBy, label, pr
                     <Box pt={"40px"} borderRadius={"24px"} overflow="hidden">
                         <CategoryLabel color='790252' type={type} label={label} createdBy={createdBy} title={category?.title} />
                         <Center>
-                            <Grid mt="30px" paddingLeft={["30px"]} templateColumns={['repeat(1, 1fr)','repeat(2, 1fr)','repeat(2, 1fr)','repeat(4, 1fr)']} gap={[1,2,3,4]}>
+                            <Grid mt="30px" paddingLeft={["30px"]} templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[1, 2, 3, 4]}>
                                 {data?.map((item: any, index: number) => {
                                     return (
-                                        <Box mb="20px" mr="20px" _hover={{ transform: "scale(1.05)", transition: "0.5s ease-in-out" }} cursor="pointer" onClick={() => clickHandler(item._id)} key={index} onMouseOver={() => setIsHover(index)} onMouseOut={() => setIsHover(-1)} role="button" w="300px">
-                                            <Center h={["310px", "310px"]} borderRadius={["8px", "16px", "24px"]} overflow="hidden">
+                                        <Box mb="20px" mr="20px" _hover={{ transform: "scale(1.05)", transition: "0.5s ease-in-out" }} cursor="pointer" onClick={() => clickHandler(item._id)} key={index} onMouseOver={() => setIsHover(index)} onMouseOut={() => setIsHover(-1)} role="button" w={["95%", "250px"]}>
+                                            <Center h={["160px", "280px"]} w="full" borderRadius={["8px", "16px", "24px"]} overflow="hidden">
                                                 <Img h="100%" src={imagePath + "/" + item?.image} objectFit="cover" alt={item?.name} />
                                             </Center>
                                             <Box>
-                                                <Flex mt="20px" justifyContent="space-between">
+                                                <Flex mt="20px" flexDir={["column", "row"]} justifyContent="space-between">
                                                     <Box
                                                         fontSize="14px"
                                                     >{item?.itemName.length > 20 ? (item?.itemName).slice(0, 20) + "..." : item?.itemName}
                                                     </Box>
-                                                    <Flex>
+                                                    <Box>
                                                         {item?.discount > 0 && <Box mr="10px" textDecoration="line-through" color="grey" className='font-bold text-sm' >{cashFormat(item?.price)}</Box>}
                                                         <Box>
-                                                            <p className='  font-bold text-[13px] lg:text-lg ' >{cashFormat(item?.price - (item?.price * item?.discount / 100))}</p>
+                                                            <p className='  font-bold text-sm ' >{cashFormat(item?.price - (item?.price * item?.discount / 100))}</p>
                                                         </Box>
-                                                    </Flex>
+                                                    </Box>
                                                 </Flex>
                                             </Box>
                                         </Box>

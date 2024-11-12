@@ -26,7 +26,7 @@ export default function Subscription() {
                     },
                     body: JSON.stringify({
                         email: value,
-                        listIds:  [123456], // Replace with your list ID
+                        listIds:  [1], // Replace with your list ID
                         updateEnabled: true, // To update contact if it already exists
                     }),
                 });

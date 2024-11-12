@@ -13,7 +13,7 @@ export default function ProductDisplay2({ item, index }: { item: { image: string
 
     const navigateToProductDetails = (id: string) => {
         localStorage.setItem("product", id.toString())
-        router.push("/product-details")
+        router.push(`/product-details?product=${item.itemName}&price=${cashFormat(item.price)}&id=${item._id}`)
     }
 
     const [value, setValue] = useState(0)
@@ -57,8 +57,8 @@ export default function ProductDisplay2({ item, index }: { item: { image: string
                     iconsCount={1}
                 />
             </Center>
-            <Box w={"full"} cursor="pointer" p="10px" bg="#ffffff" borderRadius={["8px","16px","24px"]} h={"320px"} onClick={() => navigateToProductDetails(item._id)} key={index}>
-                <Center borderRadius={["8px","16px","24px"]} h={["200px"]} overflow={"hidden"}>
+            <Box w={"full"} cursor="pointer" p="10px" bg="#ffffff" borderRadius={["8px", "16px", "24px"]} h={"320px"} onClick={() => navigateToProductDetails(item._id)} key={index}>
+                <Center borderRadius={["8px", "16px", "24px"]} h={["200px"]} overflow={"hidden"}>
                     <Img src={imagePath + "/" + item?.image} objectFit="cover" alt={item?.name} />
                 </Center>
                 <Box className='mt-4 ml-2 ' >
