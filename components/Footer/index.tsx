@@ -2,46 +2,16 @@ import { Box, Center, Flex, IconButton, Image, Img } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { COLORS } from "../../services/theme/colors";
 import Link from 'next/link';
-import { getBrand } from '../../services/userCategories';
+import { getBrand, getCategories } from '../../services/userCategories';
+import { getCollectionBrand } from '../../services/productService';
 
 export default function Footer() {
 
-    const [stateData, setStateData] = useState([{
-        title: "Ice Street",
-        nav: "street"
-    },
-    {
-        title: "Nike",
-        nav: "nike"
-    },
-    {
-        title: "Adidas",
-        nav: "Adidas"
-    }])
+    const [stateData, setStateData] = useState([])
 
-    const [stateProduct, setStateProduct] = useState([{
-        title: "Brand",
-        nav: "brand"
-    },
-    {
-        title: "Collection",
-        nav: "collection"
-    },
-    {
-        title: "New Arrivals",
-        nav: "arrival"
-    }
-    ])
+    const [stateProduct, setStateProduct] = useState([])
 
     const FooterItem = {
-        1: [{
-            header: "Categories",
-            link: stateProduct
-        }],
-        2: [{
-            header: "Collections",
-            link: stateData
-        }],
         3: [{
             header: "Support",
             link: [{
@@ -73,6 +43,18 @@ export default function Footer() {
             }]
         }]
     }
+
+    async function GetFooterDetails() {
+
+        const type = await getBrand()
+        setStateProduct(type.category)
+        const collection = await getCategories()
+        setStateData(collection.category)
+    }
+
+    useEffect(() => {
+        GetFooterDetails()
+    }, [])
 
     return (
         <Center justifyContent="space-between" mt={["24px", "24px", "24px", "60px"]} alignItems={["flex-start"]} flexDir={["column", "column", "column", "row"]} h={["auto", "auto", "auto", "400px"]} pl={["20px", "63px"]} pr={["20px", "63px"]} pt={["40px", "40px", "40px", "90px"]} pb={["20px", "90px"]} bg={COLORS.black}>
@@ -115,42 +97,41 @@ export default function Footer() {
                 </Box>
             </Box>
             <Box>
-                {FooterItem[1].map((a, b) => (
-                    <Box mb="20px" key={b}>
-                        <Box fontSize="20px" paddingBottom="8px" color={COLORS.white} fontWeight="700" lineHeight="24.2px">
-                            {a.header}
-                        </Box>
-                        <Box>
-                            {
-                                a.link.map((c, d) => (
-                                    <Link key={d} href={c.nav}>
-                                        <Box fontFamily="Inter-Regular" fontWeight="400" mb="6px" color={COLORS.white}>
-                                            {c.title}
-                                        </Box>
-                                    </Link>
-                                ))
-                            }
-                        </Box>
+                <Box mb="20px">
+                    <Box fontSize="20px" paddingBottom="8px" color={COLORS.white} fontWeight="700" lineHeight="24.2px">
+                        Categories
                     </Box>
-                ))}
-            </Box>
-            <Box>
-                {FooterItem[2].map((a, b) => (
-                    <Box key={b} mb="20px">
-                        <Box fontSize="20px" paddingBottom="8px" color={COLORS.white} fontWeight="700" lineHeight="24.2px">
-                            {a.header}
-                        </Box>
+                    <Box>
                         {
-                            a.link.map((c, d) => (
-                                <Link key={d} href={c.nav}>
-                                    <Box key={d} fontFamily="Inter-Regular" fontWeight="400" mb="6px" color={COLORS.white}>
+                            stateData.map((c:{title:string,_id:string}, d) => (
+                                <Link key={d} href={`type/${c._id}`}>
+                                    <Box display={d>5?"none":"flex"} fontFamily="Inter-Regular" fontWeight="400" mb="6px" color={COLORS.white}>
                                         {c.title}
                                     </Box>
                                 </Link>
                             ))
                         }
                     </Box>
-                ))}
+                </Box>
+            </Box>
+            <Box>
+
+                <Box mb="20px">
+                    <Box fontSize="20px" paddingBottom="8px" color={COLORS.white} fontWeight="700" lineHeight="24.2px">
+                        Collections
+                    </Box>
+                    <Box>
+                        {
+                            stateProduct.map((c:{title:string,_id:string}, d:number) => (
+                                <Link key={d} href={`brand/${c._id}`}>
+                                    <Box display={d>5?"none":"flex"} fontFamily="Inter-Regular" fontWeight="400" mb="6px" color={COLORS.white}>
+                                        {c.title}
+                                    </Box>
+                                </Link>
+                            ))
+                        }
+                    </Box>
+                </Box>
             </Box>
 
             <Box>
