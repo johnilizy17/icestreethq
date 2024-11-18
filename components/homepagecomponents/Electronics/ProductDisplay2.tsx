@@ -29,9 +29,7 @@ export default function ProductDisplay2({ item, index }: { item: { image: string
     }
 
     useEffect(() => {
-
-        console.log(item, "product")
-
+        
         const product = localStorage.getItem(item._id)
 
         if (product) {

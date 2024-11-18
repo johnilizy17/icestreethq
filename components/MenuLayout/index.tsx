@@ -20,7 +20,7 @@ export default function MenuLayout({ children, category, menu, pageName }: Props
 
     const { pathname } = useRouter();
     const [loading, setLoading] = useState(true)
-    const [metaData, setMetaData] = useState({ title: "Ice Street", description: "The best e-commerce site" })
+    const [metaData, setMetaData] = useState({ title: "Ice Street", description: "The best e-commerce site", keyword:"Shop, design, cloth and fashion" })
 
     async function MenuDetails() {
         setLoading(true)
@@ -45,6 +45,7 @@ export default function MenuLayout({ children, category, menu, pageName }: Props
                     <Head>
                         <title>{metaData.title}</title>
                         <meta name="description" content={metaData.description} />
+                        <meta name="keywords" content={metaData.keyword}/>
                         <meta name="viewport" content="width=device-width, initial-scale=1" />
                         <meta name="theme-color" content="#0dadf7" />
                         <link rel="icon" href="/favicon.ico" />

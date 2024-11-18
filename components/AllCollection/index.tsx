@@ -48,7 +48,6 @@ export default function AllCollection({ label }: props) {
         (async () => {
             try {
                 const response = await getCollections(3);
-                // console.log(response,"response")
                 setData(response);
             } catch (err) {
                 toast.error("Error occured");

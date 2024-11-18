@@ -57,7 +57,7 @@ export default function Men() {
                 <Box bg={COLORS.white}>
                     <MenuLayout menu={false} category={false}>
                         <Box overflow="hidden" mt={["20px", "20px", "20px", "30px"]} pos="relative">
-                            <Img src="/banner/men.png" />
+                            <Img alt="banner" src="/banner/men.png" />
                             <Center flexDir="column" w="full" textAlign={"center"} fontWeight="700" color="#fff" pos="absolute" top="0px" h="full" bg="#000000b5" fontSize={["24px", "32px", "47px", "57px"]} >
                                 <Box>
                                     Shop

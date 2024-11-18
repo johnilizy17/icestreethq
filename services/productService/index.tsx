@@ -13,6 +13,12 @@ export const getCollections = async (id: number) => {
     return response.data
 }
 
+
+export const getBanner = async () => {
+    const response = await instance.get(`banner`)
+    return response.data
+}
+
 export const getGender = async (id: number, style: string) => {
     const response = await instance.get(`gender/${id}?style=${style}`)
 

@@ -105,7 +105,6 @@ export default function Dashboard() {
                     setLoadingDashboard(false)
                 }
             } catch (err) {
-                console.log(err)
                 setLoadingDashboard(false)
                 toast.error("Error occured");
             }

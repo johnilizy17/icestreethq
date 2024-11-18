@@ -24,7 +24,6 @@ export default function Index() {
         let user
         try {
             const response = await getCartAmount()
-            console.log(response)
             setData(response?.data);
             refresh = ""
             if (response.data.length === 0) {

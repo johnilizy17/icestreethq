@@ -18,7 +18,6 @@ export default function Cart() {
         if (cartId) {
             getPackage(cartId)
                 .then((data) => {
-                    console.log(data, "cartid")
                     setLoading(false)
                     setPackageInstance(data)
                 }).catch((err) => {

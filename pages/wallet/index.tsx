@@ -24,7 +24,6 @@ export default function Index() {
         let user
         try {
             const response = await getWallet()
-            console.log(response.data)
             setData(response?.data[0]);
             refresh = ""
             if (response.data.length === 0) {

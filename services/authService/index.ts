@@ -44,12 +44,6 @@ export const getUser = async () => {
 export const updateUser = async (details: any) => {
   let request = await axios.put("/user/update", details);
   return request;
-  // return request.then((response) => {
-  //   console.log("response", response);
-  //   // if (response.status === 200) {
-  //     return response && response;
-  //   // }
-  // });
 };
 
 export const deleteResume = async (resumeId: any) => {

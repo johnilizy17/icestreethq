@@ -16,7 +16,6 @@ const PaymentForm = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(amount, selectedFile);
     };
 
     return (

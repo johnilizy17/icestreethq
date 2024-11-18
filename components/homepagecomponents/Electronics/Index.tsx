@@ -46,7 +46,6 @@ export default function Electronic({ label, type, category, createdBy, product }
 
     React.useEffect(() => {
         if (product) {
-            console.log(product, "item")
             setData(product)
         } else {
             (async () => {

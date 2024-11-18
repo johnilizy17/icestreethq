@@ -52,7 +52,6 @@ export default function Login() {
             if (response?.status === 200) {
                 localStorage.clear()
                 localStorage.setItem("user", response?.data?.userID)
-                console.log(response?.data?.access_token)
                 localStorage.setItem("token", response?.data?.access_token)
                 toast({
                     title: response?.data?.msg,

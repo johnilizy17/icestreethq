@@ -16,6 +16,7 @@ import {
     Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton,
 } from '@chakra-ui/react'
 import { guestLogin } from '../../../services'
+import { RWebShare } from "react-web-share";
 
 enum productActionKind {
     INCREMENT_QUANTITY = 'INCREASE',
@@ -46,9 +47,11 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
     const [packageData, setPackageData] = useState<any>()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const route = useRouter()
+    const { query, pathname } = useRouter()
+    const pathnameLink = imagePath + pathname
 
     useEffect(() => {
-        setUserId(localStorage.getItem("user") ?? "");
+        setUserId(query.id ?? "");
     }, []);
 
     // initialize packageData
@@ -75,7 +78,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                     setPackageId(res._id)
                     localStorage.setItem("default_package", res._id)
                 })
-                .catch(err => console.error(err?.response))
+                .catch(err => true)
 
         } else {
             setPackageId(defaultPackageId ?? "")
@@ -158,7 +161,6 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
             setLoading(false)
         } catch (err: any) {
             setLoading(false)
-            console.log(err.response.data, "state")
             toast({
                 title: "Email Error",
                 description: err.response.data.msg,
@@ -204,7 +206,6 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                     })
                     .catch(err => {
                         setLoading(false)
-                        console.error(err?.response)
                         toast({
                             title: "Token",
                             description: "Token has expire kindly login",
@@ -396,10 +397,34 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                         <Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
                         <Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
                     </Flex>
-                    <Center alignItems={["start"]} h={["auto", "auto", "auto", "auto"]} justifyContent={"flex-start"}>
+                    <Center flexDir="column" alignItems={["start"]} h={["auto", "auto", "auto", "auto"]} justifyContent={"flex-start"}>
                         <Box w={["100%", "100%", "100%", "500px"]}>
                             <Img w="full" src={imagePath + "/" + data?.image} alt="TopOne" />
                         </Box>
+                        <RWebShare
+                            data={{
+                                text: data?.itemName,
+                                url: pathnameLink + "/" + `?product=${data?.itemName}&id=${user_id}`,
+                                title: "Ice Street",
+                            }}
+                            onClick={() => {
+                                toast({
+                                    title: "product successfully shared",
+                                    position: "top-right",
+                                    status: "success",
+                                    isClosable: true,
+                                })
+                            }}
+                        >
+                            <Center justifyContent="end" cursor="pointer" mt="20px" w="full" >
+                                <Box mr="10px">
+                                    Share
+                                </Box>
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5" />
+                                </svg>
+                            </Center>
+                        </RWebShare>
                     </Center>
                     <Box className='bg-white lg:mt-0 mt-6 lg:w-4/12 lg:py-0 py-6 lg:px-0 px-[14px] w-full space-y-8' >
                         <Box className='space-y-4'>
@@ -425,7 +450,6 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                                 {countSize.map((a: string, b) => (
                                     <Button
                                         onClick={() => {
-                                            console.log(a, "string")
                                             setSize(a)
                                         }}
                                         colorScheme={size == a ? "green" : 'gray'}
@@ -470,8 +494,8 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                             )}
                         </Box>
 
-                        <Box className=" mt-6 flex items-center " >
-                            <button disabled={loading} onClick={() => {
+                        <Box className=" mt-6" >
+                            <button style={{ marginBottom: 10 }} disabled={loading} onClick={() => {
                                 if (localStorage.getItem("user")) {
                                     handleAddItemClicked()
                                 } else {
@@ -486,7 +510,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                                 } else {
                                     onOpen()
                                 }
-                            }} className='w-full ml-2 inline-flex items-center justify-center rounded-[4px] text-white bg-[#069046] h-[50px] '
+                            }} className='w-full inline-flex items-center justify-center rounded-[4px] text-white bg-[#069046] h-[50px] '
                             >
                                 {loading2 ? <SpinLoader size='md' /> : "Pay Now"}
                             </button>

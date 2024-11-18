@@ -118,7 +118,7 @@ export default function CartComponent({ packageInstance }: Props) {
             setCurrency(result)
 
         } catch (error: any) {
-            console.log(error.response, "amount")
+     
         }
     }
     const paymentSuccessfull = async (id: string) => {
@@ -158,8 +158,7 @@ export default function CartComponent({ packageInstance }: Props) {
     const amountNumber: any = localStorage.getItem("amount")
 
     function SumTotalFunction() {
-        console.log(products, "product")
-
+       
         if (products && products.length > 0) {
             const reformat = products.map((a: any, b: number) => {
                 return (a.item.price - (a.item.price * a.item.discount) / 100) * a.qty

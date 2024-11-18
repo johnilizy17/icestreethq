@@ -47,7 +47,6 @@ export default function ForgottenPassword() {
         } else {
             try {
                 const response = await forgotPassword(formik.values)
-                console.log(response.data,"response")    
                 toast({
                         title: response?.msg,
                         position: "bottom",

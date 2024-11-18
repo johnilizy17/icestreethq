@@ -77,7 +77,6 @@ export default function AddDeliveryAddress({ add, data, edit, getAddress }: prop
     useEffect(() => {
         setUser(localStorage.getItem("user") ?? "")
         if (edit) {
-            console.log(edit.address)
             formik.setFieldValue("address", edit.address)
         }
     }, [])
@@ -1087,7 +1086,6 @@ export default function AddDeliveryAddress({ add, data, edit, getAddress }: prop
 
         stateData.filter((item: any) => {
             if (item.state.includes(localgoverment)) {
-                console.log(item)
                 return item
             }
         }).map((st: any, _st: number) => {

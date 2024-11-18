@@ -25,7 +25,6 @@ export default function Index() {
         let user
         try {
             const response = await allTransaction(a)
-            console.log(response.data)
             setData(response?.data);
             refresh = ""
             if (response.data.length === 0) {

@@ -46,9 +46,6 @@ export default function SingleItem({ title, category, type, createdBy, label, pr
         navigate.push(`/product-details?product=${item.itemName}&price=${cashFormat(item.price)}&id=${item._id}`);
     }
 
-    useEffect(() => {
-        console.log(type, "type")
-    }, [])
     return (
         <>
             {data.length !== 0 && (

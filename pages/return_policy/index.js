@@ -13,16 +13,15 @@ const ReturnPolicy = () => {
                 <Text
                     fontSize={['12px', '14px', '14px']}
                     lineHeight={['20px', '22px', "25px"]}
-                    fontFamily="THICCCBOI"
-                    color="#000"
+                    color="#7d7e81"
                     textAlign="center"
-                    pt='10rem'
+                    pt='2rem'
                 >{"Have questions? We're here to help"}</Text>
                 <Text
                     fontSize={['40px', '50px', '60px']}
                     lineHeight={['55px', '70px', "90px"]}
-                    fontFamily="THICCCBOI"
-                    color="#000"
+    
+                    color="#7d7e81"
                     fontWeight="900"
                     textAlign="center"
                     textTransform='capitalize'
@@ -32,22 +31,22 @@ const ReturnPolicy = () => {
                 </Text>
                 <Text
                     fontSize={'17px'}
-                    color="#000">
+                    color="#7d7e81">
              {"At Ice Street, we want you to love your purchase. If you're not completely satisfied with your order, we offer a hassle-free return process to ensure your shopping experience remains smooth and enjoyable."}
                 </Text>
                 <Text
-                    color="#000"
+                    color="#7d7e81"
                     mb="-50px"
                     mt="50px"
                     fontWeight="500"
-                    fontSize={['40px', '50px', '60px']}
+                    fontSize={['20px']}
                 >
                     Eligibility for Returns
                 </Text>
                 <FAQ faqData={advertiserFaqData} show />
                 <Text
                     fontSize={'17px'}
-                    color="#000"
+                    color="#7d7e81"
                     pb="100px"
                     >
                     If you checked out as a guest, you can visit our Returns page and enter your order number and email address to begin the return process.

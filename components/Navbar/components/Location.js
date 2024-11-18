@@ -35,10 +35,8 @@ export default function Location() {
         try {
             const result = await getCurrency()
             const amount = result[e]
-            console.log(amount, "amount")
             localStorage.setItem("amount", amount)
         } catch (error) {
-            console.log(error.response, "amount")
         }
     }
 

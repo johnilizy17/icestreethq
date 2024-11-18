@@ -17,7 +17,6 @@ export default function OrderSummary({ detail, edit, data }: props) {
     const [number, setNumber] = React.useState<any>("0")
 
     useEffect(() => {
-        console.log(edit, "edit")
         setNumber(localStorage.getItem("amount"))
     }, [])
 

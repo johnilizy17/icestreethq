@@ -12,7 +12,6 @@ export default function FundWallet({ getAmount }) {
     const [isShown, setIsShown] = React.useState("")
     const toast = useToast()
     const [loading, setLoading] = useState(false)
-    console.log(process.env.FLUTTERWAVE_TEST_KEY_PUBLIC)
     const [data, setData] = useState({ email: "", phone: "", firstname: "", lastname: "" })
     const { AddFundFlotterwave } = WalletServices()
 
@@ -129,7 +128,6 @@ export default function FundWallet({ getAmount }) {
                 setData(response.data)
 
             } catch {
-                console.log("error")
             }
         }
         getProfile()

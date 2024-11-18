@@ -64,7 +64,6 @@ const MoreItemsMain = () => {
             setLoading(false)
         } catch (err: any) {
             setLoading(false)
-            console.log(err.response.data, "state")
             toast({
                 title: "Email Error",
                 description: err.response.data.msg,
@@ -153,7 +152,6 @@ const MoreItemsMain = () => {
             route.push("/cart")
         }).catch(err => {
             setLoading2(false)
-            console.log("sent")
             onOpen()
         })
         // setLoading2(false)
@@ -201,7 +199,6 @@ const MoreItemsMain = () => {
 
     function SumTotalFunction() {
         const products = packageInfo.packageInstance.product_id
-        console.log(products, "products")
         if (products && products.length > 0) {
             const reformat = products.map((a: any, b: number) => {
                 return (a.item.price - (a.item.price * a.item.discount) / 100) * a.qty
@@ -238,7 +235,6 @@ const MoreItemsMain = () => {
             })
         }).catch(err => {
             setLoading2(false)
-            console.log("sent")
             onOpen()
         })
     }

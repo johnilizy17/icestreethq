@@ -13,7 +13,6 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
 
     useEffect(() => {
-        console.log(loading)
         if (loading) return
 
         if (!isLoggedIn)

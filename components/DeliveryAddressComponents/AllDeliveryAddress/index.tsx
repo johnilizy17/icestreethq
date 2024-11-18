@@ -29,7 +29,6 @@ export default function AllDeliveryAddress({ add, data, edit, getAddress }: prop
 
             try {
                 const response = await getUserInfo(user)
-                console.log(response.data.delivery)
                 setData(response.data.delivery)
             } catch (err) {
                 toast.error("Error occured");

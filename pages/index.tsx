@@ -21,7 +21,6 @@ export default function Home() {
       try {
         const response = await getLive();
         setCategory(response);
-        console.log(response, "response")
       } catch (err) {
         toast.error("Error occured");
       }

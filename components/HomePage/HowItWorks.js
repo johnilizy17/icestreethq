@@ -37,8 +37,6 @@ const HowItWorks = () => {
 
       if (number < 40) {
         setPercentageScroll(number)
-        console.log(number)
-
       }
     }
 

@@ -21,7 +21,6 @@ const SearchProductAutoComplete = ({ handleProductClicked = () => 1 }: Props) =>
                 setProductResult(result)
             }
             catch (err) {
-                console.log(err)
             }
 
         }, 100)

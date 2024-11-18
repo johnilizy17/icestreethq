@@ -6,7 +6,7 @@ const FAQContent = ({ title, content }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box borderBottom="1px solid #000">
+    <Box borderBottom="1px solid #7d7e81">
       <Flex
         justifyContent="space-between"
         p="40px 0"
@@ -17,12 +17,11 @@ const FAQContent = ({ title, content }) => {
           fontSize={["12px", "14px", "20px"]}
           lineHeight={["20px", "25px", "30px"]}
           fontWeight="600"
-          fontFamily="THICCCBOI"
-          color="#000"
+          color="#7d7e81"
         >
           {title}
         </Text>
-        <Box color="#000">{!isOpen ? <AddIcon /> : <MinusIcon />} </Box>
+        <Box color="#7d7e81">{!isOpen ? <AddIcon /> : <MinusIcon />} </Box>
       </Flex>      
         <Box pos="relative" maxH={isOpen?"320px":"0px"}  transition="max-height 0.6s ease-out" overflow="hidden">
         <Slide direction="bottom" in={isOpen} style={{ zIndex: 10, position:"relative" }}>
@@ -30,8 +29,7 @@ const FAQContent = ({ title, content }) => {
             fontSize={["10px", "14px", "15px"]}
             lineHeight={["20px", "22px", "25px"]}
             fontWeight="500"
-            fontFamily="THICCCBOI"
-            color="#000"
+              color="#7d7e81"
             pb="20px"
           >
             {content}
@@ -54,7 +52,7 @@ const FAQ = ({ faqData, show }) => {
           fontSize={["25px", "35px", "40px"]}
           lineHeight={["35px", "45px", "50px"]}
           fontWeight="700"
-          color="#000"
+          color="#7d7e81"
           textAlign="center"
         >
           Freqently asked questions

@@ -10,19 +10,17 @@ const FAQs = () => {
     <MenuLayout menu={false} category={false}>
         
     <Box bg='#FFF' p={['0 30px', '0 30px', '0 60px']} >       
-        <Text 
+        <Box 
          fontSize={['12px', '14px', '14px']}
          lineHeight={['20px', '22px', "25px"]}
-         fontFamily="THICCCBOI"
-         color="#000"
+         color="#7d7e81"
          textAlign="center"
-         pt='10rem'
-        >{"Have questions? We're here to help"}</Text>
+         pt='2rem'
+        >{"Have questions? We're here to help"}</Box>
         <Text
                 fontSize={['40px', '50px', '60px']}
-                lineHeight={['55px', '70px', "90px"]}
-               fontFamily="THICCCBOI"
-               color="#000"
+                lineHeight={['55px', '70px', "90px"]}  
+               color="#7d7e81"
                fontWeight="500"
                textAlign="center"
                textTransform='capitalize'

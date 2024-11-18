@@ -46,9 +46,6 @@ export default function SingleItem({ title, category, type, createdBy, label, pr
         navigate.push("/product-details")
     }
 
-    useEffect(() => {
-        console.log(type, "type")
-    }, [])
     return (
         <>
             {data.length !== 0 && (
@@ -58,8 +55,8 @@ export default function SingleItem({ title, category, type, createdBy, label, pr
                         <Box mt="30px" paddingLeft={["30px"]} display="flex">
                             {data?.map((item: any, index: number) => {
                                 return (
-                                    <Box mb="20px" _hover={{transform: "scale(1.05)",  transition:"0.5s ease-in-out"}} cursor="pointer" onClick={() => clickHandler(item._id)} key={index} onMouseOver={() => setIsHover(index)} onMouseOut={() => setIsHover(-1)} role="button" w="300px" h="418px" >
-                                        <Center w={["300px"]} bg="gray" borderRadius={["8px","16px","24px"]} overflow="hidden">
+                                    <Box mb="20px" _hover={{ transform: "scale(1.05)", transition: "0.5s ease-in-out" }} cursor="pointer" onClick={() => clickHandler(item._id)} key={index} onMouseOver={() => setIsHover(index)} onMouseOut={() => setIsHover(-1)} role="button" w="300px" h="418px" >
+                                        <Center w={["300px"]} bg="gray" borderRadius={["8px", "16px", "24px"]} overflow="hidden">
                                             <Img src={imagePath + "/" + item?.image} objectFit="cover" alt={item?.name} />
                                         </Center>
                                     </Box>
