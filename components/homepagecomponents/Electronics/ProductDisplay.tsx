@@ -42,7 +42,7 @@ export default function ProductDisplay({ item, index }: { item: { image: string,
     }, [])
 
     return (
-        <Box mb="20px" ml={index < 1 ? "0px" : ["0px", "0px", "20px"]} pos="relative" _hover={{ transform: "scale(1.03)", transition: "0.5s ease-in-out" }} w={["49%", "275px"]}>
+        <Box mb="20px" pos="relative" _hover={{ transform: "scale(1.03)", transition: "0.5s ease-in-out" }} w={["100%", "225px"]}>
             <Center
                 onClick={() => {
                     IconProduct()

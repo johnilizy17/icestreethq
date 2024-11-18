@@ -2,7 +2,7 @@ import Head from 'next/head'
 import MenuLayout from '../../components/MenuLayout'
 import React, { useEffect, useState } from 'react'
 import toast from "react-hot-toast";
-import { Box, Button, Center, Flex, Img, Input, Spinner } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Grid, Img, Input, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';
 import { COLORS } from '../../services/theme/colors';
 import ProductDisplay from '../../components/homepagecomponents/Electronics/ProductDisplay';
@@ -73,29 +73,30 @@ export default function Men() {
                             {category.map((a: any, index: any) => (<SelectionButton key={index} title={a} select={select} setSelect={setSelect} />))}
                         </Center>
                         <Center bg="rgba(217, 217, 217, 0.2)" pt="20px" pb="20px">
-                            <Flex justifyContent={["space-between", "space-between", "space-between", "flex-start"]} flexWrap="wrap">
-                                {loading ?
-                                    <Center h="300px" w="full">
-                                        <Spinner size="xl" />
-                                    </Center> :
-                                    data.length < 1 ?
-                                        <Center flexDir="column" p="20px" w="full">
-                                            <Lottie options={defaultOptions}
-                                                height={300}
-                                                width={300} />
-                                            <Box fontWeight="700" mt="10px" fontSize="24px">
-                                                No Result
-                                            </Box>
-                                        </Center>
-                                        :
-                                        data?.map((item: any, index: number) => {
+                            {loading ?
+                                <Center h="300px" w="full">
+                                    <Spinner size="xl" />
+                                </Center> :
+                                data.length < 1 ?
+                                    <Center flexDir="column" p="20px" w="full">
+                                        <Lottie options={defaultOptions}
+                                            height={300}
+                                            width={300} />
+                                        <Box fontWeight="700" mt="10px" fontSize="24px">
+                                            No Result
+                                        </Box>
+                                    </Center>
+                                    :
+                                    <Grid templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 10]}>
+                                        {data?.map((item: any, index: number) => {
                                             return (
                                                 <Box key={index} mb="20px">
                                                     <ProductDisplay item={item} index={index} />
                                                 </Box>
                                             )
                                         })}
-                            </Flex>
+                                    </Grid>
+                            }
                         </Center>
                     </MenuLayout>
                 </Box>

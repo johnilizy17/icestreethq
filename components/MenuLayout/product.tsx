@@ -5,7 +5,6 @@ import ItemCategories from '../ItemCategories';
 import Navbar from '../Navbar';
 import dynamic from 'next/dynamic';
 import { imagePath } from '../../services/Variable';
-const ChatSystem = dynamic(import('./chatSystem'), { ssr: false });
 
 type Props = {
     children: React.ReactNode;
@@ -18,9 +17,6 @@ type Props = {
 
 export default function MenuLayoutProduct({ children, product, category, menu, pageName }: Props) {
 
-    useEffect(()=>{
-    console.log(product, "product")
-    },[])
     return (
         <div className="no-scrollbar">
             <div className=' w-full lg:pb-0 overflow-x-hidden ' >
@@ -42,7 +38,6 @@ export default function MenuLayoutProduct({ children, product, category, menu, p
                 <div className=' pt-0 w-full h-auto ' >
                     {children}
                 </div>
-                <ChatSystem />
                 {!menu && (
                     <Footer />
                 )}

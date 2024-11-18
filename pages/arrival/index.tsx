@@ -2,7 +2,7 @@ import Head from 'next/head'
 import MenuLayout from '../../components/MenuLayout'
 import React, { useEffect, useState } from 'react'
 import toast from "react-hot-toast";
-import { Box, Button, Center, Flex, Img, Input, Spinner } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Grid, Img, Input, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';
 import { COLORS } from '../../services/theme/colors';
 import ProductDisplay from '../../components/homepagecomponents/Electronics/ProductDisplay';
@@ -67,7 +67,7 @@ export default function Men() {
                         <Center h={["100px", "100px", "100px", "197px"]} fontWeight="700" fontSize={["24px", "27px", "47px", "57px"]}>
                             Stay Classy, Stay Trendy
                         </Center>
-                        <Flex p={["20px", "20px", "20px", "30px"]} justifyContent={["space-between", "space-between", "space-between", "flex-start"]} flexWrap="wrap">
+                        <Box backgroundColor="whitesmoke" p={["20px", "20px", "20px", "30px"]}>
                             {loading ?
                                 <Center h="300px" w="full">
                                     <Spinner size="xl" />
@@ -82,12 +82,17 @@ export default function Men() {
                                         </Box>
                                     </Center>
                                     :
-                                    data?.map((item: any, index: number) => {
-                                        return (
-                                            <ProductDisplay key={index} item={item} index={index} />
-                                        )
-                                    })}
-                        </Flex>
+                                    <Grid templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 10]}>
+                                        {
+                                            data?.map((item: any, index: number) => {
+                                                return (
+                                                    <ProductDisplay key={index} item={item} index={index} />
+                                                )
+                                            })
+                                        }
+                                    </Grid>
+                            }
+                        </Box>
                     </MenuLayout>
                 </Box>
             </main>

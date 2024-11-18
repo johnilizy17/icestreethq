@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
 type props = {
-    title: string,
+    title: any,
     label: boolean,
     type?: { color: string, Header_Color: string, title: string },
     createdBy?: string,
@@ -15,16 +15,9 @@ export default function CategoryLabel({ title, label, type, createdBy, color }: 
     const navigate = useRouter()
 
     const clickHandler = () => {
-        if (createdBy) {
-            navigate.push(`/categories?category=${title}&&id=${createdBy}`)
-        } else{
-            navigate.push("/collection")
-        }
+            navigate.push(`/categories?category=${type.title}&&id=${createdBy}`)
+      
     }
-
-    useEffect(() => {
-        console.log(type, "type")
-    }, [])
 
     return (
         <Box className=' w-full' color={type && type.Header_Color ? type.Header_Color : ""} >

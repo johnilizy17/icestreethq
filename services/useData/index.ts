@@ -44,6 +44,11 @@ export const forgotPassword = async (info: any) => {
   return data;
 };
 
+export const getHeaderDetails = async () => {
+  const { data } = await axios.get("/header");
+  return data;
+};
+
 
 export const resetPassword = async (info: any) => {
   const { data } = await axios.post("/reset/password", info);
