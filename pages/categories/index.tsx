@@ -3,6 +3,7 @@ import MenuLayout from '../../components/MenuLayout'
 import Packages from '../../components/homepagecomponents/Packages'
 import ElectronicsCategories from '../../components/homepagecomponents/Electronics/ElectronicsCategories'
 import { useRouter } from 'next/router';
+import { Box } from '@chakra-ui/react';
 
 export default function Categories() {
 
@@ -14,9 +15,9 @@ export default function Categories() {
 
     return (
         <MenuLayout menu={false} category={true} >
-            <div className=' w-full mt-4 lg:mt-12 ' >
+            <Box bg="whitesmoke" className='w-full mt-4 lg:mt-12 ' >
                 <ElectronicsCategories id={page} type={query} title={query.category} />
-            </div>
+            </Box>
         </MenuLayout>
     )
 } 

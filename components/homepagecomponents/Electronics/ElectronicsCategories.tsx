@@ -44,7 +44,9 @@ export default function ElectronicsCategories({ id, title, type }: props) {
 
     return (
         <div className=' w-full cursor-pointer' >
-            <CategoryLabel color='D2301C' label={true} type={type} title={title} createdBy={id} />
+           <Box fontWeight="bold" fontSize="20px" pl={["20px","20px","20px","30px"]} pt={["20px","20px","20px","30px"]} pr={["20px","20px","20px","30px"]}>
+            {title}
+           </Box>
             <Box p={["20px","20px","20px","30px"]}>
                 <Grid templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 10]}>
                     {data?.map((item: any, index: number) => {
