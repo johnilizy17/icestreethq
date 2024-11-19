@@ -48,7 +48,7 @@ const PaymentForm = () => {
 
             <button
                 type="submit"
-                className="mt-8 rounded-md w-full text-[15px] bg-[#069046] h-[40px] font-semibold text-white"
+                className="mt-8 rounded-md w-full text-[15px] bg-[#000] h-[40px] font-semibold text-white"
             >
                 Submit
             </button>

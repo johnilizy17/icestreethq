@@ -8,11 +8,11 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 // import required swiper modules
-import { Autoplay } from 'swiper';
+import { Swiper as SwiperType, Navigation, Autoplay } from 'swiper';
 import SwiperImage from './components/SwiperImage';
 import { COLORS } from '../../../services/theme/colors';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getBanner } from '../../../services/productService';
 import { imagePath } from '../../../services/Variable';
 
@@ -20,6 +20,7 @@ export default function HeroSection() {
 
     const router = useRouter()
     const [banner, setBanner] = useState([])
+    const swiperRef = useRef<SwiperType>();
 
     async function FetchBannerApi() {
         const data = await getBanner()
@@ -33,6 +34,7 @@ export default function HeroSection() {
     return (
         <div className=' flex lg:flex-row flex-col w-full lg:px-[32px] pb-[8px] mb-4 lg:mb-0 px-3 lg:pb-[32px]' style={{ position: "relative" }} >
             <IconButton
+                onClick={() => swiperRef.current?.slidePrev()}
                 className="#js-prev1"
                 display={["none", "none", "none", "flex"]} h="30px" bg={COLORS.white} colorScheme='white' aria-label='' pos="absolute" zIndex={2} right="110px" top="30px">
                 <svg width="7" height="15" viewBox="0 0 10 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,6 +43,7 @@ export default function HeroSection() {
                 </svg>
             </IconButton>
             <IconButton
+                onClick={() => swiperRef.current?.slideNext()}
                 className="#js-prev1" display={["none", "none", "none", "flex"]} h="30px" bg={COLORS.white} colorScheme='white' aria-label='' pos="absolute" zIndex={2} right="60px" top="30px">
                 <svg width="7" height="15" viewBox="0 0 10 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 1.42996L9 10.2993L1 19.1687" fill="white" />
@@ -48,6 +51,7 @@ export default function HeroSection() {
                 </svg>
             </IconButton>
             <IconButton
+                onClick={() => swiperRef.current?.slidePrev()}
                 className="#js-prev1" display={["flex", "flex", "flex", "none"]} bg={COLORS.white} colorScheme='white' aria-label='' pos="absolute" zIndex={2} right="70px" top="20px">
                 <svg width="7" height="18" viewBox="0 0 10 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 1.42996L1 10.2993L9 19.1687" fill="white" />
@@ -55,6 +59,7 @@ export default function HeroSection() {
                 </svg>
             </IconButton>
             <IconButton
+                onClick={() => swiperRef.current?.slideNext()}
                 className="#js-prev1" display={["flex", "flex", "flex", "none"]} bg={COLORS.white} colorScheme='white' aria-label='' pos="absolute" zIndex={2} right="25px" top="20px">
                 <svg width="7" height="18" viewBox="0 0 10 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 1.42996L9 10.2993L1 19.1687" fill="white" />
@@ -72,11 +77,14 @@ export default function HeroSection() {
                     clickable: true,
                 }}
                 slideNextClass='js-prev1'
-                modules={[Autoplay]}
+                modules={[Autoplay, Navigation]}
                 className="w-full"
+                onBeforeInit={(swiper: any) => {
+                    swiperRef.current = swiper;
+                }}
             >
-                {banner.map((a:any,b:number) => (
-                    <SwiperSlide>
+                {banner.map((a: any, b: number) => (
+                    <SwiperSlide key={b}>
                         <Flex bg={a.color} color={a.text_color} justifyContent={"space-between"} flexDir={["column", "column", "column", "row"]} pt="30px" pr="30px" borderRadius={["8px", "16px", "24px"]} h={["auto", "auto", "auto", "600px"]}>
                             <Center flexDir="column" alignItems={"self-start"} p="20px">
                                 <Box mt={["20px", "0px"]} lineHeight={["40px", "40px", "40px", "70px"]} fontWeight="bolder" fontSize={["32px", "38px", "38px", "58px"]}>
@@ -95,7 +103,7 @@ export default function HeroSection() {
                                     </svg>
                                 </Button>
                             </Center>
-                            <Img src={imagePath+"/"+a.image} />
+                            <Img src={imagePath + "/" + a.image} />
                         </Flex>
                     </SwiperSlide>
                 ))}

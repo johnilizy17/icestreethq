@@ -118,7 +118,7 @@ export default function CartComponent({ packageInstance }: Props) {
             setCurrency(result)
 
         } catch (error: any) {
-     
+
         }
     }
     const paymentSuccessfull = async (id: string) => {
@@ -158,7 +158,7 @@ export default function CartComponent({ packageInstance }: Props) {
     const amountNumber: any = localStorage.getItem("amount")
 
     function SumTotalFunction() {
-       
+
         if (products && products.length > 0) {
             const reformat = products.map((a: any, b: number) => {
                 return (a.item.price - (a.item.price * a.item.discount) / 100) * a.qty
@@ -386,28 +386,11 @@ export default function CartComponent({ packageInstance }: Props) {
                                                     value={values.country}
                                                 />
                                                 {errors.country && touched.country && errors.country}
-                                                <Box fontWeight="900" mb="10px" mt="20px">
-                                                    State
-                                                </Box>
-                                                <input
-                                                    type="state"
-                                                    name="state"
-                                                    style={{ border: "1px solid #CFCFCF", borderRadius: "7px", height: 50, paddingLeft: 10, paddingRight: 10 }}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    value={values.state}
-                                                />
-                                                {errors.state && touched.state && errors.state}
                                                 <Box fontWeight="900" mt="20px" mb="10px">
                                                     City
                                                 </Box>
-                                                <input
-                                                    type="city"
-                                                    name="city"
-                                                    style={{ border: "1px solid #CFCFCF", borderRadius: "7px", height: 50, paddingLeft: 10, paddingRight: 10 }}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    value={values.city}
+                                                <GooglePlacesAutocomplete
+                                                   
                                                 />
                                                 {errors.city && touched.city && errors.city}
                                                 <Box fontWeight="900" mt="20px" mb="10px">

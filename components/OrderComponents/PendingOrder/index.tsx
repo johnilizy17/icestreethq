@@ -18,7 +18,7 @@ export default function Index({detail}: props) {
                     <p className='  text-sm font-normal lg:text-lg ml-6 ' >Christmas Package</p>
                 </div> 
             </div> 
-            <div className=' lg:mx-8 flex mt-9 rounded-[5px] lg:text-base text-sm font-medium bg-[#06904633] flex-1 p-[13px] ' >
+            <div className=' lg:mx-8 flex mt-9 rounded-[5px] lg:text-base text-sm font-medium bg-[#00033] flex-1 p-[13px] ' >
                 You have a pending order, start payment and get your items delivered at the end of the duration.
             </div>
             <div className=' lg:mx-8 flex mt-4 lg:mb-0 mb-2 lg:mt-9 rounded-[5px] pb-[15px] text-sm font-medium border border-[#D0D0D0] flex-col flex-1 px-[35px] ' >

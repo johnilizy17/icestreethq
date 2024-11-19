@@ -2,7 +2,7 @@ import React from "react";
 
 const MassBuyAccountInfo = () => {
     return (
-        <div className="bg-[#06904633] p-[18px] text-[15px] font-semibold w-full rounded-[5px]">
+        <div className="bg-[#00033] p-[18px] text-[15px] font-semibold w-full rounded-[5px]">
             <div className="flex items-center">
                 <p className="text-[#6C6C6C] w-32">Bank:</p>
                 <p>Zenith Bank</p>

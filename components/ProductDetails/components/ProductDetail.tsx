@@ -35,7 +35,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
     const [loading2, setLoading2] = React.useState(false);
     const toast = useToast()
     const [showForm, setShowForm] = useState(false)
-    const [user_id, setUserId] = React.useState("");
+    const [user_id, setUserId] = React.useState<any>("");
     const [userData, setUserData] = React.useState("");
     const [productInfo, productInfoDispatch] = useReducer(productInfoReducer, productInitializerArg, productInitializer)
     const [packageId, setPackageId] = useState<string>("")
@@ -51,7 +51,8 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
     const pathnameLink = imagePath + pathname
 
     useEffect(() => {
-        setUserId(query.id ?? "");
+        const userQuery = query.id ?? ""
+        setUserId(userQuery);
     }, []);
 
     // initialize packageData
@@ -510,7 +511,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                                 } else {
                                     onOpen()
                                 }
-                            }} className='w-full inline-flex items-center justify-center rounded-[4px] text-white bg-[#069046] h-[50px] '
+                            }} className='w-full inline-flex items-center justify-center rounded-[4px] text-white bg-[#000] h-[50px] '
                             >
                                 {loading2 ? <SpinLoader size='md' /> : "Pay Now"}
                             </button>

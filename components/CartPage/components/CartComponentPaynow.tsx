@@ -121,7 +121,7 @@ export default function CartComponentPayNow({packageInstance}: any) {
                             monthly_payment={cartInfo.monthly_payment}
                             weekly_payment={cartInfo.weekly_payment} />
 
-                        <button onClick={handlePayNowClicked} className='mt-14 self-center inline-block rounded-md w-[200px] text-sm bg-[#069046] h-[40px] font-semibold text-white ' >Pay Now
+                        <button onClick={handlePayNowClicked} className='mt-14 self-center inline-block rounded-md w-[200px] text-sm bg-[#000] h-[40px] font-semibold text-white ' >Pay Now
                         </button>
                     </div>
                     {/* end of cart footer */}

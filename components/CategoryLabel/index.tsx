@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 type props = {
     title: any,
     label: boolean,
-    type?: { color: string, Header_Color: string, title: string },
+    type: { color: string, title:any, Header_Color: string},
     createdBy?: string,
     color?: any
 }

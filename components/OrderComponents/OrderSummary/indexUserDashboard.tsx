@@ -97,7 +97,7 @@ export default function OrderSummaryDashboard({ detail, edit }: props) {
                         <p className='  font-semibold ' >Delivery Date</p>
                         <p className=' font-normal ml-4 text-right ' >untill payment is complete</p>
                     </div>
-                    <div className=' mb-[17px] mt-4 text-sm font-normal p-[14px] rounded-[5px] bg-[#06904633] ' >
+                    <div className=' mb-[17px] mt-4 text-sm font-normal p-[14px] rounded-[5px] bg-[#00033] ' >
                         All payments has to be completed on
                         or before the due date to get package
                         delivery
@@ -126,49 +126,49 @@ export default function OrderSummaryDashboard({ detail, edit }: props) {
                         <p className=' font-normal text-sm ' >Mar 18th 2023</p>
                         <div className=' flex items-center text-sm text-[#979494] font-normal justify-between mt-1 ' >
                             <p className=' text-[#0dadf7] ' >8,333.33</p>
-                            <button className=' text-[#069046] ' >Pay Now</button>
+                            <button className=' text-[#000] ' >Pay Now</button>
                         </div>
                     </div>
                     <div className=' py-[8px] border-[#0dadf7] border-b ' >
                         <p className=' font-normal text-sm ' >Apr 18th 2023</p>
                         <div className=' flex items-center text-sm text-[#979494] font-normal justify-between mt-1 ' >
                             <p className=' text-[#0dadf7] ' >8,333.33</p>
-                            <button className=' text-[#069046] ' >Pay Now</button>
+                            <button className=' text-[#000] ' >Pay Now</button>
                         </div>
                     </div>
                     <div className=' py-[8px] border-[#0dadf7] border-b ' >
                         <p className=' font-normal text-sm ' >May 18th 2023</p>
                         <div className=' flex items-center text-sm text-[#979494] font-normal justify-between mt-1 ' >
                             <p className=' text-[#0dadf7] ' >8,333.33</p>
-                            <button className=' text-[#069046] ' >Pay Now</button>
+                            <button className=' text-[#000] ' >Pay Now</button>
                         </div>
                     </div>
                     <div className=' py-[8px] border-[#0dadf7] border-b ' >
                         <p className=' font-normal text-sm ' >Jun 18th 2023</p>
                         <div className=' flex items-center text-sm text-[#979494] font-normal justify-between mt-1 ' >
                             <p className=' text-[#0dadf7] ' >8,333.33</p>
-                            <button className=' text-[#069046] ' >Pay Now</button>
+                            <button className=' text-[#000] ' >Pay Now</button>
                         </div>
                     </div>
                     <div className=' py-[8px] border-[#0dadf7] border-b ' >
                         <p className=' font-normal text-sm ' >Jul 18th 2023</p>
                         <div className=' flex items-center text-sm text-[#979494] font-normal justify-between mt-1 ' >
                             <p className=' text-[#0dadf7] ' >8,333.33</p>
-                            <button className=' text-[#069046] ' >Pay Now</button>
+                            <button className=' text-[#000] ' >Pay Now</button>
                         </div>
                     </div>
                     <div className=' py-[8px] border-[#0dadf7] border-b ' >
                         <p className=' font-normal text-sm ' >Aug 18th 2023</p>
                         <div className=' flex items-center text-sm text-[#979494] font-normal justify-between mt-1 ' >
                             <p className=' text-[#0dadf7] ' >8,333.33</p>
-                            <button className=' text-[#069046] ' >Pay Now</button>
+                            <button className=' text-[#000] ' >Pay Now</button>
                         </div>
                     </div>
                     <div className=' py-[8px] border-[#0dadf7] border-b ' >
                         <p className=' font-normal text-sm ' >Sept 18th 2023</p>
                         <div className=' flex items-center text-sm text-[#979494] font-normal justify-between mt-1 ' >
                             <p className=' text-[#0dadf7] ' >8,333.33</p>
-                            <button className=' text-[#069046] ' >Pay Now</button>
+                            <button className=' text-[#000] ' >Pay Now</button>
                         </div>
                     </div>
                 </div>

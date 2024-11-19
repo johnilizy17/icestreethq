@@ -79,7 +79,7 @@ export default function OrderSummary({ detail, edit, data }: props) {
                         <p className='  font-semibold ' >Delivery Status</p>
                         <p className=' font-normal ml-4 text-right ' >{edit.status}</p>
                     </Box>
-                    <Box className=' mb-[17px] mt-4 text-sm font-normal p-[14px] rounded-[5px] bg-[#06904633] ' >
+                    <Box className=' mb-[17px] mt-4 text-sm font-normal p-[14px] rounded-[5px] bg-[#00033] ' >
                         A call will be put through to you hours before delivery
                     </Box>
                 </Box>

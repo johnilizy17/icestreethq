@@ -14,7 +14,7 @@ export default function BankTransfer() {
                         {/* start of heading */}
                         <div className=' w-full flex justify-between items-center py-3 ' >
                             <p className='  font-semibold ' >Hello John</p>
-                            <p className='  font-normal text-[#069046] ' >Pay <span className=' font-semibold  ' >₦8,333.33</span></p>
+                            <p className='  font-normal text-[#000] ' >Pay <span className=' font-semibold  ' >₦8,333.33</span></p>
                         </div>
                         {/* end of heading */}
 

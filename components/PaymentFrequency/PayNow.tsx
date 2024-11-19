@@ -28,7 +28,7 @@ function PaymentFrequencyPayNow({ daily_payment, weekly_payment, monthly_payment
                 <p className='font-normal text-[15px]'>{cashFormat(daily_payment)}</p>
                 <button
                     onClick={() => handleFrequencyChanged("daily", daily_payment)}
-                    className={tab === "daily" ? 'w-[12px] h-[12px] rounded-full bg-[#069046] border-[1.5px] border-[#069046]' : 'w-[12px] h-[12px] rounded-full border-[1.5px] border-black'}
+                    className={tab === "daily" ? 'w-[12px] h-[12px] rounded-full bg-[#000] border-[1.5px] border-[#000]' : 'w-[12px] h-[12px] rounded-full border-[1.5px] border-black'}
                 />
             </div>
             <div className='flex justify-between my-2 items-center'>
@@ -36,7 +36,7 @@ function PaymentFrequencyPayNow({ daily_payment, weekly_payment, monthly_payment
                 <p className='font-normal text-[15px]'>{cashFormat(weekly_payment)}</p>
                 <button
                     onClick={() => handleFrequencyChanged("weekly", weekly_payment)}
-                    className={tab === "weekly" ? 'w-[12px] h-[12px] rounded-full bg-[#069046] border-[1.5px] border-[#069046]' : 'w-[12px] h-[12px] rounded-full border-[1.5px] border-black'}
+                    className={tab === "weekly" ? 'w-[12px] h-[12px] rounded-full bg-[#000] border-[1.5px] border-[#000]' : 'w-[12px] h-[12px] rounded-full border-[1.5px] border-black'}
                 />
             </div>
             <div className='flex justify-between my-2 items-center'>
@@ -44,7 +44,7 @@ function PaymentFrequencyPayNow({ daily_payment, weekly_payment, monthly_payment
                 <p className='font-normal text-[15px]'>{cashFormat(monthly_payment)}</p>
                 <button
                     onClick={() => handleFrequencyChanged("monthly", monthly_payment)}
-                    className={tab === "monthly" ? 'w-[12px] h-[12px] rounded-full bg-[#069046] border-[1.5px] border-[#069046]' : 'w-[12px] h-[12px] rounded-full border-[1.5px] border-black'}
+                    className={tab === "monthly" ? 'w-[12px] h-[12px] rounded-full bg-[#000] border-[1.5px] border-[#000]' : 'w-[12px] h-[12px] rounded-full border-[1.5px] border-black'}
                 />
             </div>
         </div>

@@ -112,7 +112,7 @@ export default function PaymentModal({ isOpen, setIsOpen, paymentAmount, custome
                             activeMethod={paymentMethod}
                             handleClick={selectPaymentMethod} />
                     </div>
-                    <button onClick={() => handlePaymentSelected(paymentMethod)} className=' rounded-md w-[200px] text-[15] bg-[#069046] h-[40px] font-semibold text-white ' >Continue</button>
+                    <button onClick={() => handlePaymentSelected(paymentMethod)} className=' rounded-md w-[200px] text-[15] bg-[#000] h-[40px] font-semibold text-white ' >Continue</button>
                 </ModalBody>
                 <ModalFooter>
                     {/* <Button onClick={()=> setIsOpen(false)}>Close</Button> */}

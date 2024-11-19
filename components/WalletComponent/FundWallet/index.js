@@ -157,7 +157,7 @@ export default function FundWallet({ getAmount }) {
                 {isShown === "Bank Deposit, POS, Bank Transfer" && (
                     <>
 
-                        <div className=' bg-[#06904633] p-[18px] mt-4 text-[15px] font-semibold w-full rounded-[5px] ' >
+                        <div className=' bg-[#00033] p-[18px] mt-4 text-[15px] font-semibold w-full rounded-[5px] ' >
                             <div className=' flex items-center ' >
                                 <p className=' text-[#6C6C6C]  w-32 ' >Bank:</p>
                                 <p>Zenith Bank</p>
@@ -176,7 +176,7 @@ export default function FundWallet({ getAmount }) {
                         <Input type="file" height="40px" paddingTop="5.5px" border="1px solid #D9D9D9" fontSize="sm" />
                     </>
                 )}
-                <button disabled={loading} onClick={() => handleSubmit()} className=' mt-6 rounded-md w-full text-[15px] bg-[#069046] h-[45px] font-bold text-white ' >{loading ? <SpinLoader size="xs" /> : "Submit"}</button>
+                <button disabled={loading} onClick={() => handleSubmit()} className=' mt-6 rounded-md w-full text-[15px] bg-[#000] h-[45px] font-bold text-white ' >{loading ? <SpinLoader size="xs" /> : "Submit"}</button>
             </div>
         </div>
     )

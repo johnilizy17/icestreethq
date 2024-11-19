@@ -1166,7 +1166,7 @@ export default function AddDeliveryAddress({ add, data, edit, getAddress }: prop
 
                     </Select>
                 </div>
-                <button disabled={loading} onClick={() => submit()} className=' w-full h-[45px] rounded-[2px] text-white bg-[#069046] font-Inter-ExtraBold text-sm mt-6 '>
+                <button disabled={loading} onClick={() => submit()} className=' w-full h-[45px] rounded-[2px] text-white bg-[#000] font-Inter-ExtraBold text-sm mt-6 '>
                     {!loading ? "Continue" : "Loading"}
                 </button>
             </div>
