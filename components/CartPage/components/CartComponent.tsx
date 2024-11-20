@@ -392,11 +392,9 @@ export default function CartComponent({ packageInstance }: Props) {
                                                     Google Location
                                                 </Box>
                                                 <GooglePlacesAutocomplete
-                                                    type="city"
-                                                    name="city"
                                                     apiKey="AIzaSyACiXEXHit8rm2r08OS79ztwhZDtEqvGGM"
                                                     selectProps={{
-                                                        value2,
+                                                        value:value2,
                                                         onChange: setValue2
                                                     }}
                                                 />

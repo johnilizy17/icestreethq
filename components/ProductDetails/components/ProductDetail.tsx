@@ -467,8 +467,8 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                                 ))}
                             </Flex>
                             <Flex mt="20px">
-                                {data.color.map((a: string, b) => (
-                                    <Box p="5px" borderRadius="5px"  mr="2px" border={colorScheme === a ?"1px solid lightblue":""}>
+                                {data.color.map((a: string, b:number) => (
+                                    <Box p="5px" key={b} borderRadius="5px"  mr="2px" border={colorScheme === a ?"1px solid lightblue":""}>
                                         <Box
                                             onClick={() => {
                                                 setColorScheme(a)
