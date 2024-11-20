@@ -112,7 +112,7 @@ export function cartInitializer({duration, totalQuantity, totalAmount}: cartInit
 }
 
 export const getTotalQuantity = (products: productType[]): number => {
-    return products.reduce((initialValue, product) => initialValue + product.qty, 0)
+    return products.reduce((initialValue, product) => product.qty, 0)
 }
 
 export const getFrequencyAmount = (type: FrequencyType, cartInfo: CartInfoProps) => { 

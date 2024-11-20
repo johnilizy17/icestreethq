@@ -25,7 +25,8 @@ const useCartInfo = () => {
         getPackage(cartId)
         .then((res) => {
             setCartLoading(false)
-            const totalQuantity = getTotalQuantity(res[0].product_id)
+            console.log(res)
+            const totalQuantity = res[0].product_id.length
            
             setCartInfo({
                 itemsQuantity: totalQuantity

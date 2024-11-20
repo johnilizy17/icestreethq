@@ -88,27 +88,8 @@
 }
 
 .paystack-button {
-  font-weight: bold;
-  font-size: 1.5rem;
-  letter-spacing: 0.05em;
-  position: relative;
-  background: linear-gradient(45deg, #1e88e5, #29b6f6);
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-/* Bar styling */
-.paystack-button::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  background: linear-gradient(45deg, #1e88e5, #29b6f6);
-  transform: translateY(6px);
-  border-radius: 2px;
+ width: 100%;
+ height: 100%;
 }
 .loginShadow {
   box-shadow: 0px 0px 10px 0px #00000040;

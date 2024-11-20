@@ -42,7 +42,7 @@ export default function SingleItem({ title, category, type, createdBy, label, pr
     }, [category]);
 
     const clickHandler = (item: any) => {
-        localStorage.setItem("product", item)
+        localStorage.setItem("product", item._id)
         navigate.push(`/product-details?product=${item.itemName}&price=${cashFormat(item.price)}&id=${item._id}`);
     }
 
@@ -56,7 +56,7 @@ export default function SingleItem({ title, category, type, createdBy, label, pr
                             <Grid mt="30px" templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 10]} w="full">
                                 {data?.map((item: any, index: number) => {
                                     return (
-                                        <Box mb="20px" _hover={{ transform: "scale(1.05)", transition: "0.5s ease-in-out" }} cursor="pointer" onClick={() => clickHandler(item._id)} key={index} onMouseOver={() => setIsHover(index)} onMouseOut={() => setIsHover(-1)} role="button" w={["95%", "220px"]}>
+                                        <Box mb="20px" _hover={{ transform: "scale(1.05)", transition: "0.5s ease-in-out" }} cursor="pointer" onClick={() => clickHandler(item)} key={index} onMouseOver={() => setIsHover(index)} onMouseOut={() => setIsHover(-1)} role="button" w={["95%", "220px"]}>
                                             <Center h={["160px", "250px"]} w="full" borderRadius={["8px", "16px", "24px"]} overflow="hidden">
                                                 <Img h="100%" src={imagePath + "/" + item?.image} objectFit="cover" alt={item?.name} />
                                             </Center>

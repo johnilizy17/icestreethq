@@ -20,12 +20,12 @@ export default function MenuLayout({ children, category, menu, pageName }: Props
 
     const { pathname } = useRouter();
     const [loading, setLoading] = useState(true)
-    const [metaData, setMetaData] = useState({ title: "Ice Street", description: "The best e-commerce site", keyword:"Shop, design, cloth and fashion" })
+    const [metaData, setMetaData] = useState({ title: "Ice Street", description: "The best e-commerce site", keyword: "Shop, design, cloth and fashion" })
 
     async function MenuDetails() {
         setLoading(true)
         const data = await getHeaderDetails()
-        data.map((a:any,b:number) => {
+        data.map((a: any, b: number) => {
             if (pathname === a.page) {
                 setMetaData(a)
             }
@@ -45,11 +45,26 @@ export default function MenuLayout({ children, category, menu, pageName }: Props
                     <Head>
                         <title>{metaData.title}</title>
                         <meta name="description" content={metaData.description} />
-                        <meta name="keywords" content={metaData.keyword}/>
+                        <meta name="keywords" content={metaData.keyword} />
                         <meta name="viewport" content="width=device-width, initial-scale=1" />
                         <meta name="theme-color" content="#0dadf7" />
                         <link rel="icon" href="/favicon.ico" />
-                        {/* <script src= /> */}
+                        <script
+                            dangerouslySetInnerHTML={{
+                                __html: `
+                                    (function(d, w, c) {
+                                    w.BrevoConversationsID = '67122436f531abb4860c36d4';
+                                    w[c] = w[c] || function() {
+                                        (w[c].q = w[c].q || []).push(arguments);
+                                    };
+                                    var s = d.createElement('script');
+                                    s.async = true;
+                                    s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
+                                    if (d.head) d.head.appendChild(s);
+                                    })(document, window, 'BrevoConversations');
+                                `,
+                            }}
+                        ></script>
                     </Head>
                     <div className=' w-full h-[70px] lg:h-[89px] ' >
                         <div className=' fixed bg-white z-[50] top-0 w-full ' >

@@ -39,13 +39,13 @@ export default function PaymentCheckout({ paymentSuccessfull, userDetails, SumTo
 
     const componentProps = {
         ...config,
-        text: 'Pay With Paystack',
+        text: '',
         onSuccess: (reference) => handlePaystackSuccessAction(reference),
         onClose: handlePaystackCloseAction,
     };
 
     return (
-        <Box borderTop={"1px solid gray"} pt="10px" pb="20px">
+        <Box h="60px" borderTop={"1px solid gray"} backgroundRepeat="no-repeat" backgroundPosition="center"  backgroundImage="/images/download.png">
             <PaystackButton className="paystack-button" {...componentProps} />
         </Box>
     );

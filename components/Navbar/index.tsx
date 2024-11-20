@@ -1,7 +1,7 @@
 import { Box, Button, IconButton, Center, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerOverlay, Flex, Image, Img, Menu, MenuButton, MenuItem, MenuList, Text, useDisclosure } from '@chakra-ui/react';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BsFillCartFill } from 'react-icons/bs';
 import { FaSearch } from 'react-icons/fa';
@@ -27,15 +27,14 @@ interface CartBadgeProps {
 
 const CartBadge = ({ loading, value, className }: CartBadgeProps) => {
     // return null if cart is empty
-    if (value <= 0)
-        return null
-
+   useEffect(()=>{
+console.log(loading, "data", value)
+   },[])
+    
     return (
-        <span
-            className={`absolute p-1 -top-2 -right-2 w-5 h-5 flex items-center justify-center text-[11px] font-bold leading-none text-white 
-                transform rounded-full ${className}`}>
+        <Center background="red" position="absolute" top="-8px" right="-8px" borderRadius="20px" w="20px" h="20px" color="#fff">
             {loading ? "..." : value}
-        </span>
+        </Center>
     )
 }
 

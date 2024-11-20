@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, Image, Img, useToast, useDisclosure, Input } from '@chakra-ui/react'
+import { Box, Button, Center, Flex, Image, Img, useToast, useDisclosure, Input, color } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useReducer, useState } from 'react'
 import { createPackage, updatePackage } from '../../../services/UserPackage'
@@ -37,6 +37,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
     const [showForm, setShowForm] = useState(false)
     const [user_id, setUserId] = React.useState<any>("");
     const [userData, setUserData] = React.useState("");
+    const [colorScheme, setColorScheme] = React.useState("Main Color");
     const [productInfo, productInfoDispatch] = useReducer(productInfoReducer, productInitializerArg, productInitializer)
     const [packageId, setPackageId] = useState<string>("")
     const [paymentInfo, setPaymentInfo] = useState<PaymentInfoType>({
@@ -180,6 +181,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                 const packageData = {
                     duration: productInfo.duration,
                     size: size,
+                    color:colorScheme,
                     category: data.category_id,
                     numberOfExpectedPayment: calculateNumberPayment(productInfo.duration, paymentInfo.paymentFrequency),
                     product_id: [
@@ -258,6 +260,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                 const packageData = {
                     duration: productInfo.duration,
                     size: size,
+                    color:colorScheme,
                     category: data.category_id,
                     numberOfExpectedPayment: calculateNumberPayment(productInfo.duration, paymentInfo.paymentFrequency),
                     product_id: [
@@ -295,6 +298,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
             } else {
                 updatePackage({
                     ...packageData,
+                    color:colorScheme,
                     package_id: packageId
                 }).then((res) => {
                     toast({
@@ -444,7 +448,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                                     <path d="M7.3335 12L10.6668 15.3333L17.3335 8.66666" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                                 <Box>
-                                    In Stock
+                                    In Stock <span>{data.stock ? data.stock : 1}</span>
                                 </Box>
                             </Flex>
                             <Flex mt="20px">
@@ -453,13 +457,28 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                                         onClick={() => {
                                             setSize(a)
                                         }}
-                                        colorScheme={size == a ? "green" : 'gray'}
+                                        colorScheme={size == a ? "blackAlpha" : 'gray'}
                                         fontSize={"12px"}
-                                        bg={size == a ? "green" : "#E8E8E8"}
+                                        bg={size == a ? "#000" : "#E8E8E8"}
                                         color={size == a ? "white" : "black"}
                                         key={b} borderRadius="6px" mr="10px" w="34px" h="34px">
                                         {a}
                                     </Button>
+                                ))}
+                            </Flex>
+                            <Flex mt="20px">
+                                {data.color.map((a: string, b) => (
+                                    <Box p="5px" borderRadius="5px"  mr="2px" border={colorScheme === a ?"1px solid lightblue":""}>
+                                        <Box
+                                            onClick={() => {
+                                                setColorScheme(a)
+                                            }}
+                                            bg={a}
+                                            borderRadius="3px"
+                                            key={b} w="28px" h="28px">
+
+                                        </Box>
+                                    </Box>
                                 ))}
                             </Flex>
                             <Box className=' my-3 flex items-center'>

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useReducer, useState } from 'react'
-// import toast from 'react-hot-toast'
+import { country } from "../../Country_Data/country"
 import useUserDetails from '../../../hooks/auth.hook'
 import { getCartById, PurchaseItem } from '../../../services'
 import SpinLoader from '../../Loaders/SpinLoader'
@@ -19,9 +19,10 @@ import { createPaymentPlan, updatePackage2 } from '../../../services/UserPackage
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
-import { Formik } from 'formik'
+import { Field, Formik } from 'formik'
 import PaymentMethod from '../../Payment'
 import { getCurrency } from '../../../services/productService';
+import InternationPayment from './PaymentModal/InternationPayment'
 
 type Props = {
     packageInstance: any
@@ -46,6 +47,7 @@ export default function CartComponent({ packageInstance }: Props) {
     const { userDetails, isLoggedIn } = useUserDetails()
     const [selected, setSelected] = useState(true)
     const [value, setValue] = useState<any>("")
+    const [value2, setValue2] = useState<any>()
     const route = useRouter()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [currency, setCurrency] = useState({ ngn: 0, gbp: 0 })
@@ -108,7 +110,7 @@ export default function CartComponent({ packageInstance }: Props) {
         }
     }, []);
 
-    const CountryChoose = [{ country: "Nigeria", amount: { 1: 5000, 2: 15000 } }, { country: "United State", amount: { 1: 5.99, 2: 6.99 } }, { country: "USA", amount: { 1: 5.99, 2: 6.99 } }, { country: "England", amount: { 1: 5.99, 2: 6.99 } }, { country: "Britain", amount: { 1: 5.99, 2: 6.99 } }, { country: "Denmark", amount: { 1: 5.99, 2: 6.99 } }, { country: "Other", amount: { 1: 15.99, 2: 15.99 } }]
+    const CountryChoose = [{ country: "Nigeria", amount: { 1: 8000, 2: 15000 } }, { country: "United State", amount: { 1: 5.99, 2: 6.99 } }, { country: "USA", amount: { 1: 5.99, 2: 6.99 } }, { country: "England", amount: { 1: 5.99, 2: 6.99 } }, { country: "Britain", amount: { 1: 5.99, 2: 6.99 } }, { country: "Denmark", amount: { 1: 5.99, 2: 6.99 } }, { country: "Other", amount: { 1: 15.99, 2: 15.99 } }]
 
 
     async function CountryAmount() {
@@ -240,14 +242,14 @@ export default function CartComponent({ packageInstance }: Props) {
 
                             <Flex flexDir={["column", "row"]} justifyContent="space-between">
                                 <Box>
-                                    <Box>Standard Fee</Box>
+                                    <Box mb="5px">Standard Shipping</Box>
                                     <Button mb={["20px", "0px"]} onClick={() => { setSelected(true) }} _hover={{ border: "1px solid lightgreen" }} colorScheme='whiteAlpha' color="black" bg="transparent" border="1px solid grey" fontSize={"12px"} justifyContent={"space-between"}>
                                         <Radio mr="5px" isChecked={selected} value='1'></Radio>  <Box w="100px"> 3-5 Working Days</Box>
                                         <Box> </Box>
                                     </Button>
                                 </Box>
                                 <Box>
-                                    <Box>Express Fee</Box>
+                                    <Box mb="5px">Express Shipping</Box>
                                     <Button onClick={() => { setSelected(false) }} _hover={{ border: "1px solid lightgreen" }} colorScheme='whiteAlpha' color="black" bg="transparent" border="1px solid grey" fontSize={"12px"} justifyContent={"space-between"}>
                                         <Radio mr="5px" isChecked={!selected} value='2'></Radio>  <Box w="100px"> 1 Working Day</Box> <Box> </Box>
                                     </Button>
@@ -257,7 +259,11 @@ export default function CartComponent({ packageInstance }: Props) {
                         <Box fontWeight={"700"} mb="10px" textAlign="center">
                             Type of Payment
                         </Box>
-                        {isOpen && <PaymentMethod SumTotalFunction={SumTotal2} userDetails={userDetails} paymentSuccessfull={paymentSuccessfull} />}
+                        {isOpen && shippingAmount.country == "nigeria" ?
+                            <PaymentMethod SumTotalFunction={SumTotal2} userDetails={userDetails} paymentSuccessfull={paymentSuccessfull} />
+                            :
+                            <InternationPayment />
+                        }
                     </ModalBody>
                 </ModalContent>
             </Modal>
@@ -324,15 +330,13 @@ export default function CartComponent({ packageInstance }: Props) {
                                 <Formik
                                     initialValues={{ city: '', country: '', state: "", post: '', address: '' }}
                                     validate={values => {
-                                        let errors: any;
-                                        if (!values.city) {
+                                        let errors: any = {}
+                                        if (!value2) {
                                             errors.city = 'Required';
                                         } else if (!values.country) {
                                             errors.country = 'Required';
                                         } else if (!values.post) {
                                             errors.post = 'Required';
-                                        } else if (!values.state) {
-                                            errors.state = 'Required';
                                         } else if (!values.address) {
                                             errors.address = 'Required';
                                         }
@@ -377,20 +381,24 @@ export default function CartComponent({ packageInstance }: Props) {
                                                 <Box fontWeight="900" mt="20px" mb="10px">
                                                     Country
                                                 </Box>
-                                                <input
+                                                <Field
                                                     type="country"
                                                     name="country"
-                                                    style={{ border: "1px solid #CFCFCF", borderRadius: "7px", height: 50, paddingLeft: 10, paddingRight: 10 }}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    value={values.country}
-                                                />
+                                                    component="select">
+                                                    {country.map((a: any, b: number) => (<option key={b} value={a}>{a}</option>))}
+                                                </Field>
                                                 {errors.country && touched.country && errors.country}
                                                 <Box fontWeight="900" mt="20px" mb="10px">
-                                                    City
+                                                    Google Location
                                                 </Box>
                                                 <GooglePlacesAutocomplete
-                                                   
+                                                    type="city"
+                                                    name="city"
+                                                    apiKey="AIzaSyACiXEXHit8rm2r08OS79ztwhZDtEqvGGM"
+                                                    selectProps={{
+                                                        value2,
+                                                        onChange: setValue2
+                                                    }}
                                                 />
                                                 {errors.city && touched.city && errors.city}
                                                 <Box fontWeight="900" mt="20px" mb="10px">
@@ -418,7 +426,7 @@ export default function CartComponent({ packageInstance }: Props) {
                                                 />
                                                 {errors.post && touched.post && errors.post}
                                                 <Button
-                                                    isLoading={isSubmitting || loading} isDisabled={isSubmitting} mt="20px" h="50px" bg="#000" color="#fff" type="submit" disabled={isSubmitting}>
+                                                    isLoading={isSubmitting || loading} isDisabled={isSubmitting} mt="20px" h="50px" bg="#000" color="#fff" type="submit">
                                                     Submit
                                                 </Button>
                                             </Flex>
