@@ -2,13 +2,13 @@ import Head from 'next/head'
 import MenuLayout from '../../components/MenuLayout'
 import React, { useEffect, useState } from 'react'
 import toast from "react-hot-toast";
-import { Box, Button, Center, Flex, Grid, Img, Input, Spinner } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Img, Input, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';
 import { COLORS } from '../../services/theme/colors';
 import ProductDisplay from '../../components/homepagecomponents/Electronics/ProductDisplay';
 import Lottie from 'react-lottie';
 import Empty from '../../assets/lottie/empty.json'
-import { getCollections, getGender, getSearchResult } from '../../services/productService';
+import { getCollection, getCollections, getGender, getSearchResult } from '../../services/productService';
 import { useRouter } from 'next/router';
 import SelectionButton from '../../components/homepagecomponents/CategoryMenu/selectionButton';
 
@@ -19,7 +19,7 @@ export default function Men() {
     const [brandstyle, setBrandStyle] = useState("1")
     const [loading, setLoading] = useState(false)
     const { query } = useRouter()
-    const [select, setSelect] = useState({ title: "", _id: "1" })
+    const [select, setSelect] = useState({ title: "", _id: "123" })
     const [category, setCategory] = useState([])
     const defaultOptions = {
         loop: true,
@@ -32,16 +32,14 @@ export default function Men() {
 
     async function SearchProduct() {
         setLoading(true);
-        const brandArray = await getGender(2, select._id)
-        const brands = await getCollections(value)
-        setCategory(brands)
+        const brandArray = await getCollection(query.collectionID)
         setData(brandArray)
         setLoading(false)
     }
 
     useEffect(() => {
         SearchProduct()
-    }, [select._id])
+    }, [query.collectionID])
 
     return (
         <>
@@ -55,24 +53,22 @@ export default function Men() {
             <main>
                 <Box bg={COLORS.white}>
                     <MenuLayout menu={false} category={false}>
-                        <Box overflow="hidden" mt={["20px", "20px", "20px", "30px"]} pos="relative">
-                            <Img src="/banner/woman.png" />
+                        <Box onClick={() => SearchProduct()} overflow="hidden" mt={["20px", "20px", "20px", "30px"]} pos="relative">
+                            <Img src="/banner/collection.png" />
                             <Center flexDir="column" w="full" textAlign={"center"} fontWeight="700" color="#fff" pos="absolute" top="0px" h="full" bg="#000000b5" fontSize={["24px", "32px", "47px", "57px"]} >
                                 <Box>
                                     Shop
                                 </Box>
                                 <Box>
-                                    Women’s Collection
+                                    All Collections
                                 </Box>
                             </Center>
                         </Box>
                         <Center h={["100px", "100px", "100px", "197px"]} fontWeight="700" fontSize={["24px", "27px", "47px", "57px"]}>
                             Stay Classy, Stay Trendy
                         </Center>
-                        <Flex p={["20px", "20px", "20px", "30px"]} overflow={"scroll"} >
-                        {category.map((a: any, index: any) => (<SelectionButton key={index} title={a} select={select} setSelect={setSelect} />))}
-                        </Flex>
-                        <Center bg="rgba(217, 217, 217, 0.2)" pt="20px" pb="20px">
+                       
+                        <Flex p={["20px", "20px", "20px", "30px"]} justifyContent={["space-between", "space-between", "space-between", "flex-start"]} flexWrap="wrap">
                             {loading ?
                                 <Center h="300px" w="full">
                                     <Spinner size="xl" />
@@ -87,17 +83,14 @@ export default function Men() {
                                         </Box>
                                     </Center>
                                     :
-                                    <Grid templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 10]}>
-                                        {data?.map((item: any, index: number) => {
-                                            return (
-                                                <Box key={index} mb="20px">
-                                                    <ProductDisplay item={item} index={index} />
-                                                </Box>
-                                            )
-                                        })}
-                                    </Grid>
-                            }
-                        </Center>
+                                    data?.map((item: any, index: number) => {
+                                        return (
+                                            <ProductDisplay key={index} item={item} index={index} />
+                                        )
+                                    })
+                                    
+                                    }
+                        </Flex>
                     </MenuLayout>
                 </Box>
             </main>

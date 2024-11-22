@@ -30,7 +30,9 @@ const CartBadge = ({ loading, value, className }: CartBadgeProps) => {
     useEffect(() => {
         console.log(loading, "data", value)
     }, [])
-
+    if (value <= 0)
+        return null
+    
     return (
         <Center background="red" position="absolute" top="-8px" right="-8px" borderRadius="20px" w="20px" h="20px" color="#fff">
             {loading ? "..." : value}

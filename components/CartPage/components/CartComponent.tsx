@@ -240,7 +240,7 @@ export default function CartComponent({ packageInstance }: Props) {
                                     }</Box>
                             </Center>
 
-                            <Flex flexDir={["column", "row"]} justifyContent="space-between">
+                            <Flex flexDir={"row"} justifyContent="space-between">
                                 <Box>
                                     <Box mb="5px">Standard Shipping</Box>
                                     <Button mb={["20px", "0px"]} onClick={() => { setSelected(true) }} _hover={{ border: "1px solid lightgreen" }} colorScheme='whiteAlpha' color="black" bg="transparent" border="1px solid grey" fontSize={"12px"} justifyContent={"space-between"}>
@@ -256,10 +256,10 @@ export default function CartComponent({ packageInstance }: Props) {
                                 </Box>
                             </Flex>
                         </Box>
-                        <Box fontWeight={"700"} mb="10px" textAlign="center">
-                            Type of Payment
+                        <Box fontWeight={"700"} mb="10px" textAlign="left">
+                            Payment with
                         </Box>
-                        {isOpen && shippingAmount.country == "nigeria" ?
+                        {isOpen && shippingAmount.country == "Nigeria" ?
                             <PaymentMethod SumTotalFunction={SumTotal2} userDetails={userDetails} paymentSuccessfull={paymentSuccessfull} />
                             :
                             <InternationPayment />
@@ -394,7 +394,7 @@ export default function CartComponent({ packageInstance }: Props) {
                                                 <GooglePlacesAutocomplete
                                                     apiKey="AIzaSyACiXEXHit8rm2r08OS79ztwhZDtEqvGGM"
                                                     selectProps={{
-                                                        value:value2,
+                                                        value: value2,
                                                         onChange: setValue2
                                                     }}
                                                 />

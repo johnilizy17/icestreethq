@@ -2,7 +2,7 @@ import Head from 'next/head'
 import MenuLayout from '../../components/MenuLayout'
 import React, { useEffect, useState } from 'react'
 import toast from "react-hot-toast";
-import { Box, Button, Center, Flex, Img, Input, Spinner } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Grid, Img, Input, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';
 import { COLORS } from '../../services/theme/colors';
 import ProductDisplay from '../../components/homepagecomponents/Electronics/ProductDisplay';
@@ -55,7 +55,7 @@ export default function Men() {
             <main>
                 <Box bg={COLORS.white}>
                     <MenuLayout menu={false} category={false}>
-                        <Box onClick={()=>SearchProduct()} overflow="hidden" mt={["20px", "20px", "20px", "30px"]} pos="relative">
+                        <Box onClick={() => SearchProduct()} overflow="hidden" mt={["20px", "20px", "20px", "30px"]} pos="relative">
                             <Img src="/banner/men.png" />
                             <Center flexDir="column" w="full" textAlign={"center"} fontWeight="700" color="#fff" pos="absolute" top="0px" h="full" bg="#000000b5" fontSize={["24px", "32px", "47px", "57px"]} >
                                 <Box>
@@ -69,34 +69,37 @@ export default function Men() {
                         <Center h={["100px", "100px", "100px", "197px"]} fontWeight="700" fontSize={["24px", "27px", "47px", "57px"]}>
                             Stay Classy, Stay Trendy
                         </Center>
-                        <Center p={["20px", "20px", "20px", "30px"]} flexWrap="wrap" >
+                        <Flex p={["20px", "20px", "20px", "30px"]} overflow={"scroll"} >
                             {category.map((a: any, index: any) => (<SelectionButton key={index} title={a} select={select} setSelect={setSelect} />))}
-                        </Center>
-                        <Center bg="rgba(217, 217, 217, 0.2)" pt="20px" pb="20px">
-                            <Flex justifyContent={["space-between","space-between","space-between","flex-start"]} flexWrap="wrap">
-                                {loading ?
-                                    <Center h="300px" w="full">
-                                        <Spinner size="xl" />
-                                    </Center> :
-                                    data.length < 1 ?
-                                        <Center flexDir="column" p="20px" w="full">
-                                            <Lottie options={defaultOptions}
-                                                height={300}
-                                                width={300} />
-                                            <Box fontWeight="700" mt="10px" fontSize="24px">
-                                                No Result
-                                            </Box>
-                                        </Center>
-                                        :
-                                        data?.map((item: any, index: number) => {
-                                            return (
-                                                <Box key={index} mb="20px">
-                                                    <ProductDisplay item={item} index={index} />
-                                                </Box>
-                                            )
-                                        })}
-                            </Flex>
-                        </Center>
+                        </Flex>
+                        <Flex justifyContent={["space-between", "space-between", "space-between", "flex-start"]} flexWrap="wrap">
+                            {loading ?
+                                <Center h="300px" w="full">
+                                    <Spinner size="xl" />
+                                </Center> :
+                                data.length < 1 ?
+                                    <Center flexDir="column" p="20px" w="full">
+                                        <Lottie options={defaultOptions}
+                                            height={300}
+                                            width={300} />
+                                        <Box fontWeight="700" mt="10px" fontSize="24px">
+                                            No Result
+                                        </Box>
+                                    </Center>
+                                    :
+                                    <Grid mt="30px" templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 10]} w="full">
+                                        {
+                                            data?.map((item: any, index: number) => {
+                                                return (
+                                                    <Box key={index} mb="20px">
+                                                        <ProductDisplay item={item} index={index} />
+                                                    </Box>
+                                                )
+                                            })
+                                        }
+                                    </Grid>
+                            }
+                        </Flex>
                     </MenuLayout>
                 </Box>
             </main>

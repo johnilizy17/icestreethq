@@ -69,9 +69,9 @@ export default function Men() {
                         <Center h={["100px", "100px", "100px", "197px"]} fontWeight="700" fontSize={["24px", "27px", "47px", "57px"]}>
                             Stay Classy, Stay Trendy
                         </Center>
-                        <Center p={["20px", "20px", "20px", "30px"]} flexWrap="wrap" >
-                            {category.map((a: any, index: any) => (<SelectionButton key={index} title={a} select={select} setSelect={setSelect} />))}
-                        </Center>
+                        <Flex p={["20px", "20px", "20px", "30px"]} overflow={"scroll"} >
+                        {category.map((a: any, index: any) => (<SelectionButton key={index} title={a} select={select} setSelect={setSelect} />))}
+                        </Flex>
                         <Center bg="rgba(217, 217, 217, 0.2)" pt="20px" pb="20px">
                             {loading ?
                                 <Center h="300px" w="full">

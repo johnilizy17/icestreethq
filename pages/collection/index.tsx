@@ -2,7 +2,7 @@ import Head from 'next/head'
 import MenuLayout from '../../components/MenuLayout'
 import React, { useEffect, useState } from 'react'
 import toast from "react-hot-toast";
-import { Box, Button, Center, Flex, Img, Input, Spinner } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Grid, Img, Input, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';
 import { COLORS } from '../../services/theme/colors';
 import ProductDisplay from '../../components/homepagecomponents/Electronics/ProductDisplay';
@@ -11,6 +11,7 @@ import Empty from '../../assets/lottie/empty.json'
 import { getCollection, getCollections, getGender, getSearchResult } from '../../services/productService';
 import { useRouter } from 'next/router';
 import SelectionButton from '../../components/homepagecomponents/CategoryMenu/selectionButton';
+import { imagePath } from '../../services/Variable';
 
 export default function Men() {
 
@@ -19,6 +20,7 @@ export default function Men() {
     const [brandstyle, setBrandStyle] = useState("1")
     const [loading, setLoading] = useState(false)
     const { query } = useRouter()
+    const router = useRouter()
     const [select, setSelect] = useState({ title: "", _id: "123" })
     const [category, setCategory] = useState([])
     const defaultOptions = {
@@ -32,10 +34,8 @@ export default function Men() {
 
     async function SearchProduct() {
         setLoading(true);
-        const brandArray = await getCollection(select._id)
         const brands = await getCollections(value)
         setCategory(brands)
-        setData(brandArray)
         setLoading(false)
     }
 
@@ -69,34 +69,32 @@ export default function Men() {
                         <Center h={["100px", "100px", "100px", "197px"]} fontWeight="700" fontSize={["24px", "27px", "47px", "57px"]}>
                             Stay Classy, Stay Trendy
                         </Center>
-                        <Center>
-                            <Flex p={["20px", "20px", "20px", "30px"]} overflow={"scroll"} >
-                                {category.map((a: any, index: any) => (<SelectionButton key={index} title={a} select={select} setSelect={setSelect} />))}
-                            </Flex>
-                        </Center>
-                        <Flex p={["20px", "20px", "20px", "30px"]} justifyContent={["space-between", "space-between", "space-between", "flex-start"]} flexWrap="wrap">
-                            {loading ?
-                                <Center h="300px" w="full">
-                                    <Spinner size="xl" />
-                                </Center> :
-                                data.length < 1 ?
-                                    <Center flexDir="column" p="20px" w="full">
-                                        <Lottie options={defaultOptions}
-                                            height={300}
-                                            width={300} />
-                                        <Box fontWeight="700" mt="10px" fontSize="24px">
-                                            No Result
+                        {loading ?
+                            <Center h="300px" w="full">
+                                <Spinner size="xl" />
+                            </Center> :
+                            <Box p={["20px", "20px", "20px", "30px"]}>
+                                <Flex flexWrap="wrap" justifyContent="space-between">
+                                    {category.map((a: any, index: any) => (
+                                        <Box mb="10px" w={["full", "47%", "47%"]} pos="relative" overflow="hidden" cursor="pointer" borderRadius={["8px", "16px", "24px"]} h="320px" key={index}>
+                                            <Img h={["100%","100%","150%"]} src={a.image ? imagePath + "/" + a.image : "/banner/collectionBanner.png"} />
+                                            <Button
+                                                onClick={() => {
+                                                    router.push(`/collection/${a._id}`)
+                                                }}
+                                                borderRadius={["8px", "16px", "24px"]}
+                                                pos="absolute" bottom="20px" left="20px" fontSize="20px" h="53px">
+                                                {a.title}
+                                                <svg style={{ marginLeft: 10 }} width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12.6667 1.66675L1 13.3334" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M2.16666 1.66675H12.6667V12.1667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </Button>
                                         </Box>
-                                    </Center>
-                                    :
-                                    data?.map((item: any, index: number) => {
-                                        return (
-                                            <ProductDisplay key={index} item={item} index={index} />
-                                        )
-                                    })
-                                    
-                                    }
-                        </Flex>
+                                    ))}
+                                </Flex>
+                            </Box>
+                        }
                     </MenuLayout>
                 </Box>
             </main>
