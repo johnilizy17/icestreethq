@@ -24,9 +24,9 @@ export const cashFormat = (x, numb) => {
 
 export const cashFormat2 = (x, item) => {
   let icon = "$"
-  if (item == "England" || item == "Britain") {
+  if (item == "GBP") {
     icon = "￡"
-  } else if (item == "Nigeria") {
+  } else if (item == "NGN") {
     icon = "₦"
   } else {
     icon = "$"

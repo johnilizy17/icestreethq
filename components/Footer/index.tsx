@@ -104,7 +104,7 @@ export default function Footer() {
                     <Box>
                         {
                             stateProduct.map((c: { title: string, _id: string }, d: number) => (
-                                <Link key={d} href={`brand/${c._id}`}>
+                                <Link key={d} href={`/brand/${c._id}`}>
                                     <Box display={d > 5 ? "none" : "flex"} fontFamily="Inter-Regular" fontWeight="400" mb="6px" color={COLORS.white}>
                                         {c.title}
                                     </Box>
@@ -123,7 +123,7 @@ export default function Footer() {
                     <Box>
                         {
                             stateData.map((c: { title: string, _id: string }, d) => (
-                                <Link key={d} href={`collection/${c._id}`}>
+                                <Link key={d} href={`/collection/${c._id}`}>
                                     <Box display={d > 5 ? "none" : "flex"} fontFamily="Inter-Regular" fontWeight="400" mb="6px" color={COLORS.white}>
                                         {c.title}
                                     </Box>

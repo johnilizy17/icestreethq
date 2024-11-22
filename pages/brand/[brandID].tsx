@@ -8,18 +8,19 @@ import { COLORS } from '../../services/theme/colors';
 import ProductDisplay from '../../components/homepagecomponents/Electronics/ProductDisplay';
 import Lottie from 'react-lottie';
 import Empty from '../../assets/lottie/empty.json'
-import { getCollection, getCollections, getGender, getSearchResult } from '../../services/productService';
+import { getCollections, getGender, getSearchResult } from '../../services/productService';
 import { useRouter } from 'next/router';
 import SelectionButton from '../../components/homepagecomponents/CategoryMenu/selectionButton';
+import { getBrand, getBrandProduct } from '../../services/userCategories';
 
-export default function Men() {
+export default function Brand() {
 
     const [data, setData] = useState([]);
     const [value, setValue] = useState(3)
-    const [brandstyle, setBrandStyle] = useState("1")
+    const [brandstyle, setBrandStyle] = useState("")
     const [loading, setLoading] = useState(false)
     const { query } = useRouter()
-    const [select, setSelect] = useState({ title: "", _id: "123" })
+    const [select, setSelect] = useState({ title: "", _id: "" })
     const [category, setCategory] = useState([])
     const defaultOptions = {
         loop: true,
@@ -32,14 +33,18 @@ export default function Men() {
 
     async function SearchProduct() {
         setLoading(true);
-        const brandArray = await getCollection(query.collectionID)
-        setData(brandArray)
+        const productId = query.brandID
+        if (productId) {
+            const brandArray = await getBrandProduct(productId)
+            console.log(brandArray, "brandArray")
+            setData(brandArray)
+        }
         setLoading(false)
     }
 
     useEffect(() => {
         SearchProduct()
-    }, [query.collectionID])
+    }, [query.brandID])
 
     return (
         <>
@@ -53,21 +58,17 @@ export default function Men() {
             <main>
                 <Box bg={COLORS.white}>
                     <MenuLayout menu={false} category={false}>
-                        <Box onClick={() => SearchProduct()} overflow="hidden" mt={["20px", "20px", "20px", "30px"]} pos="relative">
-                            <Img src="/banner/collection.png" />
+                        <Box overflow="hidden" mt={["20px", "20px", "20px", "30px"]} pos="relative">
+                            <Img alt="banner" src="/banner/men.png" />
                             <Center flexDir="column" w="full" textAlign={"center"} fontWeight="700" color="#fff" pos="absolute" top="0px" h="full" bg="#000000b5" fontSize={["24px", "32px", "47px", "57px"]} >
                                 <Box>
                                     Shop
                                 </Box>
                                 <Box>
-                                    All Collections
+                                    Men’s Collection
                                 </Box>
                             </Center>
                         </Box>
-                        <Center h={["100px", "100px", "100px", "197px"]} fontWeight="700" fontSize={["24px", "27px", "47px", "57px"]}>
-                            Stay Classy, Stay Trendy
-                        </Center>
-
                         {loading ?
                             <Center h="300px" w="full">
                                 <Spinner size="xl" />
@@ -82,13 +83,14 @@ export default function Men() {
                                     </Box>
                                 </Center>
                                 :
-                                <Grid bg="whitesmoke" p={["20px", "20px", "20px", "30px"]} templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 10]}>
-                                    {
-                                        data?.map((item: any, index: number) => {
-                                            return (
-                                                <ProductDisplay key={index} item={item} index={index} />
-                                            )
-                                        })
+                                <Grid bg="whitesmoke" p={["20px","20px","20px","30px"]} templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 10]}>
+                                    {data?.map((item: any, index: number) => {
+                                        return (
+                                            <Box key={index} mb="20px">
+                                                <ProductDisplay item={item} index={index} />
+                                            </Box>
+                                        )
+                                    })
                                     }
                                 </Grid>
                         }

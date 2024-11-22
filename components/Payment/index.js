@@ -1,5 +1,5 @@
 import { Box, Center, Flex, Img, Radio, useToast } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PaystackButton } from 'react-paystack';
 
 export default function PaymentCheckout({ paymentSuccessfull, userDetails, SumTotalFunction }) {
@@ -14,13 +14,13 @@ export default function PaymentCheckout({ paymentSuccessfull, userDetails, SumTo
             status: "success",
             isClosable: true,
         })
-        paymentSuccessfull()
+        paymentSuccessfull(reference)
     };
 
     // Config setting
     const config = {
         reference: (new Date()).getTime().toString(),
-        email: userDetails && userDetails?.user ? userDetails?.user.email : "johnabrahamtosin@gmail.com",
+        email: userDetails && userDetails?.user ? userDetails?.user.email :  userDetails?.user.email,
         amount: SumTotalFunction, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
         publicKey: 'pk_test_05010684d9dbcd82b2b931fa886f9b01904e5d78',
     };
@@ -46,15 +46,13 @@ export default function PaymentCheckout({ paymentSuccessfull, userDetails, SumTo
 
     return (
         <Box pos="relative">
-            <Center cursor="pointer" p="10px" justifyContent="space-between" bg="whitesmoke" borderRadius={"14px"}>
+            <Center cursor="pointer" p="10px" bg="whitesmoke" borderRadius={"14px"}>
                 <Center>
                     <Img h="40px" src="/images/download.png" />
                     <Box fontWeight="800">
                         Pay Stack
                     </Box>
                 </Center>
-
-                <Radio colorScheme='black' isChecked={false} value='2'></Radio>
             </Center>
             <PaystackButton className="paystack-button" {...componentProps} />
         </Box>

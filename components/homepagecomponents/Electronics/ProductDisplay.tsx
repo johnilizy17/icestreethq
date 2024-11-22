@@ -44,7 +44,7 @@ export default function ProductDisplay({ item, index }: { item: { image: string,
                 onClick={() => {
                     IconProduct()
                 }}
-                zIndex={20} pos="absolute" bg="#fff" w="40px" h="40px" pt="10px" overflow="hidden" borderRadius="50px" right={["24px", "50px"]} top={["12px", "25px"]}>
+                zIndex={20} pos="absolute" bg="#fff" w="40px" h="40px" pt="10px" overflow="hidden" borderRadius="50px" right={["24px", "30px"]} top={["12px", "20px"]}>
                 <Rating
                     emptyIcon={<MdFavoriteBorder size={30} />}
                     initialValue={value}

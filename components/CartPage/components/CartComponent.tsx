@@ -7,7 +7,7 @@ import SpinLoader from '../../Loaders/SpinLoader'
 import MonthlySelector from '../../MontlySelector'
 import PaymentFrequency from '../../PaymentFrequency'
 import ProductItem from '../../ProductItem'
-import { cashFormat, cashFormat2 } from '../../utils/cashFormat'
+import { cashFormat, cashFormat2, cashFormat3 } from '../../utils/cashFormat'
 import { convertToNumber, getSingularOrPlural } from '../../utils/index.util'
 import { calculateTotalAmount } from '../../utils/productDetails.utils'
 import CartHeader from './CartHeader'
@@ -47,7 +47,7 @@ export default function CartComponent({ packageInstance }: Props) {
     const { userDetails, isLoggedIn } = useUserDetails()
     const [selected, setSelected] = useState(true)
     const [value, setValue] = useState<any>("")
-    const [value2, setValue2] = useState<any>()
+    const [value2, setValue2] = useState<any>("")
     const route = useRouter()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [currency, setCurrency] = useState({ ngn: 0, gbp: 0 })
@@ -110,7 +110,7 @@ export default function CartComponent({ packageInstance }: Props) {
         }
     }, []);
 
-    const CountryChoose = [{ country: "Nigeria", amount: { 1: 8000, 2: 15000 } }, { country: "United State", amount: { 1: 5.99, 2: 6.99 } }, { country: "USA", amount: { 1: 5.99, 2: 6.99 } }, { country: "England", amount: { 1: 5.99, 2: 6.99 } }, { country: "Britain", amount: { 1: 5.99, 2: 6.99 } }, { country: "Denmark", amount: { 1: 5.99, 2: 6.99 } }, { country: "Other", amount: { 1: 15.99, 2: 15.99 } }]
+    const CountryChoose = [{ country: "NGN", amount: { 1: 8000, 2: 15000 } }, { country: "USA", amount: { 1: 5.99, 2: 6.99 } }, { country: "USA", amount: { 1: 5.99, 2: 6.99 } }, { country: "GBP", amount: { 1: 5.99, 2: 6.99 } }, { country: "Britain", amount: { 1: 5.99, 2: 6.99 } }, { country: "Denmark", amount: { 1: 5.99, 2: 6.99 } }, { country: "Other", amount: { 1: 15.99, 2: 15.99 } }]
 
 
     async function CountryAmount() {
@@ -123,20 +123,17 @@ export default function CartComponent({ packageInstance }: Props) {
 
         }
     }
-    const paymentSuccessfull = async (id: string) => {
+    const paymentSuccessfull = async (id: any) => {
         try {
             setLoading(true)
             onClose()
             const package_id = localStorage.getItem("default_package")
             let shipping
-            if (shippingAmount.amount[1] > 19) {
-                const amount = selected ? shippingAmount.amount[1] : shippingAmount.amount[2]
-                shipping = amount / currency.gbp
-            } else {
-                const amount = selected ? shippingAmount.amount[1] : shippingAmount.amount[2]
-                shipping = amount / currency.ngn
-            }
-            const response = await PurchaseItem({ ...data, payment: id, total: SumTotal3, shipping: shippingPayment, product_id: products, package_id: package_id });
+            const amount = selected ? shippingAmount.amount[1] : shippingAmount.amount[2]
+            shipping = amount
+            const sumCash = cashFormat3(SumTotal3)
+            const shipFee = cashFormat3(shippingPayment)
+            const response = await PurchaseItem({ ...data, payment: id.reference, total: sumCash, shipping: shipFee, product_id: products, package_id: package_id });
             localStorage.removeItem("default_package")
             route.push({ pathname: "/successful_payment", query: { ...data, payment: id, total: SumTotal3, shipping: shippingPayment, product_id: products, package_id: package_id } })
             toast({
@@ -145,7 +142,7 @@ export default function CartComponent({ packageInstance }: Props) {
                 position: "top-right",
                 status: "success"
             })
-            // setLoading(false)
+            setLoading(false)
         } catch (err) {
             toast({
                 title: "Cart",
@@ -166,12 +163,9 @@ export default function CartComponent({ packageInstance }: Props) {
                 return (a.item.price - (a.item.price * a.item.discount) / 100) * a.qty
             })
             const total = reformat.reduce((a: any, b: number) => a + b, 0)
-            let shipping
-            if (data.country.toLowerCase() === "nigeria" || data.country.toLowerCase() === "England" || data.country.toLowerCase() === "Britain") {
-                shipping = selected ? shippingAmount.amount[1] : shippingAmount.amount[2]
-            } else {
-                shipping = selected ? shippingAmount.amount[1] * currency.gbp : shippingAmount.amount[2] * currency.gbp
-            }
+
+            const shipping = selected ? shippingAmount.amount[1] : shippingAmount.amount[2]
+
             setSumTotal2(Math.floor(100 * (shipping + (total * JSON.parse(amountNumber)))))
             setSumTotal3(total * JSON.parse(amountNumber))
             setShippingPayment(shipping)
@@ -183,10 +177,11 @@ export default function CartComponent({ packageInstance }: Props) {
 
     function shippingFee() {
         const result: any = CountryChoose.filter((a: any, b: number) => {
-            if (a.country.toLowerCase() === data.country.toLowerCase()) {
+            if (a.country === localStorage.getItem("currency")) {
                 return a
             }
         })
+        console.log(result, "result")
         if (result.length === 1) {
             setShippingAmount(result[0])
         } else {
@@ -237,7 +232,8 @@ export default function CartComponent({ packageInstance }: Props) {
                                 Shipping Amount:<Box ml="5px" fontSize="14px" color="green.300">
                                     {
                                         selected ? cashFormat2(shippingAmount.amount[1], shippingAmount.country) : cashFormat2(shippingAmount.amount[2], shippingAmount.country)
-                                    }</Box>
+                                    }
+                                </Box>
                             </Center>
 
                             <Flex flexDir={"row"} justifyContent="space-between">
@@ -259,7 +255,7 @@ export default function CartComponent({ packageInstance }: Props) {
                         <Box fontWeight={"700"} mb="10px" textAlign="left">
                             Payment with
                         </Box>
-                        {isOpen && shippingAmount.country == "Nigeria" ?
+                        {isOpen && localStorage.getItem("currency") === "NGN" ?
                             <PaymentMethod SumTotalFunction={SumTotal2} userDetails={userDetails} paymentSuccessfull={paymentSuccessfull} />
                             :
                             <InternationPayment />
