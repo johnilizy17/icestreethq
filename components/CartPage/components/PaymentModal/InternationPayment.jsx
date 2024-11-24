@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { paypal } from '../../../../services/Variable';
 
-export default function InternationPayment({ paymentSuccessfull, userDetails, SumTotalFunction }: any) {
+export default function InternationPayment({ paymentSuccessfull, userDetails, SumTotalFunction }) {
 
     const [initialOptions, setInitialOptions] = useState({
         clientId: "test",
@@ -39,8 +39,8 @@ export default function InternationPayment({ paymentSuccessfull, userDetails, Su
                             ],
                         });
                     }}
-                    onApprove={(data: any, actions: any) => {
-                        return actions.order.capture().then((details:any) => {
+                    onApprove={(data, actions) => {
+                        return actions.order.capture().then((details) => {
                             alert(`Transaction completed by ${details.payer.name.given_name}`);
                         });
                     }}
