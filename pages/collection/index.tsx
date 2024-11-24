@@ -74,17 +74,20 @@ export default function Men() {
                                 <Spinner size="xl" />
                             </Center> :
                             <Box p={["20px", "20px", "20px", "30px"]}>
-                                <Flex flexWrap="wrap" justifyContent="space-between">
+                                <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={[4, 2, 3, 10]}>
                                     {category.map((a: any, index: any) => (
-                                        <Box mb="10px" w={["full", "47%", "47%"]} pos="relative" overflow="hidden" cursor="pointer" borderRadius={["8px", "16px", "24px"]} h="320px" key={index}>
-                                            <Img h={["100%","100%","150%"]} src={a.image ? imagePath + "/" + a.image : "/banner/collectionBanner.png"} />
+                                        <Box mb="10px" w={["full", "100%", "100%"]} pos="relative" overflow="hidden" cursor="pointer" borderRadius={["8px", "16px", "24px"]} h="320px" key={index}>
+                                            <Img h={["100%", "100%", "150%"]} src={a.image ? imagePath + "/" + a.image : "/banner/collectionBanner.png"} />
+                                            <Center w="100%" h="100%" fontWeight="900" pos="absolute" background="#00000096" color="#fff" top="0px" justifyContent="start" pl="20px" fontSize="24px">
+                                                {a.title}
+                                            </Center>
                                             <Button
                                                 onClick={() => {
                                                     router.push(`/collection/${a._id}`)
                                                 }}
                                                 borderRadius={["8px", "16px", "24px"]}
                                                 pos="absolute" bottom="20px" left="20px" fontSize="20px" h="53px">
-                                                {a.title}
+                                                Browse
                                                 <svg style={{ marginLeft: 10 }} width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M12.6667 1.66675L1 13.3334" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M2.16666 1.66675H12.6667V12.1667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -92,7 +95,7 @@ export default function Men() {
                                             </Button>
                                         </Box>
                                     ))}
-                                </Flex>
+                                </Grid>
                             </Box>
                         }
                     </MenuLayout>
