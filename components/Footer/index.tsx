@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { COLORS } from "../../services/theme/colors";
 import Link from 'next/link';
 import { getBrand, getCategories } from '../../services/userCategories';
-import { getCollectionBrand } from '../../services/productService';
+import { getCollectionBrand, getCollections } from '../../services/productService';
 
 export default function Footer() {
 
@@ -48,8 +48,8 @@ export default function Footer() {
 
         const type = await getBrand()
         setStateProduct(type.category)
-        const collection = await getCategories()
-        setStateData(collection.category)
+        const collection = await getCollections(3)
+        setStateData(collection)
     }
 
     useEffect(() => {
