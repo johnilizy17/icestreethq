@@ -47,7 +47,7 @@ export default function CartComponent({ packageInstance }: Props) {
     const { userDetails, isLoggedIn } = useUserDetails()
     const [selected, setSelected] = useState(true)
     const [value, setValue] = useState<any>("")
-    const [value2, setValue2] = useState<any>("")
+    const [value2, setValue2] = useState<any>({city:"", country:"", address:""})
     const route = useRouter()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [currency, setCurrency] = useState({ ngn: 0, gbp: 0 })
@@ -219,6 +219,32 @@ export default function CartComponent({ packageInstance }: Props) {
     }, [products.length])
 
 
+    const handlePlaceSelected = async (place: any) => {
+        if (place && place.value && place.value.place_id) {
+            const service = new window.google.maps.places.PlacesService(document.createElement('div'));
+
+            service.getDetails({ placeId: place.value.place_id }, (details: any, status) => {
+                if (status === window.google.maps.places.PlacesServiceStatus.OK && details) {
+                    // Extract the state (administrative area level 1)
+                    const stateComponent = details.address_components.find((component: any) =>
+                        component.types.includes('administrative_area_level_1')
+                    );
+                    const countryComponent = details.address_components.find((component: any) =>
+                        component.types.includes('country')
+                    );
+
+                    if (stateComponent) {
+                        setValue2({ city: stateComponent.long_name, country: countryComponent.long_name, account:details.formatted_address }); // or `short_name` for abbreviations
+                    } else {
+                        console.error('State information not found');
+                    }
+                } else {
+                    console.error('Failed to fetch place details', status);
+                }
+            });
+        }
+    };
+
     return (
         <>
             <Modal isCentered isOpen={isOpen} onClose={onClose}>
@@ -258,7 +284,7 @@ export default function CartComponent({ packageInstance }: Props) {
                         {isOpen && localStorage.getItem("currency") === "NGN" ?
                             <PaymentMethod SumTotalFunction={SumTotal2} userDetails={userDetails} paymentSuccessfull={paymentSuccessfull} />
                             :
-                            <InternationPayment />
+                            <InternationPayment SumTotalFunction={SumTotal2} userDetails={userDetails} paymentSuccessfull={paymentSuccessfull}/>
                         }
                     </ModalBody>
                 </ModalContent>
@@ -327,9 +353,9 @@ export default function CartComponent({ packageInstance }: Props) {
                                     initialValues={{ city: '', country: '', state: "", post: '', address: '' }}
                                     validate={values => {
                                         let errors: any = {}
-                                        if (!value2) {
+                                        if (!value2.city) {
                                             errors.city = 'Required';
-                                        } else if (!values.country) {
+                                        } else if (!value2.country) {
                                             errors.country = 'Required';
                                         } else if (!values.post) {
                                             errors.post = 'Required';
@@ -374,15 +400,6 @@ export default function CartComponent({ packageInstance }: Props) {
 
                                                         }} />
                                                 </Box>
-                                                <Box fontWeight="900" mt="20px" mb="10px">
-                                                    Country
-                                                </Box>
-                                                <Field
-                                                    type="country"
-                                                    name="country"
-                                                    component="select">
-                                                    {country.map((a: any, b: number) => (<option key={b} value={a}>{a}</option>))}
-                                                </Field>
                                                 {errors.country && touched.country && errors.country}
                                                 <Box fontWeight="900" mt="20px" mb="10px">
                                                     Google Location
@@ -390,9 +407,28 @@ export default function CartComponent({ packageInstance }: Props) {
                                                 <GooglePlacesAutocomplete
                                                     apiKey="AIzaSyACiXEXHit8rm2r08OS79ztwhZDtEqvGGM"
                                                     selectProps={{
-                                                        value: value2,
-                                                        onChange: setValue2
+                                                        onChange: handlePlaceSelected
                                                     }}
+                                                />
+                                                {errors.city && touched.city && errors.city}
+                                                <Box fontWeight="900" mt="20px" mb="10px">
+                                                    Country
+                                                </Box>
+                                                <input
+                                                    type="country"
+                                                    name="country"
+                                                    style={{ border: "1px solid #CFCFCF", borderRadius: "7px", height: 50, paddingLeft: 10, paddingRight: 10 }}
+                                                    value={value2.country}
+                                                />
+                                                {errors.country && touched.country && errors.country}
+                                                <Box fontWeight="900" mt="20px" mb="10px">
+                                                    City
+                                                </Box>
+                                                <input
+                                                    type="city"
+                                                    name="city"
+                                                    style={{ border: "1px solid #CFCFCF", borderRadius: "7px", height: 50, paddingLeft: 10, paddingRight: 10 }}
+                                                    value={value2.city}
                                                 />
                                                 {errors.city && touched.city && errors.city}
                                                 <Box fontWeight="900" mt="20px" mb="10px">

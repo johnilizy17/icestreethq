@@ -399,10 +399,10 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                 <Box className=' w-full flex items-start lg:flex-row flex-col justify-around lg:py-8  lg:bg-white ' p={["20px", "20px", "20px", "30px"]} >
                     <Flex flexDir={["row", "row", "row", "column"]} w={["full", "full", "full", "auto"]} justifyContent={["space-between"]} overflow={["scroll", "scroll", "hidden", "hidden"]} >
                         <Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
-                        {data?.image_2.length > 2 ? <Image src={imagePath + "/" + data?.image_2} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
+                        {data?.image_2 && data?.image_2.length > 2 ? <Image src={imagePath + "/" + data?.image_2} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
                         :<Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
                         }
-                        {data?.image_3.length > 2 ? <Image src={imagePath + "/" + data?.image_3} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
+                        {data?.image_3 && data?.image_3.length > 2 ? <Image src={imagePath + "/" + data?.image_3} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
                         :<Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
                         }
                         </Flex>
