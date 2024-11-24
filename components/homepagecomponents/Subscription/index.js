@@ -128,7 +128,7 @@ export default function Subscription() {
                         Free Return
                     </Box>
                     <Box w={["100%", "100%", "100%", "350px"]} textAlign="center" p={["16px", "16px", "16px", "12px"]}>
-                        {"We offer hassle-free returns at no extra cost, giving you peace of mind with every purchase."}
+                        {"We offer hassle-free returns at no extra cost, giving you peace of mind with every purchase. Tearms and condition apply"}
                     </Box>
                 </Center>
                 <Center mt={["30px", "30px", "30px", "0px"]} flexDir="column">
