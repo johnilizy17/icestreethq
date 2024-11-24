@@ -103,7 +103,7 @@ export default function HeroSection() {
                                     </svg>
                                 </Button>
                             </Center>
-                            <Img src={imagePath + "/" + a.image} />
+                            <Img src={imagePath + "/" + a.image} ml="20px"/>
                         </Flex>
                     </SwiperSlide>
                 ))}
