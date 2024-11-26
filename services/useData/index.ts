@@ -1,31 +1,32 @@
 import axios from "../axiosConfig";
+import instancePublic from "../publicConfig";
 
 
 export const getCategories = async () => {
-  const { data } = await axios.get("/category");
+  const { data } = await instancePublic.get("/category");
   return data;
 };
 
 
 export const getLive = async () => {
-  const { data } = await axios.get("/live");
+  const { data } = await instancePublic.get("/live");
   return data;
 };
 
 export const getProducts = async (item: any) => {
-  const { data } = await axios.get("/products-by-category", {
+  const { data } = await instancePublic.get("/products-by-category", {
     params: item
   });
   return data;
 };
 
 export const getCategoriesById = async (categoryID: any) => {
-  const { data } = await axios.get(`/products-by-category?category=${categoryID}`);
+  const { data } = await instancePublic.get(`/products-by-category?category=${categoryID}`);
   return data;
 }
 
 export const getProductsById = async (item: any) => {
-  const { data } = await axios.get("/product/" + item);
+  const { data } = await instancePublic.get("/product/" + item);
   return data;
 };
 

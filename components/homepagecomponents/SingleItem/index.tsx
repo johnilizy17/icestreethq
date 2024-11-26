@@ -53,11 +53,11 @@ export default function SingleItem({ title, category, type, createdBy, label, pr
                     <Box pt={"40px"} borderRadius={"24px"} overflow="hidden">
                         <CategoryLabel color='790252' type={type} label={label} createdBy={createdBy} title={category?.title} />
                         <Center>
-                            <Grid mt="30px" templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 10]} w="full">
+                            <Grid mt="30px" templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 4]} w="full">
                                 {data?.map((item: any, index: number) => {
                                     return (
-                                        <Box mb="20px" _hover={{ transform: "scale(1.05)", transition: "0.5s ease-in-out" }} cursor="pointer" onClick={() => clickHandler(item)} key={index} onMouseOver={() => setIsHover(index)} onMouseOut={() => setIsHover(-1)} role="button" w={["95%", "220px"]}>
-                                            <Center h={["160px", "250px"]} w="full" borderRadius={["8px", "16px", "24px"]} overflow="hidden">
+                                        <Box mb="80px" _hover={{ transform: "scale(1.05)", transition: "0.5s ease-in-out" }} cursor="pointer" onClick={() => clickHandler(item)} key={index} onMouseOver={() => setIsHover(index)} onMouseOut={() => setIsHover(-1)} role="button" w={["95%", "100%"]}>
+                                            <Center h={["160px", "90%"]} w="full" borderRadius={["8px", "16px", "24px"]} overflow="hidden">
                                                 <Img h="100%" src={imagePath + "/" + item?.image} objectFit="cover" alt={item?.name} />
                                             </Center>
                                             <Box>
@@ -66,11 +66,11 @@ export default function SingleItem({ title, category, type, createdBy, label, pr
                                                         fontSize="14px"
                                                     >{item?.itemName.length > 20 ? (item?.itemName).slice(0, 20) + "..." : item?.itemName}
                                                     </Box>
-                                                    <Box>
-                                                        {item?.discount > 0 && <Box mr="10px" textDecoration="line-through" color="grey" className='font-bold text-sm' >{cashFormat(item?.price)}</Box>}
-                                                        <Box>
+                                                    <Box display="flex">
+                                                        <Box mr="10px">
                                                             <p className='  font-bold text-sm ' >{cashFormat(item?.price - (item?.price * item?.discount / 100))}</p>
                                                         </Box>
+                                                        {item?.discount > 0 && <Box mr="10px" textDecoration="line-through" color="grey" className='font-bold text-sm' >{cashFormat(item?.price)}</Box>}
                                                     </Box>
                                                 </Flex>
                                             </Box>
