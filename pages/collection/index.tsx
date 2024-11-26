@@ -74,7 +74,7 @@ export default function Men() {
                                 <Spinner size="xl" />
                             </Center> :
                             <Box p={["20px", "20px", "20px", "30px"]}>
-                                <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={[4, 2, 3, 10]}>
+                                <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={[4, 2, 3, 4]}>
                                     {category.map((a: any, index: any) => (
                                         <Box mb="10px" w={["full", "100%", "100%"]} pos="relative" overflow="hidden" cursor="pointer" borderRadius={["8px", "16px", "24px"]} h="320px" key={index}>
                                             <Img h={["100%", "100%", "150%"]} src={a.image ? imagePath + "/" + a.image : "/banner/collectionBanner.png"} />

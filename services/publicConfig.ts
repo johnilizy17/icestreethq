@@ -1,5 +1,5 @@
 import axios from "axios";
-let baseURL = "https://api.icestreethq.com/";
+let baseURL = "http://localhost:4000/";
 let token;
 
 axios.defaults.headers.common["Content-Type"] = "application/x-www-form-urlencoded";

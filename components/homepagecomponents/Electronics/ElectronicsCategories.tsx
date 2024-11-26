@@ -48,7 +48,7 @@ export default function ElectronicsCategories({ id, title, type }: props) {
             {title}
            </Box>
             <Box p={["20px","20px","20px","30px"]}>
-                <Grid templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 10]}>
+                <Grid templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 4]}>
                     {data?.map((item: any, index: number) => {
                         return (
                             <Box key={index} mb="20px">

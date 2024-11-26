@@ -83,7 +83,7 @@ export default function Brand() {
                                     </Box>
                                 </Center>
                                 :
-                                <Grid bg="whitesmoke" p={["20px","20px","20px","30px"]} templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 10]}>
+                                <Grid bg="whitesmoke" p={["20px","20px","20px","30px"]} templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 4]}>
                                     {data?.map((item: any, index: number) => {
                                         return (
                                             <Box key={index} mb="20px">
