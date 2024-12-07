@@ -27,7 +27,7 @@ export default function Footer() {
                 nav: "faq"
             },
             {
-                title: "Size",
+                title: "Size Guide",
                 nav: "size"
             }]
         }],
