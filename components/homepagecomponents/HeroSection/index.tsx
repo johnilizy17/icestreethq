@@ -114,10 +114,10 @@ export default function HeroSection() {
                     <SwiperSlide key={b}>
                         <Flex bg={a.color} color={a.text_color} justifyContent={"space-between"} flexDir={["column", "column", "column", "column"]} pt="30px" pr="30px" borderRadius={["8px", "16px", "24px"]} h={["auto", "auto", "auto", "auto"]}>
                             <Center flexDir="column" alignItems={"self-start"} p="20px">
-                                <Box mt={["20px", "0px"]} lineHeight={["40px", "40px", "40px", "70px"]} fontWeight="bolder" fontSize={["32px", "38px", "38px", "58px"]}>
+                                <Box mt={["20px", "0px"]} lineHeight={["40px", "40px", "40px", "70px"]} fontWeight="bolder" fontSize={["32px", "38px", "38px", "38px"]}>
                                     {a.title}
                                 </Box>
-                                <Box fontStyle="italic" mt="16px" fontSize={["16px", "16px", "28px", "36px"]}>
+                                <Box fontStyle="italic" mt="16px" h="150px" fontSize={["16px", "16px", "28px", "28px"]}>
                                     {a.discount}
                                 </Box>
                                 <Button onClick={() => router.push("/brand")} h="53px" p={["12px 24px"]} colorScheme='blackAlpha' bg="black" mt="16px">
