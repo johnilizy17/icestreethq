@@ -22,32 +22,6 @@ export default function HeroSection() {
     const [banner, setBanner] = useState([])
     const swiperRef = useRef<SwiperType>();
 
-    const [windowSize, setWindowSize] = useState(2);
-    const [size, setSize] = useState(false);
-
-    useEffect(() => {
-        // Function to update the window size
-        const handleResize = () => {
-            if (window.innerWidth > 900) {
-                setSize(false)
-                setWindowSize(2);
-            } else {
-                setSize(true)
-                setWindowSize(1);
-            }
-
-        };
-
-        // Set the initial window size
-        handleResize();
-
-        // Add resize event listener
-        window.addEventListener('resize', handleResize);
-
-        // Cleanup event listener on component unmount
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
     async function FetchBannerApi() {
         const data = await getBanner()
         setBanner(data)
@@ -93,9 +67,8 @@ export default function HeroSection() {
                 </svg>
             </IconButton>
             <Swiper
-                slidesPerView={windowSize} // Display 2 slides per view
-                centeredSlides={size} // Align slides to the start
                 spaceBetween={30}
+                centeredSlides={true}
                 autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,
@@ -112,12 +85,12 @@ export default function HeroSection() {
             >
                 {banner.map((a: any, b: number) => (
                     <SwiperSlide key={b}>
-                        <Flex bg={a.color} color={a.text_color} justifyContent={"space-between"} flexDir={["column", "column", "column", "column"]} pt="30px" pr="30px" borderRadius={["8px", "16px", "24px"]} h={["auto", "auto", "auto", "auto"]}>
-                            <Center flexDir="column" alignItems={"self-start"} p="20px">
-                                <Box mt={["20px", "0px"]} lineHeight={["40px", "40px", "40px", "70px"]} fontWeight="bolder" fontSize={["32px", "38px", "38px", "38px"]}>
+                        <Flex bg={a.color} color={a.text_color} justifyContent={"space-between"} flexDir={["column", "column", "column", "row"]} pt="30px" pr="30px" borderRadius={["8px", "16px", "24px"]} h={["auto", "auto", "auto", "600px"]}>
+                            <Center w={["100%","100%","100%","50%"]} flexDir="column"  alignItems={"self-start"} p="20px">
+                                <Box mt={["20px", "0px"]} lineHeight={["40px", "40px", "40px", "70px"]} fontWeight="bolder" fontSize={["32px", "38px", "38px", "58px"]}>
                                     {a.title}
                                 </Box>
-                                <Box fontStyle="italic" mt="16px" h="150px" fontSize={["16px", "16px", "28px", "28px"]}>
+                                <Box fontStyle="italic" mt="16px" fontSize={["16px", "16px", "28px", "36px"]}>
                                     {a.discount}
                                 </Box>
                                 <Button onClick={() => router.push("/brand")} h="53px" p={["12px 24px"]} colorScheme='blackAlpha' bg="black" mt="16px">
@@ -130,7 +103,7 @@ export default function HeroSection() {
                                     </svg>
                                 </Button>
                             </Center>
-                            <Img src={imagePath + "/" + a.image} ml="20px" />
+                            <Img src={imagePath + "/" + a.image} ml="20px"/>
                         </Flex>
                     </SwiperSlide>
                 ))}
@@ -138,4 +111,3 @@ export default function HeroSection() {
         </div>
     )
 }
-

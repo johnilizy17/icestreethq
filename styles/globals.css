@@ -40,10 +40,26 @@
   input:focus {
     outline: none;
   }
+/* Hide scrollbars for all elements by default */
+*::-webkit-scrollbar {
+  display: none;
+}
 
-  /*
-  Typography
-  */
+* {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For IE and Edge */
+}
+
+/* Show the scrollbar only for the body */
+body::-webkit-scrollbar {
+  display: block; /* Chrome, Safari, Edge */
+}
+
+body {
+  scrollbar-width: auto; /* Firefox */
+  -ms-overflow-style: auto; /* IE and Edge */
+}
+
   p {
     font-size: .93rem;
     /* 15px*/
