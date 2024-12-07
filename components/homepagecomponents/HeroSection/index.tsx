@@ -23,13 +23,16 @@ export default function HeroSection() {
     const swiperRef = useRef<SwiperType>();
 
     const [windowSize, setWindowSize] = useState(2);
+    const [size, setSize] = useState(false);
 
     useEffect(() => {
         // Function to update the window size
         const handleResize = () => {
             if (window.innerWidth > 900) {
+                setSize(false)
                 setWindowSize(2);
             } else {
+                setSize(true)
                 setWindowSize(1);
             }
 
@@ -90,9 +93,9 @@ export default function HeroSection() {
                 </svg>
             </IconButton>
             <Swiper
-                slidesPerView={windowSize}
-                centeredSlides={false}
-                spaceBetween={20}
+                slidesPerView={windowSize} // Display 2 slides per view
+                centeredSlides={size} // Align slides to the start
+                spaceBetween={30}
                 autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,
@@ -102,6 +105,7 @@ export default function HeroSection() {
                 }}
                 slideNextClass='js-prev1'
                 modules={[Autoplay, Navigation]}
+                className="w-full"
                 onBeforeInit={(swiper: any) => {
                     swiperRef.current = swiper;
                 }}
