@@ -22,6 +22,29 @@ export default function HeroSection() {
     const [banner, setBanner] = useState([])
     const swiperRef = useRef<SwiperType>();
 
+    const [windowSize, setWindowSize] = useState(2);
+
+    useEffect(() => {
+        // Function to update the window size
+        const handleResize = () => {
+            if (window.innerWidth > 900) {
+                setWindowSize(2);
+            } else {
+                setWindowSize(1);
+            }
+
+        };
+
+        // Set the initial window size
+        handleResize();
+
+        // Add resize event listener
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup event listener on component unmount
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     async function FetchBannerApi() {
         const data = await getBanner()
         setBanner(data)
@@ -67,8 +90,9 @@ export default function HeroSection() {
                 </svg>
             </IconButton>
             <Swiper
-                spaceBetween={30}
-                centeredSlides={true}
+                slidesPerView={windowSize}
+                centeredSlides={false}
+                spaceBetween={20}
                 autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,
@@ -78,14 +102,13 @@ export default function HeroSection() {
                 }}
                 slideNextClass='js-prev1'
                 modules={[Autoplay, Navigation]}
-                className="w-full"
                 onBeforeInit={(swiper: any) => {
                     swiperRef.current = swiper;
                 }}
             >
                 {banner.map((a: any, b: number) => (
                     <SwiperSlide key={b}>
-                        <Flex bg={a.color} color={a.text_color} justifyContent={"space-between"} flexDir={["column", "column", "column", "row"]} pt="30px" pr="30px" borderRadius={["8px", "16px", "24px"]} h={["auto", "auto", "auto", "600px"]}>
+                        <Flex bg={a.color} color={a.text_color} justifyContent={"space-between"} flexDir={["column", "column", "column", "column"]} pt="30px" pr="30px" borderRadius={["8px", "16px", "24px"]} h={["auto", "auto", "auto", "auto"]}>
                             <Center flexDir="column" alignItems={"self-start"} p="20px">
                                 <Box mt={["20px", "0px"]} lineHeight={["40px", "40px", "40px", "70px"]} fontWeight="bolder" fontSize={["32px", "38px", "38px", "58px"]}>
                                     {a.title}
@@ -103,7 +126,7 @@ export default function HeroSection() {
                                     </svg>
                                 </Button>
                             </Center>
-                            <Img src={imagePath + "/" + a.image} ml="20px"/>
+                            <Img src={imagePath + "/" + a.image} ml="20px" />
                         </Flex>
                     </SwiperSlide>
                 ))}
