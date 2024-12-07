@@ -25,6 +25,10 @@ export default function Footer() {
             {
                 title: "FAQs",
                 nav: "faq"
+            },
+            {
+                title: "Size",
+                nav: "size"
             }]
         }],
         4: [{
