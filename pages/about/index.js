@@ -29,19 +29,10 @@ function AboutUs() {
 
                             <Box>
                                 <p style={{ marginBottom: "20px", fontSize: "18px" }}>
-                                    {"Welcome to ICE STREET, where fashion meets attitude and style meets substance. Our brand is built on a simple yet powerful philosophy: `Freeze the Moment, Own the Look.` We believe that fashion is not just about what you wear but how you express yourself in the world."}
+                                    {"Ice Street is more than just a clothing brand; we’re a lifestyle. Our mission is to bring cutting-edge fashion and timeless style to individuals who appreciate quality and those who are radically unique. We cater to the fashion-forward, the trendsetters, and our collections include everything from casual, streetwear, to chic office wear, ensuring there's something for every occasion. Freeze The Moment, Own The Look, with every piece we create and treasure the memories forever."}
                                 </p>
                                 <p style={{ marginBottom: "20px", fontSize: "18px" }}>
-                                    {"At ICE STREET, we are passionate about creating clothing that stands out and makes a statement. Our collections are designed for those who dare to be different, who embrace their individuality, and who see fashion as a form of self-expression. Whether you're hitting the streets or stepping out for a special occasion, our pieces are crafted to make you feel confident and unforgettable."}
-                                </p>
-                                <p style={{ marginBottom: "20px", fontSize: "18px" }}>
-                                    {"We draw inspiration from urban culture, contemporary trends, and timeless classics, blending them into designs that are both cutting-edge and enduring. Every garment is meticulously crafted with attention to detail and quality, ensuring that you look and feel your best."}
-                                </p>
-                                <p style={{ marginBottom: "20px", fontSize: "18px" }}>
-                                    {"Our mission is to provide you with more than just clothing; we aim to offer a platform for you to showcase your unique style and make your mark. At ICE STREET, we’re not just setting trends—we’re creating them."}
-                                </p>
-                                <p style={{ marginBottom: "20px", fontSize: "18px" }}>
-                                    {"Join us on this journey, and let’s freeze the moment together. Own your look. Own your story. Own your place in the world."}
+                                    {"Each item in our collection is crafted with care, combining high-quality fabrics with meticulous design to deliver comfort and style. Because we believe that clothing should not only reflect who you are but also inspire who you want to become."}
                                 </p>
                             </Box>
                         </Container>
