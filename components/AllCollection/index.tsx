@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Box, Button, Flex, Image, Img } from '@chakra-ui/react'
+import { Box, Button, Center, Flex, Image, Img } from '@chakra-ui/react'
 import CategoryLabel from '../CategoryLabel'
 import { getProducts } from '../../services'
 import { toast } from 'react-hot-toast'
@@ -68,13 +68,16 @@ export default function AllCollection({ label }: props) {
                                     <Box w="275px" mr="20px" pos="relative" overflow="hidden" _hover={{ w: ["280px", "480px"], transition: "0.5s ease-in-out" }} cursor="pointer" bg="black" borderRadius={["8px","16px","24px"]} h="320px" key={index}>
                                         <Box w="500px" h="full">
                                             <img style={{ width: 500, objectFit: "cover", height: "100%" }} src={item.image ? imagePath + "/" + item.image : "/banner/collectionBanner.png"} />
+                                            <Center w="100%" h="100%" fontWeight="900" pos="absolute" background="#00000096" color="#fff" top="0px" justifyContent="start" pl="20px" fontSize="24px">
+                                                {item.title}
+                                            </Center>
                                             <Button
                                                 onClick={() => {
-                                                    router.push(`/collection?id=${item._id}&name=${item.title}`)
+                                                    router.push(`/collection/${item._id}`)
                                                 }}
-                                                borderRadius={["8px","16px","24px"]}
+                                                borderRadius={["8px", "16px", "24px"]}
                                                 pos="absolute" bottom="20px" left="20px" fontSize="20px" h="53px">
-                                                {item.title}
+                                                Browse
                                                 <svg style={{ marginLeft: 10 }} width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M12.6667 1.66675L1 13.3334" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M2.16666 1.66675H12.6667V12.1667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
