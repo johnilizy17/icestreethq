@@ -10,12 +10,14 @@ import toast from "react-hot-toast";
 import HeroSearch from '../components/homepagecomponents/HeroSection/Search'
 import Subscription from '../components/homepagecomponents/Subscription'
 import AllCollection from '../components/AllCollection'
+import { Box, Center } from '@chakra-ui/react'
+import { COLORS } from '../services/theme/colors'
 
 export default function Home() {
 
   const [category, setCategory] = React.useState([] as any)
-  
-  
+
+
   useEffect(() => {
     (async () => {
       try {
@@ -31,6 +33,11 @@ export default function Home() {
   return (
     <>
       <main>
+        <Center fontWeight="bold" w="full" h={["70px", "50px"]} pos="fixed" zIndex={1000} top="0px" background={COLORS.black} color={COLORS.white}>
+         <Box textAlign={"center"}>
+          DISCOVER OUR EVOCATION 11 CAPSULE COLLECTION NOW →
+          </Box>
+        </Center>
         <MenuLayout pageName='Ice Street' menu={false} category={false}>
           <div className=' w-full mt-[10px] lg:mt-[32px] ' >
             <HeroSection />

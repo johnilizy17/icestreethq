@@ -7,16 +7,18 @@ import dynamic from 'next/dynamic';
 import LoadingPage from './LoadingPage';
 import { getHeaderDetails } from '../../services';
 import { useRouter } from 'next/router';
+import { Box } from '@chakra-ui/react';
 
 type Props = {
     children: React.ReactNode;
     category: boolean,
-    menu: boolean
-    pageName?: string
-    isProtectedRoute?: boolean
+    menu: boolean,
+    pageName?: string,
+    isProtectedRoute?: boolean,
+    home?: boolean
 };
 
-export default function MenuLayout({ children, category, menu, pageName }: Props) {
+export default function MenuLayout({ children, home, category, menu, pageName }: Props) {
 
     const { pathname } = useRouter();
     const [loading, setLoading] = useState(true)
@@ -40,8 +42,8 @@ export default function MenuLayout({ children, category, menu, pageName }: Props
     return (
         <>
             <LoadingPage display={loading} />
-            <div className="no-scrollbar">
-                <div className=' w-full lg:pb-0 overflow-x-hidden ' >
+            <Box className="no-scrollbar">
+                <Box className=' w-full lg:pb-0 overflow-x-hidden ' >
                     <Head>
                         <title>{metaData.title}</title>
                         <meta name="description" content={metaData.description} />
@@ -66,20 +68,20 @@ export default function MenuLayout({ children, category, menu, pageName }: Props
                             }}
                         ></script>
                     </Head>
-                    <div className=' w-full h-[70px] lg:h-[89px] ' >
-                        <div className=' fixed bg-white z-[50] top-0 w-full ' >
+                    <Box className=' w-full h-[70px] lg:h-[89px] ' >
+                        <Box top={home? ["70px", "50px"]: "0px"} className=' fixed bg-white z-[50] w-full ' >
                             <Navbar menu={menu} />
-                        </div>
-                    </div>
-                    <div className=' pt-0 w-full h-auto ' >
+                        </Box>
+                    </Box>
+                    <Box className=' pt-0 w-full h-auto ' >
                         {children}
-                    </div>
+                    </Box>
                     {/* <ChatSystem /> */}
                     {!menu && (
                         <Footer />
                     )}
-                </div>
-            </div>
+                </Box>
+            </Box>
         </>
     )
 } 
