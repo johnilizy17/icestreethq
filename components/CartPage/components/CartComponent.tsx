@@ -47,7 +47,7 @@ export default function CartComponent({ packageInstance }: Props) {
     const { userDetails, isLoggedIn } = useUserDetails()
     const [selected, setSelected] = useState(true)
     const [value, setValue] = useState<any>("")
-    const [value2, setValue2] = useState<any>({city:"", country:"", address:""})
+    const [value2, setValue2] = useState<any>({ city: "", country: "", address: "" })
     const route = useRouter()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [currency, setCurrency] = useState({ ngn: 0, gbp: 0 })
@@ -233,8 +233,19 @@ export default function CartComponent({ packageInstance }: Props) {
                         component.types.includes('country')
                     );
 
+                    const cityComponent = details.address_components.find((component: any) =>
+                        component.types.includes('locality') || // Primary city type
+                        component.types.includes('administrative_area_level_2') || // Fallback for regions acting as city
+                        component.types.includes('sublocality') // For neighborhoods or subregions
+                    );
+
+                    const postalCodeComponent = details.address_components.find((component:any) =>
+                        component.types.includes('postal_code')
+                    );
+
+                    console.log(postalCodeComponent, "details")
                     if (stateComponent) {
-                        setValue2({ city: stateComponent.long_name, country: countryComponent.long_name, account:details.formatted_address }); // or `short_name` for abbreviations
+                        setValue2({ post: postalCodeComponent.long_name, state: stateComponent.long_name, city: cityComponent.long_name, country: countryComponent.long_name, account: details.formatted_address, address: details.name }); // or `short_name` for abbreviations
                     } else {
                         console.error('State information not found');
                     }
@@ -284,7 +295,7 @@ export default function CartComponent({ packageInstance }: Props) {
                         {isOpen && localStorage.getItem("currency") === "NGN" ?
                             <PaymentMethod SumTotalFunction={SumTotal2} userDetails={userDetails} paymentSuccessfull={paymentSuccessfull} />
                             :
-                            <InternationPayment SumTotalFunction={SumTotal2} userDetails={userDetails} paymentSuccessfull={paymentSuccessfull}/>
+                            <InternationPayment SumTotalFunction={SumTotal2} userDetails={userDetails} paymentSuccessfull={paymentSuccessfull} />
                         }
                     </ModalBody>
                 </ModalContent>
@@ -357,9 +368,9 @@ export default function CartComponent({ packageInstance }: Props) {
                                             errors.city = 'Required';
                                         } else if (!value2.country) {
                                             errors.country = 'Required';
-                                        } else if (!values.post) {
+                                        } else if (!values.post && !value2.post) {
                                             errors.post = 'Required';
-                                        } else if (!values.address) {
+                                        } else if (!values.address && !value2.address) {
                                             errors.address = 'Required';
                                         }
                                         return errors;
@@ -402,7 +413,7 @@ export default function CartComponent({ packageInstance }: Props) {
                                                 </Box>
                                                 {errors.country && touched.country && errors.country}
                                                 <Box fontWeight="900" mt="20px" mb="10px">
-                                                    Google Location
+                                                    Enter Delivery Address
                                                 </Box>
                                                 <GooglePlacesAutocomplete
                                                     apiKey="AIzaSyACiXEXHit8rm2r08OS79ztwhZDtEqvGGM"
@@ -422,6 +433,16 @@ export default function CartComponent({ packageInstance }: Props) {
                                                 />
                                                 {errors.country && touched.country && errors.country}
                                                 <Box fontWeight="900" mt="20px" mb="10px">
+                                                    State
+                                                </Box>
+                                                <input
+                                                    type="State"
+                                                    name="State"
+                                                    style={{ border: "1px solid #CFCFCF", borderRadius: "7px", height: 50, paddingLeft: 10, paddingRight: 10 }}
+                                                    value={value2.state}
+                                                />
+                                                {errors.state && touched.state && errors.state}
+                                                <Box fontWeight="900" mt="20px" mb="10px">
                                                     City
                                                 </Box>
                                                 <input
@@ -440,7 +461,7 @@ export default function CartComponent({ packageInstance }: Props) {
                                                     style={{ border: "1px solid #CFCFCF", borderRadius: "7px", height: 50, paddingLeft: 10, paddingRight: 10 }}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    value={values.address}
+                                                    value={values.address.length > 1 ? values.address : value2.address}
                                                 />
                                                 {errors.address && touched.address && errors.address}
                                                 <Box fontWeight="900" mt="20px" mb="10px">
@@ -452,7 +473,7 @@ export default function CartComponent({ packageInstance }: Props) {
                                                     style={{ border: "1px solid #CFCFCF", borderRadius: "7px", height: 50, paddingLeft: 10, paddingRight: 10 }}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    value={values.post}
+                                                    value={values.post.length > 1 ? values.post : value2.post}
                                                 />
                                                 {errors.post && touched.post && errors.post}
                                                 <Button

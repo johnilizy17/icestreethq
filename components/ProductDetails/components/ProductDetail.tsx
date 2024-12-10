@@ -45,6 +45,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
         amount: 123
     })
     const [size, setSize] = useState("")
+    const [imageSelection, setImageSelection] = useState(data?.image)
     const [packageData, setPackageData] = useState<any>()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const route = useRouter()
@@ -181,7 +182,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                 const packageData = {
                     duration: productInfo.duration,
                     size: size,
-                    color:colorScheme,
+                    color: colorScheme,
                     category: data.category_id,
                     numberOfExpectedPayment: calculateNumberPayment(productInfo.duration, paymentInfo.paymentFrequency),
                     product_id: [
@@ -260,7 +261,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                 const packageData = {
                     duration: productInfo.duration,
                     size: size,
-                    color:colorScheme,
+                    color: colorScheme,
                     category: data.category_id,
                     numberOfExpectedPayment: calculateNumberPayment(productInfo.duration, paymentInfo.paymentFrequency),
                     product_id: [
@@ -298,7 +299,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
             } else {
                 updatePackage({
                     ...packageData,
-                    color:colorScheme,
+                    color: colorScheme,
                     package_id: packageId
                 }).then((res) => {
                     toast({
@@ -398,17 +399,25 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
             <Box className=' w-full' >
                 <Box className=' w-full flex items-start lg:flex-row flex-col justify-around lg:py-8  lg:bg-white ' p={["20px", "20px", "20px", "30px"]} >
                     <Flex flexDir={["row", "row", "row", "column"]} w={["full", "full", "full", "auto"]} justifyContent={["space-between"]} overflow={["scroll", "scroll", "hidden", "hidden"]} >
-                        <Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
-                        {data?.image_2 && data?.image_2.length > 2 ? <Image src={imagePath + "/" + data?.image_2} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
-                        :<Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
+                        <Box onClick={() => setImageSelection(data?.image)} borderRadius={"10px"} border={imageSelection === data?.image ? "1px solid #000" : ""} p="2px">
+                            <Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
+                        </Box>
+                        {data?.image_2 && data?.image_2.length > 2 ?
+                            <Box onClick={() => setImageSelection(data?.image_2)} borderRadius={"10px"} border={imageSelection === data?.image_2 ? "1px solid #000" : ""} p="2px">
+                                <Image src={imagePath + "/" + data?.image_2} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
+                            </Box>
+                            : <Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
                         }
-                        {data?.image_3 && data?.image_3.length > 2 ? <Image src={imagePath + "/" + data?.image_3} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
-                        :<Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
+                        {data?.image_3 && data?.image_3.length > 2 ?
+                            <Box onClick={() => setImageSelection(data?.image_3)} borderRadius={"10px"} border={imageSelection === data?.image_3 ? "1px solid #000" : ""} p="2px">
+                                <Image src={imagePath + "/" + data?.image_3} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
+                            </Box>
+                            : <Image src={imagePath + "/" + data?.image} mr={["10px", "10px", "10px", "0px"]} mb="10px" w={["150px", "150px", "180px", "180px"]} alt="TopOne" />
                         }
-                        </Flex>
+                    </Flex>
                     <Center flexDir="column" alignItems={["start"]} h={["auto", "auto", "auto", "auto"]} justifyContent={"flex-start"}>
                         <Box w={["100%", "100%", "100%", "500px"]}>
-                            <Img w="full" src={imagePath + "/" + data?.image} alt="TopOne" />
+                            <Img w="full" src={imagePath + "/" + imageSelection} alt="TopOne" />
                         </Box>
                         <RWebShare
                             data={{
@@ -471,8 +480,8 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                                 ))}
                             </Flex>
                             <Flex mt="20px">
-                                {data.color.map((a: string, b:number) => (
-                                    <Box p="5px" key={b} borderRadius="5px"  mr="2px" border={colorScheme === a ?"1px solid lightblue":""}>
+                                {data.color.map((a: string, b: number) => (
+                                    <Box p="5px" key={b} borderRadius="5px" mr="2px" border={colorScheme === a ? "1px solid lightblue" : ""}>
                                         <Box
                                             onClick={() => {
                                                 setColorScheme(a)

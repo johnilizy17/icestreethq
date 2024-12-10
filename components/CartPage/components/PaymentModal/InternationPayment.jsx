@@ -33,7 +33,7 @@ export default function InternationPayment({ paymentSuccessfull, userDetails, Su
                             purchase_units: [
                                 {
                                     amount: {
-                                        value: SumTotalFunction, // Specify the amount to be paid
+                                        value: SumTotalFunction / 100, // Specify the amount to be paid
                                     },
                                 },
                             ],
@@ -41,7 +41,7 @@ export default function InternationPayment({ paymentSuccessfull, userDetails, Su
                     }}
                     onApprove={(data, actions) => {
                         return actions.order.capture().then((details) => {
-                            alert(`Transaction completed by ${details.payer.name.given_name}`);
+                            paymentSuccessfull()
                         });
                     }}
                     onError={(err) => {
