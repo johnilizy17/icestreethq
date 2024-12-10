@@ -38,7 +38,7 @@ export default function Home() {
           DISCOVER OUR EVOCATION 11 CAPSULE COLLECTION NOW →
           </Box>
         </Center>
-        <MenuLayout pageName='Ice Street' menu={false} category={false}>
+        <MenuLayout home={true} pageName='Ice Street' menu={false} category={false}>
           <div className=' w-full mt-[10px] lg:mt-[32px] ' >
             <HeroSection />
             {/* <HeroSearch /> */}
