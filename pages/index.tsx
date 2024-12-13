@@ -34,8 +34,8 @@ export default function Home() {
     <>
       <main>
         <Center fontWeight="bold" w="full" h={["70px", "50px"]} pos="fixed" zIndex={1000} top="0px" background={COLORS.black} color={COLORS.white}>
-         <Box textAlign={"center"}>
-          DISCOVER OUR EVOCATION 11 CAPSULE COLLECTION NOW →
+          <Box textAlign={"center"}>
+            Welcome to Ice Street Official Store. Enjoy up to 50% Discount Season sales →
           </Box>
         </Center>
         <MenuLayout home={true} pageName='Ice Street' menu={false} category={false}>
