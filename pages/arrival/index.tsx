@@ -60,7 +60,7 @@ export default function Men() {
                                     New Arrivals
                                 </Box>
                                 <Box>
-                                    All Produce
+                                    All Product
                                 </Box>
                             </Center>
                         </Box>
