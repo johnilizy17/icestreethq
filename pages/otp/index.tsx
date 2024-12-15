@@ -50,7 +50,7 @@ export default function ForgottenPassword() {
             try {
                 const response = await resetPassword(formik.values)
                 toast({
-                    title: response?.data?.msg,
+                    title: "password changed successfully",
                     position: "bottom",
                     status: "success",
                     isClosable: true,
