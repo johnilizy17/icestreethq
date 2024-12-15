@@ -2,7 +2,7 @@ import Head from 'next/head'
 import MenuLayout from '../../components/MenuLayout'
 import React, { useEffect, useState } from 'react'
 import toast from "react-hot-toast";
-import { Box, Button, Center, Flex, Img, Input, Spinner } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Grid, Img, Input, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';
 import { COLORS } from '../../services/theme/colors';
 import ProductDisplay from '../../components/homepagecomponents/Electronics/ProductDisplay';
@@ -56,7 +56,7 @@ export default function Home() {
                 <Box bg={COLORS.white}>
                     <MenuLayout menu={false} category={false}>
                         <Box p={["20px", "20px", "20px", "30px"]}>
-                            <Center borderRadius={["8px","16px","24px"]} p={["26px","28px","28px","48px"]} bg="#EDEFEF" h="auto" w="full">
+                            <Center borderRadius={["8px", "16px", "24px"]} p={["26px", "28px", "28px", "48px"]} bg="#EDEFEF" h="auto" w="full">
                                 <Center zIndex={1} h="full" w="full" flexDir="column">
                                     <Box fontWeight="700" p="10px" fontSize={["24px", "24px", "24px", "48px"]} >
                                         Search Products
@@ -72,7 +72,7 @@ export default function Home() {
                                                 SearchProduct()
                                                 setDisable(false)
                                                 setValue(e.target.value)
-                                            }} bg={COLORS.white} w="full" h="50px" p="10px" mb={["20px","20px","20px","0px"]} borderColor="white" />
+                                            }} bg={COLORS.white} w="full" h="50px" p="10px" mb={["20px", "20px", "20px", "0px"]} borderColor="white" />
                                         <Button
                                             display={["none", "none", "none", "flex"]}
                                             isLoading={loading}
@@ -103,7 +103,7 @@ export default function Home() {
                                         <Box pos="absolute" left="0px" bg="red" bottom="-10px" h="full" w="full">
                                             {!disabled && data.map((a: any, b: number) => (
                                                 <Flex
-                                                key={b}
+                                                    key={b}
                                                     onClick={() => {
                                                         setValue(a.itemName)
                                                         setDisable(true)
@@ -126,29 +126,33 @@ export default function Home() {
                                 Search Result
                             </Center>
                         </Box>
-                        <Flex justifyContent={["center", "flex-start"]} flexWrap="wrap" p={["20px", "20px", "20px", "30px"]} bg="rgba(217, 217, 217, 0.2)">
-                            {loading ?
-                                <Center h="300px" w="full">
-                                    <Spinner size="xl" />
-                                </Center> :
-                                data.length < 1 ?
-                                    <Center flexDir="column" p="20px" w="full">
-                                        <Lottie options={defaultOptions}
-                                            height={300}
-                                            width={300} />
-                                        <Box fontWeight="700" mt="10px" fontSize="24px">
-                                            No Result
-                                        </Box>
-                                    </Center>
-                                    :
-                                    data?.map((item: any, index: number) => {
-                                        return (
-                                            <Box key={index} mb="20px">
-                                                <ProductDisplay item={item} index={index} />
-                                            </Box>
-                                        )
-                                    })}
-                        </Flex>
+                        {loading ?
+                            <Center h="300px" w="full">
+                                <Spinner size="xl" />
+                            </Center> :
+                            data.length < 1 ?
+                                <Center flexDir="column" p="20px" w="full">
+                                    <Lottie options={defaultOptions}
+                                        height={300}
+                                        width={300} />
+                                    <Box fontWeight="700" mt="10px" fontSize="24px">
+                                        No Result
+                                    </Box>
+                                </Center>
+                                :
+                                <Grid templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(5, 1fr)']} gap={[4, 2, 3, 4]}>
+                              {
+                                data?.map((item: any, index: number) => {
+                                    return (
+                                    <Box key={index} mb="20px">
+                                        <ProductDisplay item={item} index={index} />
+                                    </Box>
+                                    )
+                                })
+                                }
+                                
+                                </Grid>
+}
                     </MenuLayout>
                 </Box>
             </main>
