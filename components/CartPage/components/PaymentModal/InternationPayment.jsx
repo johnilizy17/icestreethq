@@ -6,7 +6,7 @@ import { paypal } from '../../../../services/Variable';
 export default function InternationPayment({ paymentSuccessfull, userDetails, SumTotalFunction }) {
 
     const [initialOptions, setInitialOptions] = useState({
-        clientId: "test",
+        clientId: "AUawWQI0GwmlCKSu2xCheH1X8btyru4yip3ajBzpf7-5zxzXNVYV6tHoIXSIPsR1WKm0Skk4ZsJwHcrP",
         currency: "USD",
         intent: "capture",
     })
@@ -17,7 +17,7 @@ export default function InternationPayment({ paymentSuccessfull, userDetails, Su
         console.log(SumTotalFunction, "SumTotalFunction")
         if (localStorage.getItem("currency") === "GBP") {
             setInitialOptions({
-                clientId: "test",
+                clientId: "AUawWQI0GwmlCKSu2xCheH1X8btyru4yip3ajBzpf7-5zxzXNVYV6tHoIXSIPsR1WKm0Skk4ZsJwHcrP",
                 currency: "GBP",
                 intent: "capture",
             })
