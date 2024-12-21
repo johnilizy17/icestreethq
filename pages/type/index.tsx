@@ -8,14 +8,14 @@ import { COLORS } from '../../services/theme/colors';
 import ProductDisplay from '../../components/homepagecomponents/Electronics/ProductDisplay';
 import Lottie from 'react-lottie';
 import Empty from '../../assets/lottie/empty.json'
-import { getCollections, getGender, getSearchResult } from '../../services/productService';
+import { getCollections, getCollectionType, getGender, getSearchResult } from '../../services/productService';
 import { useRouter } from 'next/router';
 import SelectionButton from '../../components/homepagecomponents/CategoryMenu/selectionButton';
 
 export default function Men() {
 
     const [data, setData] = useState([]);
-    const [value, setValue] = useState(3)
+    const [value, setValue] = useState(5)
     const [brandstyle, setBrandStyle] = useState("")
     const [loading, setLoading] = useState(false)
     const { query } = useRouter()
@@ -32,7 +32,7 @@ export default function Men() {
 
     async function SearchProduct() {
         setLoading(true);
-        const brandArray = await getGender(1, select._id)
+        const brandArray = await getCollectionType(select._id)
         const brands = await getCollections(value)
         setCategory(brands)
         setData(brandArray)
@@ -59,10 +59,10 @@ export default function Men() {
                             <Img src="/banner/men.png" />
                             <Center flexDir="column" w="full" textAlign={"center"} fontWeight="700" color="#fff" pos="absolute" top="0px" h="full" bg="#000000b5" fontSize={["24px", "32px", "47px", "57px"]} >
                                 <Box>
-                                    Shop
+                                    Types
                                 </Box>
                                 <Box>
-                                    Men’s Collection
+                                    Choose from various Types of cloth
                                 </Box>
                             </Center>
                         </Box>

@@ -332,6 +332,9 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
         }
     }
 
+    useEffect(() => {
+        console.log(data)
+    }, [])
     const countSize = ["XS", "S", "M", "L", "XL", "XXL"]
 
     return (
@@ -515,12 +518,12 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                                 </Box>
                             )}
 
-                            {data?.spec && (
+                            {data?.feature && data?.feature.length>1  && (
                                 <Box className=' w-full bg-white  mt-6 lg:mt-8 ' >
-                                    <p className=' font-bold' >Specification</p>
+                                    <p className=' font-bold' >Feature</p>
                                     <p className=' font-normal text-justify text-[15px] ' >
                                         <HTMLState
-                                            item={data?.spec}
+                                            item={data?.feature}
                                         />
                                     </p>
                                 </Box>

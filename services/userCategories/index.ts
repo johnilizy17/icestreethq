@@ -14,3 +14,9 @@ export async function getBrandProduct(id:any){
     const {data} = await axios.get(`/productby/brand/${id}`)
     return data
 }
+
+
+export async function getTypeProduct(id:any){
+    const {data} = await axios.get(`/productby/type/${id}`)
+    return data
+}

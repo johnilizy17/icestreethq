@@ -8,14 +8,14 @@ import { COLORS } from '../../services/theme/colors';
 import ProductDisplay from '../../components/homepagecomponents/Electronics/ProductDisplay';
 import Lottie from 'react-lottie';
 import Empty from '../../assets/lottie/empty.json'
-import { getCollection, getCollectionBrand, getCollections, getGender, getSearchResult } from '../../services/productService';
+import { getCollection, getCollectionBrand, getCollections, getCollectionType, getGender, getSearchResult } from '../../services/productService';
 import { useRouter } from 'next/router';
 import SelectionButton from '../../components/homepagecomponents/CategoryMenu/selectionButton';
 
 export default function Men() {
 
     const [data, setData] = useState([]);
-    const [value, setValue] = useState(4)
+    const [value, setValue] = useState(5)
     const [brandstyle, setBrandStyle] = useState("1")
     const [loading, setLoading] = useState(false)
     const { query } = useRouter()
@@ -32,7 +32,7 @@ export default function Men() {
 
     async function SearchProduct() {
         setLoading(true);
-        const brandArray = await getCollectionBrand(select._id)
+        const brandArray = await getCollectionType(select._id)
         const brands = await getCollections(value)
         setCategory(brands)
         setData(brandArray)
@@ -62,7 +62,7 @@ export default function Men() {
                                     Shop
                                 </Box>
                                 <Box>
-                                    All Brands
+                                    All Type
                                 </Box>
                             </Center>
                         </Box>

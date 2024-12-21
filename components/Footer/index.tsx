@@ -50,8 +50,8 @@ export default function Footer() {
 
     async function GetFooterDetails() {
 
-        const type = await getBrand()
-        setStateProduct(type.category)
+        const type =  await getCollections(5)
+        setStateProduct(type)
         const collection = await getCollections(3)
         setStateData(collection)
     }
@@ -103,13 +103,13 @@ export default function Footer() {
             <Box>
                 <Box mb="20px">
                     <Box fontSize="20px" paddingBottom="8px" color={COLORS.white} fontWeight="700" lineHeight="24.2px">
-                        Categories
+                        Type
                     </Box>
                     <Box>
                         {
                             stateProduct.map((c: { title: string, _id: string }, d: number) => (
-                                <Link key={d} href={`/brand/${c._id}`}>
-                                    <Box display={d > 5 ? "none" : "flex"} fontFamily="Inter-Regular" fontWeight="400" mb="6px" color={COLORS.white}>
+                                <Link key={d} href={`/type/${c._id}`}>
+                                    <Box fontFamily="Inter-Regular" fontWeight="400" mb="6px" color={COLORS.white}>
                                         {c.title}
                                     </Box>
                                 </Link>
@@ -128,7 +128,7 @@ export default function Footer() {
                         {
                             stateData.map((c: { title: string, _id: string }, d) => (
                                 <Link key={d} href={`/collection/${c._id}`}>
-                                    <Box display={d > 5 ? "none" : "flex"} fontFamily="Inter-Regular" fontWeight="400" mb="6px" color={COLORS.white}>
+                                    <Box fontFamily="Inter-Regular" fontWeight="400" mb="6px" color={COLORS.white}>
                                         {c.title}
                                     </Box>
                                 </Link>
