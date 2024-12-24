@@ -33,8 +33,8 @@ export default function Men() {
     async function SearchProduct() {
         setLoading(true);
         const brandArray = await getGender(1, select._id)
-        const brands = await getCollections(value)
-        setCategory(brands)
+        // const brands = await getCollections(value)
+        // setCategory(brands)
         setData(brandArray)
         setLoading(false)
     }
@@ -69,9 +69,9 @@ export default function Men() {
                         <Center h={["100px", "100px", "100px", "197px"]} fontWeight="700" fontSize={["24px", "27px", "47px", "57px"]}>
                             Stay Classy, Stay Trendy
                         </Center>
-                        <Flex p={["20px", "20px", "20px", "30px"]} overflow={"scroll"} >
+                        {/* <Flex p={["20px", "20px", "20px", "30px"]} overflow={"scroll"} >
                         {category.map((a: any, index: any) => (<SelectionButton key={index} title={a} select={select} setSelect={setSelect} />))}
-                        </Flex>
+                        </Flex> */}
                         <Center bg="rgba(217, 217, 217, 0.2)" pt="20px" pb="20px">
                             {loading ?
                                 <Center h="300px" w="full">

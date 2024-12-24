@@ -68,11 +68,11 @@ export default function MenuLayout({ children, home, category, menu, pageName }:
                             }}
                         ></script>
                     </Head>
-                    <Box className=' w-full h-[70px] lg:h-[89px] ' >
+                    {/* <Box className=' w-full h-[70px] lg:h-[89px] ' >
                         <Box top={home? ["70px", "50px"]: "0px"} className=' fixed bg-white z-[50] w-full ' >
                             <Navbar menu={menu} />
                         </Box>
-                    </Box>
+                    </Box> */}
                     <Box className=' pt-0 w-full h-auto ' >
                         {children}
                     </Box>

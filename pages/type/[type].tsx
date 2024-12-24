@@ -33,7 +33,8 @@ export default function TypeID() {
 
     async function SearchProduct() {
         setLoading(true);
-        const productId = query.brandID
+        const productId = query.type
+        console.log(productId, "productId")
         if (productId) {
             const brandArray = await getTypeProduct(productId)
             console.log(brandArray, "brandArray")
@@ -44,7 +45,7 @@ export default function TypeID() {
 
     useEffect(() => {
         SearchProduct()
-    }, [query.brandID])
+    }, [query.type])
 
     return (
         <>
@@ -62,10 +63,10 @@ export default function TypeID() {
                             <Img alt="banner" src="/banner/men.png" />
                             <Center flexDir="column" w="full" textAlign={"center"} fontWeight="700" color="#fff" pos="absolute" top="0px" h="full" bg="#000000b5" fontSize={["24px", "32px", "47px", "57px"]} >
                                 <Box>
-                                    Shop
+                                    {query.name}
                                 </Box>
                                 <Box>
-                                    Men’s Collection
+                                     Cloth Type
                                 </Box>
                             </Center>
                         </Box>
