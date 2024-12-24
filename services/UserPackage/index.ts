@@ -39,15 +39,20 @@ export function UserPackageFunction() {
 
 
 export const createPackage = async (packageObj: CreatePackageProps) => {
-    const response = await axios.post(`package/user`, packageObj)
-    return response.data
+  const response = await axios.post(`package/user`, packageObj)
+  return response.data
+}
+
+export const createPackageWithout = async (packageObj: CreatePackageProps) => {
+  const response = await axios.post(`package/user/without`, packageObj)
+  return response.data
 }
 
 export const getPackage = async (package_id: string) => {
 
-    const response = await axios.get(`package/user/single?package_id=${package_id}`)
-    
-    return response.data    
+  const response = await axios.get(`package/user/single?package_id=${package_id}`)
+
+  return response.data
 }
 
 export const getCartAmount = async () => {
@@ -62,23 +67,29 @@ export const getCartAmount = async () => {
 export const updatePackage2 = async (packageObj: any) => {
   const response = await axios.put("package/update/checkout", packageObj)
 
-  return response.data  
+  return response.data
 }
 
 export const updatePackage = async (packageObj: UpdatePackageProps) => {
-    const response = await axios.put("package/update", packageObj)
+  const response = await axios.put("package/update", packageObj)
 
-    return response.data  
+  return response.data
+}
+
+export const updatePackageWithout = async (packageObj: UpdatePackageProps) => {
+  const response = await axios.put("package/update/without", packageObj)
+
+  return response.data
 }
 
 export async function createPaymentPlan(amount: number, name: string, interval: string, duration: number) {
-    const paymentRequest = await flutterWaveConfig.post("/payment-plans", {
-      amount,
-      name,
-      interval,
-      duration
-    })
+  const paymentRequest = await flutterWaveConfig.post("/payment-plans", {
+    amount,
+    name,
+    interval,
+    duration
+  })
 
-    return paymentRequest.data
+  return paymentRequest.data
 
-  } 
+} 

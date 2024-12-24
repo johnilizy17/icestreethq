@@ -295,20 +295,15 @@ const MoreItemsMain = () => {
                             <ModalHeader>Login</ModalHeader>
                             <ModalCloseButton />
                             <ModalBody>
-                                Do you want to Log in or explore has a guest
+                                Inorder to checkout you have to login
                             </ModalBody>
 
-                            <ModalFooter justifyContent="space-between">
+                            <ModalFooter justifyContent="center">
                                 <Button onClick={() => {
                                     route.push("/login")
                                 }} bg='black' color="white" mr={3}>
                                     Login
                                 </Button>
-                                <Button
-                                    onClick={() => {
-                                        setShowForm(true)
-                                    }}
-                                    colorScheme='green'>Guest</Button>
                             </ModalFooter>
                         </>
                     }

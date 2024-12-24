@@ -1,7 +1,7 @@
 import { Box, Button, Center, Flex, Image, Img, useToast, useDisclosure, Input, color } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useReducer, useState } from 'react'
-import { createPackage, updatePackage } from '../../../services/UserPackage'
+import { createPackage, createPackageWithout, updatePackage, updatePackageWithout } from '../../../services/UserPackage'
 import SpinLoader from '../../Loaders/SpinLoader'
 import MonthlySelector from '../../MontlySelector'
 import PaymentFrequency from '../../PaymentFrequency'
@@ -253,6 +253,85 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
         }
     }
 
+    const handleAddItemClickedWithout = () => {
+        setLoading(true)
+        const defaultPackageId = localStorage.getItem("default_package")
+        if (size.length > 0) {
+            if (!defaultPackageId) {
+                const packageData = {
+                    duration: productInfo.duration,
+                    size: size,
+                    color: colorScheme,
+                    category: data.category_id,
+                    numberOfExpectedPayment: calculateNumberPayment(productInfo.duration, paymentInfo.paymentFrequency),
+                    product_id: [
+                        {
+                            item: productId.toString(),
+                            qty: productInfo.quantity
+                        }
+                    ],
+                    payment_frequency: paymentInfo.paymentFrequency,
+                    total: productInfo.total_amount
+                }
+                setPackageData(packageData)
+                createPackageWithout(packageData)
+                    .then((res) => {
+                        setPackageId(res._id)
+                        localStorage.setItem("default_package", res._id)
+                        setLoading(false)
+                        toast({
+                            title: "Product",
+                            description: "Product Successfully added to cart",
+                            status: "success",
+                            position: "top-right"
+                        })
+
+                    })
+                    .catch(err => {
+                        setLoading(false)
+                        toast({
+                            title: "Token",
+                            description: "Token has expire kindly login",
+                            status: "error",
+                            position: "top-right"
+                        })
+                        onOpen()
+                    })
+            } else {
+                updatePackageWithout({
+                    ...packageData,
+                    package_id: packageId
+                }).then((res) => {
+                    toast({
+                        title: "Product",
+                        description: "Product Successfully added to cart",
+                        status: "success",
+                        position: "top-right"
+                    })
+                    setLoading(false)
+                }).catch((res: any) => {
+                    setLoading(false)
+                    toast({
+                        title: "Token",
+                        description: "Token has expire kindly login",
+                        status: "error",
+                        position: "top-right"
+                    })
+                    onOpen()
+                })
+
+            }
+        } else {
+            toast({
+                title: "Product",
+                description: "Please in a size to your stock",
+                status: "warning",
+                position: "top-right"
+            })
+            setLoading(false)
+        }
+    }
+
     const handleAddItemClicked2 = () => {
         setLoading2(true)
         const defaultPackageId = localStorage.getItem("default_package")
@@ -298,6 +377,85 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                     })
             } else {
                 updatePackage({
+                    ...packageData,
+                    color: colorScheme,
+                    package_id: packageId
+                }).then((res) => {
+                    toast({
+                        title: "Product",
+                        description: "Product Successfully added to cart",
+                        status: "success",
+                        position: "top-right"
+                    })
+                    route.push("/add-more-items")
+                }).catch((res: any) => {
+                    setLoading2(false)
+                    toast({
+                        title: "Token",
+                        description: "Token has expire kindly login",
+                        status: "error",
+                        position: "top-right"
+                    })
+                    onOpen()
+                })
+
+            }
+        } else {
+            toast({
+                title: "Product",
+                description: "Please in a size to your stock",
+                status: "warning",
+                position: "top-right"
+            })
+            setLoading2(false)
+        }
+    }
+
+    const handleAddItemClicked2Without = () => {
+        setLoading2(true)
+        const defaultPackageId = localStorage.getItem("default_package")
+        if (size.length > 0) {
+            if (!defaultPackageId) {
+                const packageData = {
+                    duration: productInfo.duration,
+                    size: size,
+                    color: colorScheme,
+                    category: data.category_id,
+                    numberOfExpectedPayment: calculateNumberPayment(productInfo.duration, paymentInfo.paymentFrequency),
+                    product_id: [
+                        {
+                            item: productId.toString(),
+                            qty: productInfo.quantity
+                        }
+                    ],
+                    payment_frequency: paymentInfo.paymentFrequency,
+                    total: productInfo.total_amount
+                }
+                setPackageData(packageData)
+                createPackageWithout(packageData)
+                    .then((res) => {
+                        setPackageId(res._id)
+                        localStorage.setItem("default_package", res._id)
+                        route.push("/add-more-items")
+                        toast({
+                            title: "Product",
+                            description: "Product Successfully added to cart",
+                            status: "success",
+                            position: "top-right"
+                        })
+                    })
+                    .catch(err => {
+                        setLoading2(false)
+                        toast({
+                            title: "Token",
+                            description: "Token has expire kindly login",
+                            status: "error",
+                            position: "top-right"
+                        })
+                        onOpen()
+                    })
+            } else {
+                updatePackageWithout({
                     ...packageData,
                     color: colorScheme,
                     package_id: packageId
@@ -518,7 +676,7 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                                 </Box>
                             )}
 
-                            {data?.feature && data?.feature.length>1  && (
+                            {data?.feature && data?.feature.length > 1 && (
                                 <Box className=' w-full bg-white  mt-6 lg:mt-8 ' >
                                     <p className=' font-bold' >Feature</p>
                                     <p className=' font-normal text-justify text-[15px] ' >
@@ -535,20 +693,20 @@ export default function ProductDetail({ data, productId }: productDetailsProp) {
                                 if (localStorage.getItem("user")) {
                                     handleAddItemClicked()
                                 } else {
-                                    onOpen()
+                                    handleAddItemClickedWithout()
                                 }
                             }} className=' w-full inline-flex justify-center items-center mr-2 rounded-[4px] text-black border border-black font-semibold h-[50px] ' >
-                                {loading ? <SpinLoader size='md' /> : "Add items"}
+                                {loading ? <SpinLoader size='md' /> : "Add to Cart"}
                             </button>
                             <button disabled={loading2} onClick={() => {
                                 if (localStorage.getItem("user")) {
                                     handleAddItemClicked2()
                                 } else {
-                                    onOpen()
+                                    handleAddItemClicked2Without()
                                 }
                             }} className='w-full inline-flex items-center justify-center rounded-[4px] text-white bg-[#000] h-[50px] '
                             >
-                                {loading2 ? <SpinLoader size='md' /> : "Pay Now"}
+                                {loading2 ? <SpinLoader size='md' /> : "Buy Now"}
                             </button>
                         </Box>
                     </Box>

@@ -57,7 +57,7 @@ export default function Men() {
                             <Img src="/banner/collection.png" />
                             <Center flexDir="column" w="full" textAlign={"center"} fontWeight="700" color="#fff" pos="absolute" top="0px" h="full" bg="#000000b5" fontSize={["24px", "32px", "47px", "57px"]} >
                                 <Box>
-                                    Shop
+                                    {query.name}
                                 </Box>
                                 <Box>
                                     All Collections
