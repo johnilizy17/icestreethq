@@ -103,7 +103,7 @@ export default function Footer() {
             <Box>
                 <Box mb="20px">
                     <Box fontSize="20px" paddingBottom="8px" color={COLORS.white} fontWeight="700" lineHeight="24.2px">
-                        Type
+                    Categories
                     </Box>
                     <Box>
                         {

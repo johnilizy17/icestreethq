@@ -63,11 +63,9 @@ export default function TypeID() {
                             <Img alt="banner" src="/banner/men.png" />
                             <Center flexDir="column" w="full" textAlign={"center"} fontWeight="700" color="#fff" pos="absolute" top="0px" h="full" bg="#000000b5" fontSize={["24px", "32px", "47px", "57px"]} >
                                 <Box>
-                                    {query.name}
+                                Shop |{query.name}
                                 </Box>
-                                <Box>
-                                     Cloth Type
-                                </Box>
+                               
                             </Center>
                         </Box>
                         {loading ?
