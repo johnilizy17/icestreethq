@@ -61,9 +61,6 @@ export default function Men() {
                                 <Box>
                                     Shop
                                 </Box>
-                                <Box>
-                                    All Type
-                                </Box>
                             </Center>
                         </Box>
                         <Center h={["100px", "100px", "100px", "197px"]} fontWeight="700" fontSize={["24px", "27px", "47px", "57px"]}>
