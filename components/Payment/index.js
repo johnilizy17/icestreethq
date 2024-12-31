@@ -22,7 +22,7 @@ export default function PaymentCheckout({ paymentSuccessfull, userDetails, SumTo
         reference: (new Date()).getTime().toString(),
         email: userDetails && userDetails?.user ? userDetails?.user.email :  userDetails?.user.email,
         amount: SumTotalFunction, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-        publicKey: "pk_live_e0f7f264648d319f3d4352079bb0c2f6cac6b53c"
+        publicKey: "sk_test_ad587be0301aae9eaa5479695cfd939c14e9832a"
     };
 
     // you can call this function anything
