@@ -145,7 +145,7 @@ const MoreItemsMain = () => {
         updatePackage2(packageData).then(() => {
             localStorage.setItem("cartId", packageId)
             toast({
-                title: "Checkout your order with easy",
+                title: "Proceed to checkout your order with ease",
                 status: "success",
                 position: "top-right"
             })

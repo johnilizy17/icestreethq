@@ -147,22 +147,22 @@ export default function Navbar({ menu }: props) {
             <Center w="full">
                 <Center w="350px" display={["none", "none", "none", "flex"]} justifyContent="space-between">
                     <Button colorScheme="white" color="#000" mr="10px">
-                        <Link href="arrival">
+                        <Link href="/arrival">
                             NEW IN
                         </Link>
                     </Button>
                     <Button colorScheme="white" color="#000" mr="10px">
-                        <Link href="men">
+                        <Link href="/gender/men">
                             MEN
                         </Link>
                     </Button>
                     <Button colorScheme="white" color="#000" mr="10px">
-                        <Link href="women">
+                        <Link href="/gender/women">
                             WOMEN
                         </Link>
                     </Button>
                     <Button colorScheme="white" color="#000">
-                        <Link href="collection">
+                        <Link href="/collection">
                             COLLECTIONS
                         </Link>
                     </Button>

@@ -24,6 +24,7 @@ export default function HeroSection() {
 
     async function FetchBannerApi() {
         const data = await getBanner()
+        console.log(data)
         setBanner(data)
     }
 
@@ -93,7 +94,7 @@ export default function HeroSection() {
                                 <Box fontStyle="italic" mt="16px" fontSize={["16px", "16px", "28px", "36px"]}>
                                     {a.discount}
                                 </Box>
-                                <Button onClick={() => router.push("/brand")} h="53px" p={["12px 24px"]} colorScheme='blackAlpha' bg="black" mt="16px">
+                                <Button onClick={() => router.push("/collection")} h="53px" p={["12px 24px"]} colorScheme='blackAlpha' bg="black" mt="16px">
                                     <Box mr="10px">
                                         {a.button}
                                     </Box>
